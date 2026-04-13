@@ -1,1 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ar.QueoJones · Avant‑garde Archaeological Intelligence</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a1e2b;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+
+        /* elegant container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* header & navigation */
+        .site-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            padding: 18px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo h1 {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 600;
+            font-size: 1.9rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1a2a3a, #2c4a6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo span {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #5b6e8c;
+            letter-spacing: -0.2px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e2a3e;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 4px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            border-bottom-color: #c9772e;
+            color: #c9772e;
+        }
+        .github-link {
+            background: #f0f2f5;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .github-link:hover {
+            background: #e4e7ec;
+            color: #c9772e;
+            border-bottom: none;
+        }
+
+        /* sections */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: #0f172a;
+        }
+        .section-sub {
+            font-size: 1.1rem;
+            color: #4a5a72;
+            max-width: 720px;
+            margin-bottom: 56px;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            align-items: center;
+        }
+        .service-card {
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.25s ease, box-shadow 0.25s;
+            border: 1px solid #edf2f7;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+            border-color: #e2e8f0;
+        }
+        .service-icon {
+            font-size: 2.8rem;
+            color: #c9772e;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .btn-soft {
+            margin-top: 28px;
+            display: inline-block;
+            background: none;
+            border: 1px solid #cfdde6;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .btn-soft:hover {
+            background: #f8fafc;
+            border-color: #c9772e;
+            color: #c9772e;
+        }
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(145deg, #ffffff 0%, #fbfdff 100%);
+        }
+        .hero-content h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(125deg, #1f2f40, #2b4b6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-badge {
+            background: #f1f5f9;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .free-badge {
+            background: #e6f4ea;
+            color: #2c6e3c;
+            border-radius: 40px;
+            padding: 4px 14px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .feature-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+        .feature-list li {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .feature-list i {
+            color: #c9772e;
+            width: 24px;
+        }
+
+        /* modal (extra window for arqueobot) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #ffffff;
+            max-width: 750px;
+            width: 90%;
+            border-radius: 48px;
+            padding: 40px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.2);
+        }
+        .modal-content h3 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+        .close-modal {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            font-size: 28px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .modal-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        /* back to top arrow */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: #1e2a3e;
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            z-index: 99;
+            border: none;
+            font-size: 1.4rem;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: #c9772e;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: #fafcff;
+            padding: 56px 0 40px;
+            border-top: 1px solid #eef2f6;
+        }
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-policies p {
+            font-size: 0.85rem;
+            color: #4a5a72;
+            margin-top: 12px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e9edf2;
+            margin: 28px 0;
+        }
+
+        @media (max-width: 900px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            .container {
+                padding: 0 24px;
+            }
+            .nav-links {
+                gap: 18px;
+            }
+        }
+        @media (max-width: 680px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        img.mock-img {
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+        }
+        .pillar-img {
+            background: #f4f7fc;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo">
+            <h1>ar.QueoJones</h1>
+            <span>avant‑garde archaeological intelligence</span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#photogrammetry">3D Photogrammetry</a>
+            <a href="#app-building">App Building</a>
+            <a href="#qgis">QGIS</a>
+            <a href="#arqueobot">arqueobot</a>
+            <a href="https://github.com/arQueoJones" target="_blank" class="github-link"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fas fa-robot"></i> AI‑powered · Heritage intelligence</div>
+                <h2>Reconstructing the past<br>with future intelligence</h2>
+                <p class="section-sub" style="margin-bottom: 24px;">From 3D photogrammetry to neural museum design — ar.QueoJones delivers bespoke digital solutions for archaeologists, museums, and cultural institutions.</p>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <a href="#photogrammetry" class="btn-soft" style="background:#1e2a3e; color:white; border:none;">Explore services <i class="fas fa-arrow-right"></i></a>
+                    <a href="#arqueobot" class="btn-soft"><i class="fas fa-gem"></i> Discover free arqueobot</a>
+                </div>
+            </div>
+            <div style="margin-top: 48px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between;">
+                <div style="flex:1; min-width: 180px;"><i class="fas fa-cubes"></i> 3D reconstruction</div>
+                <div style="flex:1; min-width: 180px;"><i class="fas fa-mobile-alt"></i> field‑ready apps</div>
+                <div style="flex:1; min-width: 180px;"><i class="fas fa-map-marked-alt"></i> geospatial QGIS</div>
+                <div style="flex:1; min-width: 180px;"><i class="fas fa-brain"></i> arqueobot AI suite</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Photogrammetry Section -->
+    <section id="photogrammetry">
+        <div class="container">
+            <div class="grid-2col">
+                <div>
+                    <span class="free-badge" style="background:#eef2ff; color:#2c5282;"><i class="fas fa-camera"></i> high‑precision</span>
+                    <h2 class="section-title" style="margin-top: 12px;">3D Photogrammetry</h2>
+                    <p>Capture millimeter‑accurate digital twins of artifacts, excavations, and architectural heritage. Our pipeline integrates COLMAP, OpenCV, and neural reconstruction for stunning textured meshes & point clouds.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Automated Structure‑from‑Motion (SfM)</li>
+                        <li><i class="fas fa-check-circle"></i> Dense cloud & mesh generation</li>
+                        <li><i class="fas fa-check-circle"></i> Orthophoto & volumetric analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Web‑based 3D viewer integration</li>
+                    </ul>
+                    <button class="btn-soft" onclick="alert('📸 Contact us for enterprise photogrammetry pipelines. Customizable for any scale.')">Request demo →</button>
+                </div>
+                <div class="pillar-img">
+                    <img src="https://picsum.photos/id/104/600/450" alt="3d photogrammetry example" class="mock-img" style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Building Section -->
+    <section id="app-building">
+        <div class="container">
+            <div class="grid-2col" style="direction: rtl;">
+                <div style="direction: ltr;">
+                    <span class="free-badge" style="background:#fef3e2;"><i class="fas fa-code-branch"></i> cross‑platform</span>
+                    <h2 class="section-title" style="margin-top: 12px;">App Building</h2>
+                    <p>Modern mobile & web apps tailored for archaeological workflows — offline data collection, photogrammetry processing on‑device, and real‑time collaboration dashboards.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> React Native / Flutter apps</li>
+                        <li><i class="fas fa-check-circle"></i> GPS‑enabled survey tools</li>
+                        <li><i class="fas fa-check-circle"></i> Multimedia annotation & cataloguing</li>
+                        <li><i class="fas fa-check-circle"></i> Cloud sync & AI classification</li>
+                    </ul>
+                    <button class="btn-soft" onclick="alert('📱 Let’s build your custom heritage app — from concept to store.')">Discuss project →</button>
+                </div>
+                <div class="pillar-img">
+                    <img src="https://picsum.photos/id/20/600/450" alt="mobile archaeology app" class="mock-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QGIS Services Section -->
+    <section id="qgis">
+        <div class="container">
+            <div class="grid-2col">
+                <div>
+                    <span class="free-badge" style="background:#e6f2ef;"><i class="fas fa-draw-polygon"></i> spatial intelligence</span>
+                    <h2 class="section-title" style="margin-top: 12px;">QGIS & Geospatial Analysis</h2>
+                    <p>Professional GIS services: site predictive modeling, landscape archaeology, LiDAR integration, and custom QGIS plugins for heritage management. Transform raw spatial data into actionable insights.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Terrain & viewshed analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Aerial imagery interpretation</li>
+                        <li><i class="fas fa-check-circle"></i> Geodatabase design & automation</li>
+                        <li><i class="fas fa-check-circle"></i> Web maps & StoryMaps integration</li>
+                    </ul>
+                    <button class="btn-soft" onclick="alert('🗺️ QGIS advanced training & consulting — get in touch.')">Explore GIS →</button>
+                </div>
+                <div class="pillar-img">
+                    <img src="https://picsum.photos/id/15/600/450" alt="qgis archaeological map" class="mock-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- arqueobot - FREE unified toolkit -->
+    <section id="arqueobot" style="background: #ffffff; border-bottom: 1px solid #edf2f9;">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 48px;">
+                <span class="free-badge" style="background:#e1f7e6; color:#1f6e43;"><i class="fas fa-leaf"></i> free for non‑commercial use</span>
+                <h2 class="section-title">arqueobot · unified archaeological AI</h2>
+                <p class="section-sub">One ecosystem that merges museum design, shard detection, AI classification, live detection, and conversational intelligence. Inspired by WAAZP's advanced engine.</p>
+            </div>
+            <div class="grid-2col" style="align-items: start;">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI Museum Architect</h3>
+                    <p>Neural reinforcement learning creates visitor‑optimized layouts. Simulate crowd flows, exhibit engagement, and cultural resonance — all driven by hybrid deep neural networks.</p>
+                    <button class="btn-soft" id="openModalBtn">⟳ Discover full arqueobot <i class="fas fa-external-link-alt"></i></button>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-archive"></i></div>
+                    <h3>Intelligent Artifact Analysis</h3>
+                    <p>Shard detection, live video segmentation, GPT4All‑powered research assistant, plus instant classification of pottery, lithics, and ecofacts using transfer learning.</p>
+                    <ul class="feature-list" style="margin-top: 8px;">
+                        <li><i class="fas fa-microchip"></i> Real‑time object detection (ESP32-CAM ready)</li>
+                        <li><i class="fas fa-chart-line"></i> Photogrammetry & 3D reconstruction</li>
+                        <li><i class="fas fa-database"></i> Smart category management & annotation</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: 48px; background: #F9FBFE; border-radius: 48px; padding: 32px; text-align: center;">
+                <i class="fas fa-infinity" style="font-size: 2rem; color: #c9772e;"></i>
+                <p style="margin-top: 16px;"><strong>arqueobot unifies:</strong> Museum AI Builder, AI Tab (GPT4All), Shard detection, Preprocessing, Classification, COLMAP integration, Personal programs, and advanced analytics — all free for academic & non‑commercial use.</p>
+                <a href="https://github.com/arQueoJones" target="_blank" style="margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: #1e2a3e; color: white; padding: 12px 28px; border-radius: 60px; text-decoration: none;"><i class="fab fa-github"></i> Access source code & docs</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- MODAL extra window for arqueobot detailed explanation -->
+<div id="arqueobotModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModalBtn">&times;</span>
+        <h3><i class="fas fa-microchip"></i> arqueobot – deep intelligence suite</h3>
+        <div class="modal-grid">
+            <p><strong>arqueobot</strong> is a free, non‑commercial toolkit that integrates all core Python‑based engines from the WAAZP ecosystem. Designed for archaeologists, researchers, and heritage professionals.</p>
+            <div style="background:#F8FAFE; padding: 20px; border-radius: 28px;">
+                <h4>⚙️ core modules included:</h4>
+                <ul style="columns: 2; column-gap: 32px; margin-top: 16px; list-style: none;">
+                    <li><i class="fas fa-cube"></i> Museum Builder (RL + NeuroEvolution)</li>
+                    <li><i class="fas fa-language"></i> AI Assistant (GPT4All)</li>
+                    <li><i class="fas fa-shield-alt"></i> Shard / Object Detection</li>
+                    <li><i class="fas fa-video"></i> Live detection (ESP32-CAM)</li>
+                    <li><i class="fas fa-chart-simple"></i> Multivariate statistical analysis</li>
+                    <li><i class="fas fa-draw-polygon"></i> Photogrammetry & COLMAP</li>
+                    <li><i class="fas fa-tags"></i> Classification & training pipeline</li>
+                    <li><i class="fas fa-database"></i> Hierarchical category management</li>
+                </ul>
+            </div>
+            <p><strong>🔓 License:</strong> arqueobot is free for research, education, and non‑commercial fieldwork. Commercial licensing available for enterprise features. The entire codebase is open on GitHub.</p>
+            <p><i class="fas fa-flask"></i> <strong>Try integrated features:</strong> Museum AI optimizer, academic paper search (SciSearch), personal program manager, interactive dashboards, and advanced 3D reconstruction.</p>
+            <div style="margin-top: 20px;">
+                <a href="https://github.com/arQueoJones" target="_blank" style="background:#1e2a3e; color:white; padding: 12px 20px; border-radius: 48px; text-decoration: none; display: inline-flex; gap: 12px;"><i class="fab fa-github"></i> Visit arQueoJones on GitHub</a>
+                <button class="btn-soft" id="closeModalBtn2" style="margin-left: 16px;">Close window</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- back to top arrow -->
+<div class="back-to-top" id="backToTopBtn" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4 style="font-weight: 600;">ar.QueoJones</h4>
+                <p style="max-width: 280px;">Avant‑garde archaeological technologies · 3D scanning · AI · GIS · heritage software</p>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <p>3D Photogrammetry</p>
+                <p>App Building</p>
+                <p>QGIS & Spatial</p>
+                <p>arqueobot free suite</p>
+            </div>
+            <div>
+                <h4>Legal & Policies</h4>
+                <p>Disclaimer: arqueobot is provided “as is” for non‑commercial use. No warranty for site‑specific results. All other services subject to commercial agreement.</p>
+                <p>Privacy policy: we do not collect personal data via this landing page. Third‑party GitHub repositories have their own policies.</p>
+                <p>© 2025 ar.QueoJones – heritage intelligence lab.</p>
+            </div>
+        </div>
+        <hr>
+        <div style="font-size: 0.8rem; text-align: center; color: #6c7a91;">
+            <i class="fas fa-balance-scale"></i> arqueobot is free for non‑commercial academic use. Commercial rights reserved for photogrammetry, app building & QGIS services. <a href="https://github.com/arQueoJones" target="_blank" style="color:#c9772e;">Open source repositories</a> under MIT / research licenses.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // modal logic for arqueobot extra window
+    const modal = document.getElementById('arqueobotModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const closeBtn2 = document.getElementById('closeModalBtn2');
+
+    function openModal() {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (closeBtn2) closeBtn2.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // back to top arrow automatic + scroll behavior
+    const backBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 350) {
+            backBtn.classList.add('show');
+        } else {
+            backBtn.classList.remove('show');
+        }
+    });
+    backBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // active navigation highlighting on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    function setActiveLink() {
+        let scrollPos = window.scrollY + 100;
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                const targetId = section.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${targetId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+    window.addEventListener('scroll', setActiveLink);
+    window.addEventListener('load', setActiveLink);
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (link.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+    // also support direct hash navigation at load
+    if (window.location.hash) {
+        const hashElement = document.getElementById(window.location.hash.substring(1));
+        if (hashElement) {
+            setTimeout(() => {
+                hashElement.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    }
+</script>
+</body>
+</html>
