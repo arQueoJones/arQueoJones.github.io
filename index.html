@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,7 +23,7 @@
         .lang-btn { background: none; border: 1px solid #cfdde6; border-radius: 30px; padding: 5px 12px; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.8rem; color: #2c3e50; }
         .lang-btn.active { background: #1e2a3e; color: white; border-color: #1e2a3e; }
         .lang-btn:hover { background: #eef2f6; }
-        section { padding: 100px 0; border-bottom: 1px solid #f0f0f0; }
+        section { padding: 100px 0; border-bottom: 1px solid #f0f0f0; scroll-margin-top: 90px; }
         .section-title { font-size: 2.6rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 24px; color: #0f172a; }
         .section-sub { font-size: 1.1rem; color: #4a5a72; max-width: 720px; margin-bottom: 56px; }
         .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; align-items: center; }
@@ -90,7 +89,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge"><i class="fas fa-robot"></i> <span data-i18n="hero_badge">IA · inteligencia patrimonial</span></div>
-                <h2 id="heroTitle" data-i18n-html="hero_title">Reconstruimos el pasado<br>con la inteligencia del futuro</h2>
+                <h2 id="heroTitle" data-i18n="hero_title">Reconstruimos el pasado con la inteligencia del futuro</h2>
                 <p class="section-sub" data-i18n="hero_desc">Desde la fotogrametría 3D hasta el diseño de museos asistido por IA, ar.QueoJones ofrece soluciones digitales a medida para arqueólogos, museos e instituciones culturales.</p>
                 <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                     <a href="#photogrammetry" class="btn-soft" style="background:#1e2a3e; color:white; border:none;" data-i18n="hero_btn1">Explorar servicios <i class="fas fa-arrow-right"></i></a>
@@ -185,7 +184,7 @@
     const translations = {
         es: {
             tagline: "inteligencia arqueológica de vanguardia", nav_home: "Inicio", nav_photogram: "Fotogrametría 3D", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Dron", nav_ar: "RA", nav_addons: "Complementos", nav_webdev: "Web & SW", nav_aiprompt: "IA Prompt", nav_arqueobot: "arqueobot",
-            hero_badge: "IA · inteligencia patrimonial", hero_title: "Reconstruimos el pasado<br>con la inteligencia del futuro", hero_desc: "Desde la fotogrametría 3D hasta el diseño de museos asistido por IA, ar.QueoJones ofrece soluciones digitales a medida para arqueólogos, museos e instituciones culturales.", hero_btn1: "Explorar servicios →", hero_btn2: "Descubrir arqueobot gratis",
+            hero_badge: "IA · inteligencia patrimonial", hero_title: "Reconstruimos el pasado con la inteligencia del futuro", hero_desc: "Desde la fotogrametría 3D hasta el diseño de museos asistido por IA, ar.QueoJones ofrece soluciones digitales a medida para arqueólogos, museos e instituciones culturales.", hero_btn1: "Explorar servicios →", hero_btn2: "Descubrir arqueobot gratis",
             badge1: "reconstrucción 3D", badge2: "apps de campo", badge3: "QGIS geoespacial", badge4: "suite arqueobot", badge5: "arqueología aérea", badge6: "realidad aumentada",
             photogram_badge: "alta precisión", photogram_title: "Fotogrametría 3D", photogram_desc: "Gemelos digitales milimétricos de artefactos, excavaciones y patrimonio arquitectónico. Integración COLMAP, OpenCV y redes neuronales.", photogram_f1: "SfM automatizado", photogram_f2: "Nube densa y mallado", photogram_f3: "Ortofotos y análisis volumétrico", photogram_f4: "Visor web 3D", photogram_btn: "Solicitar demo →", photogram_link: "Página detallada →",
             app_badge: "multiplataforma", app_title: "Creación de Apps", app_desc: "Apps móviles y web para flujos arqueológicos: recogida offline, procesamiento fotogramétrico y paneles colaborativos.", app_f1: "React Native / Flutter", app_f2: "Herramientas con GPS", app_f3: "Anotación multimedia", app_f4: "Sincronización cloud + IA", app_btn: "Hablar del proyecto →", app_link: "Página detallada →",
@@ -201,7 +200,7 @@
         },
         en: {
             tagline: "avant‑garde archaeological intelligence", nav_home: "Home", nav_photogram: "3D Photogrammetry", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drone", nav_ar: "AR", nav_addons: "Add-ons", nav_webdev: "Web & SW", nav_aiprompt: "AI Prompt", nav_arqueobot: "arqueobot",
-            hero_badge: "AI · heritage intelligence", hero_title: "We reconstruct the past<br>with the intelligence of the future", hero_desc: "From 3D photogrammetry to AI‑powered museum design, ar.QueoJones delivers tailor‑made digital solutions for archaeologists, museums, and cultural institutions.", hero_btn1: "Explore services →", hero_btn2: "Discover free arqueobot",
+            hero_badge: "AI · heritage intelligence", hero_title: "We reconstruct the past with the intelligence of the future", hero_desc: "From 3D photogrammetry to AI‑powered museum design, ar.QueoJones delivers tailor‑made digital solutions for archaeologists, museums, and cultural institutions.", hero_btn1: "Explore services →", hero_btn2: "Discover free arqueobot",
             badge1: "3D reconstruction", badge2: "field apps", badge3: "geospatial QGIS", badge4: "arqueobot suite", badge5: "aerial archaeology", badge6: "augmented reality",
             photogram_badge: "high precision", photogram_title: "3D Photogrammetry", photogram_desc: "Millimeter‑accurate digital twins of artefacts, excavations and architectural heritage. COLMAP, OpenCV and neural network pipeline.", photogram_f1: "Automated SfM", photogram_f2: "Dense cloud & meshing", photogram_f3: "Orthophotos & volumetric analysis", photogram_f4: "Web 3D viewer", photogram_btn: "Request demo →", photogram_link: "Detailed page →",
             app_badge: "cross‑platform", app_title: "App Building", app_desc: "Mobile & web apps for archaeological workflows: offline data collection, on‑device photogrammetry, collaborative dashboards.", app_f1: "React Native / Flutter", app_f2: "GPS‑enabled tools", app_f3: "Multimedia annotation", app_f4: "Cloud sync + AI", app_btn: "Discuss project →", app_link: "Detailed page →",
@@ -217,7 +216,7 @@
         },
         fr: {
             tagline: "intelligence archéologique d'avant-garde", nav_home: "Accueil", nav_photogram: "Photogrammétrie 3D", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drone", nav_ar: "RA", nav_addons: "Extensions", nav_webdev: "Web & Logiciel", nav_aiprompt: "Prompt IA", nav_arqueobot: "arqueobot",
-            hero_badge: "IA · intelligence patrimoniale", hero_title: "Nous reconstruisons le passé<br>avec l'intelligence du futur", hero_desc: "De la photogrammétrie 3D à la conception de musées par IA, ar.QueoJones propose des solutions numériques sur mesure pour archéologues, musées et institutions culturelles.", hero_btn1: "Explorer les services →", hero_btn2: "Découvrir arqueobot gratuit",
+            hero_badge: "IA · intelligence patrimoniale", hero_title: "Nous reconstruisons le passé avec l'intelligence du futur", hero_desc: "De la photogrammétrie 3D à la conception de musées par IA, ar.QueoJones propose des solutions numériques sur mesure pour archéologues, musées et institutions culturelles.", hero_btn1: "Explorer les services →", hero_btn2: "Découvrir arqueobot gratuit",
             badge1: "reconstruction 3D", badge2: "apps terrain", badge3: "QGIS géospatial", badge4: "suite arqueobot", badge5: "archéologie aérienne", badge6: "réalité augmentée",
             photogram_badge: "haute précision", photogram_title: "Photogrammétrie 3D", photogram_desc: "Jumeaux numériques millimétriques d'artefacts, fouilles et patrimoine architectural. Pipeline COLMAP, OpenCV et réseaux neuronaux.", photogram_f1: "SfM automatisé", photogram_f2: "Nuage dense et maillage", photogram_f3: "Orthophotos & analyse volumétrique", photogram_f4: "Visualiseur web 3D", photogram_btn: "Demander une démo →", photogram_link: "Page détaillée →",
             app_badge: "multiplateforme", app_title: "Création d'applications", app_desc: "Apps mobiles et web pour flux archéologiques : collecte hors ligne, photogrammétrie sur appareil, tableaux de bord collaboratifs.", app_f1: "React Native / Flutter", app_f2: "Outils GPS", app_f3: "Annotation multimédia", app_f4: "Synchronisation cloud + IA", app_btn: "Discuter du projet →", app_link: "Page détaillée →",
@@ -233,7 +232,7 @@
         },
         de: {
             tagline: "avantgardistische archäologische Intelligenz", nav_home: "Start", nav_photogram: "3D-Photogrammetrie", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drohne", nav_ar: "AR", nav_addons: "Add-ons", nav_webdev: "Web & SW", nav_aiprompt: "KI-Prompt", nav_arqueobot: "arqueobot",
-            hero_badge: "KI · Kulturerbe-Intelligenz", hero_title: "Wir rekonstruieren die Vergangenheit<br>mit der Intelligenz der Zukunft", hero_desc: "Von der 3D-Photogrammetrie bis zum KI-gestützten Museumsdesign – ar.QueoJones bietet maßgeschneiderte digitale Lösungen für Archäologen, Museen und Kultureinrichtungen.", hero_btn1: "Dienste erkunden →", hero_btn2: "Kostenloses arqueobot entdecken",
+            hero_badge: "KI · Kulturerbe-Intelligenz", hero_title: "Wir rekonstruieren die Vergangenheit mit der Intelligenz der Zukunft", hero_desc: "Von der 3D-Photogrammetrie bis zum KI-gestützten Museumsdesign – ar.QueoJones bietet maßgeschneiderte digitale Lösungen für Archäologen, Museen und Kultureinrichtungen.", hero_btn1: "Dienste erkunden →", hero_btn2: "Kostenloses arqueobot entdecken",
             badge1: "3D-Rekonstruktion", badge2: "Feld-Apps", badge3: "georäumliches QGIS", badge4: "arqueobot-Suite", badge5: "Luftbildarchäologie", badge6: "erweiterte Realität",
             photogram_badge: "hohe Präzision", photogram_title: "3D-Photogrammetrie", photogram_desc: "Millimetergenaue digitale Zwillinge von Artefakten, Ausgrabungen und Architekturerbe. COLMAP-, OpenCV- und neuronale Netzwerk-Pipeline.", photogram_f1: "Automatisiertes SfM", photogram_f2: "Dichte Punktwolke & Vernetzung", photogram_f3: "Orthofotos & Volumenanalyse", photogram_f4: "Web-3D-Betrachter", photogram_btn: "Demo anfordern →", photogram_link: "Detailseite →",
             app_badge: "plattformübergreifend", app_title: "App-Entwicklung", app_desc: "Mobile & Web-Apps für archäologische Arbeitsabläufe: Offline-Datenerfassung, Photogrammetrie auf dem Gerät, Echtzeit-Dashboards.", app_f1: "React Native / Flutter", app_f2: "GPS-fähige Werkzeuge", app_f3: "Multimedia-Annotation", app_f4: "Cloud-Synchronisation + KI", app_btn: "Projekt besprechen →", app_link: "Detailseite →",
@@ -255,14 +254,18 @@
         currentLang = lang;
         const t = translations[lang];
         if (!t) return;
-        // Actualizar textos normales (innerText)
+        // Actualizar todos los elementos con data-i18n (texto plano)
         document.querySelectorAll("[data-i18n]").forEach(el => {
             const key = el.getAttribute("data-i18n");
-            if (t[key]) el.innerText = t[key];
+            if (t[key] !== undefined) {
+                // Si el elemento es un encabezado o similar que puede contener HTML, lo tratamos como texto plano.
+                // Para el título del héroe usamos innerText porque ya no tiene <br>
+                el.innerText = t[key];
+            }
         });
-        // Actualizar título con HTML (por el <br>)
+        // Asegurar que el título del héroe se actualice correctamente (sin HTML)
         const heroTitle = document.getElementById("heroTitle");
-        if (heroTitle && t.hero_title) heroTitle.innerHTML = t.hero_title;
+        if (heroTitle && t.hero_title) heroTitle.innerText = t.hero_title;
         // Marcar botón activo
         document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.remove("active"));
         document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add("active");
@@ -278,6 +281,7 @@
         btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang")));
     });
 
+    // Inicializar en español
     setLanguage("es");
 
     // Lógica del modal
