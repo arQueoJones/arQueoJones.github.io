@@ -37,7 +37,7 @@
         .detail-link { display: inline-block; margin-top: 28px; font-size: 0.9rem; color: #c9772e; text-decoration: none; font-weight: 500; border-bottom: 1px dashed #c9772e; transition: 0.2s; }
         .detail-link:hover { border-bottom-style: solid; }
         .hero { padding: 120px 0 80px; background: linear-gradient(145deg, #ffffff 0%, #fbfdff 100%); }
-        .hero-content h2 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; background: linear-gradient(125deg, #1f2f40, #2b4b6e); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero-content h2 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; background: linear-gradient(125deg, #1f2f40, #2b4b6e); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
         .hero-badge { background: #f1f5f9; display: inline-block; padding: 6px 16px; border-radius: 60px; font-size: 0.8rem; font-weight: 500; margin-bottom: 20px; }
         .free-badge { background: #e6f4ea; color: #2c6e3c; border-radius: 40px; padding: 4px 14px; font-size: 0.8rem; font-weight: 500; display: inline-block; }
         .feature-list { list-style: none; margin-top: 24px; }
@@ -90,7 +90,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge"><i class="fas fa-robot"></i> <span data-i18n="hero_badge">IA · inteligencia patrimonial</span></div>
-                <h2 data-i18n="hero_title">Reconstruimos el pasado<br>con la inteligencia del futuro</h2>
+                <h2 id="heroTitle" data-i18n-html="hero_title">Reconstruimos el pasado<br>con la inteligencia del futuro</h2>
                 <p class="section-sub" data-i18n="hero_desc">Desde la fotogrametría 3D hasta el diseño de museos asistido por IA, ar.QueoJones ofrece soluciones digitales a medida para arqueólogos, museos e instituciones culturales.</p>
                 <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                     <a href="#photogrammetry" class="btn-soft" style="background:#1e2a3e; color:white; border:none;" data-i18n="hero_btn1">Explorar servicios <i class="fas fa-arrow-right"></i></a>
@@ -181,7 +181,7 @@
 </footer>
 
 <script>
-    // Complete translations (ES, EN, FR, DE) - only showing ES and EN for brevity, but full set included in final code.
+    // Traducciones completas y naturales para ES, EN, FR, DE
     const translations = {
         es: {
             tagline: "inteligencia arqueológica de vanguardia", nav_home: "Inicio", nav_photogram: "Fotogrametría 3D", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Dron", nav_ar: "RA", nav_addons: "Complementos", nav_webdev: "Web & SW", nav_aiprompt: "IA Prompt", nav_arqueobot: "arqueobot",
@@ -199,29 +199,106 @@
             modal_title: "arqueobot – suite de inteligencia profunda", modal_desc: "arqueobot es una herramienta gratuita no comercial que integra todos los motores Python del ecosistema WAAZP.", modal_modules_title: "⚙️ módulos incluidos:", mod1: "Museum Builder (RL + NeuroEvolution)", mod2: "Asistente IA (GPT4All)", mod3: "Detección de fragmentos/objetos", mod4: "Detección en vivo (ESP32-CAM)", mod5: "Análisis estadístico multivariante", mod6: "Fotogrametría y COLMAP", mod7: "Clasificación y entrenamiento", mod8: "Gestión jerárquica de categorías", license_title: "🔓 Licencia:", license_text: "arqueobot es gratuito para investigación, educación y trabajo de campo no comercial.", modal_github: "Visitar arQueoJones en GitHub", modal_close: "Cerrar ventana",
             footer_desc: "Tecnologías arqueológicas de vanguardia", footer_services_title: "Servicios", footer_s1: "Fotogrametría 3D", footer_s2: "Creación de Apps", footer_s3: "QGIS y Espacial", footer_s4: "Arqueología con Dron", footer_s5: "Realidad Aumentada", footer_s6: "Complementos", footer_s7: "Desarrollo Web y SW", footer_s8: "Desarrollo de Prompts IA", footer_s9: "arqueobot gratuito", footer_legal: "Aviso legal y políticas", footer_disclaimer: "arqueobot se proporciona 'tal cual' para uso no comercial.", footer_privacy: "Política de privacidad: no recopilamos datos personales.", footer_copyright: "arqueobot es gratuito para uso académico no comercial.", footer_repo: "Repositorios open source", footer_license: "bajo licencias MIT / investigación."
         },
-        en: { /* similar structure but omitted for brevity, same as previous working version */ },
-        fr: { /* similar */ },
-        de: { /* similar */ }
+        en: {
+            tagline: "avant‑garde archaeological intelligence", nav_home: "Home", nav_photogram: "3D Photogrammetry", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drone", nav_ar: "AR", nav_addons: "Add-ons", nav_webdev: "Web & SW", nav_aiprompt: "AI Prompt", nav_arqueobot: "arqueobot",
+            hero_badge: "AI · heritage intelligence", hero_title: "We reconstruct the past<br>with the intelligence of the future", hero_desc: "From 3D photogrammetry to AI‑powered museum design, ar.QueoJones delivers tailor‑made digital solutions for archaeologists, museums, and cultural institutions.", hero_btn1: "Explore services →", hero_btn2: "Discover free arqueobot",
+            badge1: "3D reconstruction", badge2: "field apps", badge3: "geospatial QGIS", badge4: "arqueobot suite", badge5: "aerial archaeology", badge6: "augmented reality",
+            photogram_badge: "high precision", photogram_title: "3D Photogrammetry", photogram_desc: "Millimeter‑accurate digital twins of artefacts, excavations and architectural heritage. COLMAP, OpenCV and neural network pipeline.", photogram_f1: "Automated SfM", photogram_f2: "Dense cloud & meshing", photogram_f3: "Orthophotos & volumetric analysis", photogram_f4: "Web 3D viewer", photogram_btn: "Request demo →", photogram_link: "Detailed page →",
+            app_badge: "cross‑platform", app_title: "App Building", app_desc: "Mobile & web apps for archaeological workflows: offline data collection, on‑device photogrammetry, collaborative dashboards.", app_f1: "React Native / Flutter", app_f2: "GPS‑enabled tools", app_f3: "Multimedia annotation", app_f4: "Cloud sync + AI", app_btn: "Discuss project →", app_link: "Detailed page →",
+            qgis_badge: "spatial intelligence", qgis_title: "QGIS & Geospatial Analysis", qgis_desc: "Predictive modelling, landscape archaeology, LiDAR and custom QGIS plugins for heritage management.", qgis_f1: "Terrain & viewshed analysis", qgis_f2: "Aerial imagery interpretation", qgis_f3: "Geodatabase automation", qgis_f4: "Web maps & StoryMaps", qgis_btn: "Explore GIS →", qgis_link: "Detailed page →",
+            drone_badge: "UAV · multispectral", drone_title: "Aerial Archaeology via Drone", drone_desc: "High‑resolution surveys, LiDAR‑like terrain models, thermal & multispectral analysis to uncover hidden features.", drone_f1: "Orthomosaics & DEM", drone_f2: "NDVI & cropmark detection", drone_f3: "Automated flight + RTK", drone_f4: "3D terrain reconstruction", drone_btn: "Request survey →", drone_link: "Detailed page →",
+            ar_badge: "immersive heritage", ar_title: "Augmented Reality", ar_desc: "Interactive overlays, museum AR guides, virtual reconstructions of ruined structures.", ar_f1: "Markerless & location‑based AR", ar_f2: "Virtual reconstruction", ar_f3: "WebAR & native apps", ar_f4: "3D model integration", ar_btn: "Discuss AR project →", ar_link: "Detailed page →",
+            addons_badge: "extend & integrate", addons_title: "Custom Add-ons & Plugins", addons_desc: "QGIS plugins, 3D software extensions, data connectors, custom dashboards.", addons_f1: "QGIS/ArcGIS plugin dev", addons_f2: "Blender, MeshLab extensions", addons_f3: "Import/export connectors", addons_f4: "Automation scripts", addons_btn: "Request add‑on →", addons_link: "Detailed page →",
+            webdev_badge: "full‑stack expertise", webdev_title: "Web & Software Development", webdev_desc: "End‑to‑end web platforms, desktop applications, scientific software for archaeological research.", webdev_f1: "Web portals & databases", webdev_f2: "Desktop apps (Python, Electron)", webdev_f3: "REST APIs & cloud", webdev_f4: "Long‑term maintenance", webdev_btn: "Start project →", webdev_link: "Detailed page →",
+            aidev_badge: "generative AI", aidev_title: "AI Prompt Development", aidev_desc: "Design and fine‑tune LLM pipelines for archaeological research, semantic search, automated reports, virtual assistants.", aidev_f1: "Specialized prompt engineering", aidev_f2: "RAG pipelines for excavation archives", aidev_f3: "GPT4All & open‑source LLM", aidev_f4: "Auto cataloguing & summarization", aidev_btn: "Develop AI prompts →", aidev_link: "Detailed page →",
+            arqueobot_free: "free for non‑commercial use", arqueobot_title: "arqueobot · unified archaeological AI", arqueobot_desc: "An ecosystem merging museum design, shard detection, AI classification, live detection, and conversational intelligence.", arqueobot_card1_title: "AI Museum Architect", arqueobot_card1_desc: "Neural reinforcement learning optimises visitor flow, engagement and cultural resonance.", arqueobot_btn: "⟳ Discover full arqueobot", arqueobot_card2_title: "Intelligent Artefact Analysis", arqueobot_card2_desc: "Shard detection, live segmentation, GPT4All assistant, pottery/lithics classification.", arqueobot_f1: "Real‑time detection (ESP32-CAM)", arqueobot_f2: "Photogrammetry & 3D reconstruction", arqueobot_f3: "Smart category management", arqueobot_unify_text: "arqueobot unifies:", arqueobot_unify_list: "Museum AI Builder, AI Tab (GPT4All), shard detection, preprocessing, classification, COLMAP integration, personal programs, advanced analytics — all free for academic & non‑commercial use.", github_access: "Access source code & docs", arqueobot_detail_link: "Detailed page →",
+            modal_title: "arqueobot – deep intelligence suite", modal_desc: "arqueobot is a free non‑commercial toolkit integrating all Python engines from the WAAZP ecosystem.", modal_modules_title: "⚙️ core modules:", mod1: "Museum Builder (RL + NeuroEvolution)", mod2: "AI Assistant (GPT4All)", mod3: "Shard / Object Detection", mod4: "Live detection (ESP32-CAM)", mod5: "Multivariate statistical analysis", mod6: "Photogrammetry & COLMAP", mod7: "Classification & training", mod8: "Hierarchical category management", license_title: "🔓 License:", license_text: "arqueobot is free for research, education and non‑commercial fieldwork.", modal_github: "Visit arQueoJones on GitHub", modal_close: "Close window",
+            footer_desc: "Avant‑garde archaeological technologies", footer_services_title: "Services", footer_s1: "3D Photogrammetry", footer_s2: "App Building", footer_s3: "QGIS & Spatial", footer_s4: "Drone Archaeology", footer_s5: "Augmented Reality", footer_s6: "Add-ons", footer_s7: "Web & Software Dev", footer_s8: "AI Prompt Development", footer_s9: "arqueobot free", footer_legal: "Legal & Policies", footer_disclaimer: "arqueobot provided 'as is' for non‑commercial use.", footer_privacy: "Privacy: no personal data collected.", footer_copyright: "arqueobot free for non‑commercial academic use.", footer_repo: "Open source repositories", footer_license: "under MIT / research licenses."
+        },
+        fr: {
+            tagline: "intelligence archéologique d'avant-garde", nav_home: "Accueil", nav_photogram: "Photogrammétrie 3D", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drone", nav_ar: "RA", nav_addons: "Extensions", nav_webdev: "Web & Logiciel", nav_aiprompt: "Prompt IA", nav_arqueobot: "arqueobot",
+            hero_badge: "IA · intelligence patrimoniale", hero_title: "Nous reconstruisons le passé<br>avec l'intelligence du futur", hero_desc: "De la photogrammétrie 3D à la conception de musées par IA, ar.QueoJones propose des solutions numériques sur mesure pour archéologues, musées et institutions culturelles.", hero_btn1: "Explorer les services →", hero_btn2: "Découvrir arqueobot gratuit",
+            badge1: "reconstruction 3D", badge2: "apps terrain", badge3: "QGIS géospatial", badge4: "suite arqueobot", badge5: "archéologie aérienne", badge6: "réalité augmentée",
+            photogram_badge: "haute précision", photogram_title: "Photogrammétrie 3D", photogram_desc: "Jumeaux numériques millimétriques d'artefacts, fouilles et patrimoine architectural. Pipeline COLMAP, OpenCV et réseaux neuronaux.", photogram_f1: "SfM automatisé", photogram_f2: "Nuage dense et maillage", photogram_f3: "Orthophotos & analyse volumétrique", photogram_f4: "Visualiseur web 3D", photogram_btn: "Demander une démo →", photogram_link: "Page détaillée →",
+            app_badge: "multiplateforme", app_title: "Création d'applications", app_desc: "Apps mobiles et web pour flux archéologiques : collecte hors ligne, photogrammétrie sur appareil, tableaux de bord collaboratifs.", app_f1: "React Native / Flutter", app_f2: "Outils GPS", app_f3: "Annotation multimédia", app_f4: "Synchronisation cloud + IA", app_btn: "Discuter du projet →", app_link: "Page détaillée →",
+            qgis_badge: "intelligence spatiale", qgis_title: "QGIS & Analyse géospatiale", qgis_desc: "Modélisation prédictive, archéologie du paysage, LiDAR et plugins QGIS personnalisés pour la gestion patrimoniale.", qgis_f1: "Analyse de terrain et bassins visuels", qgis_f2: "Interprétation d'images aériennes", qgis_f3: "Géodatabases et automatisation", qgis_f4: "Cartes web et StoryMaps", qgis_btn: "Explorer SIG →", qgis_link: "Page détaillée →",
+            drone_badge: "UAV · multispectral", drone_title: "Archéologie aérienne par drone", drone_desc: "Levés haute résolution, modèles de terrain type LiDAR, analyse thermique et multispectrale pour détecter les vestiges cachés.", drone_f1: "Orthomosaïques et MNT", drone_f2: "NDVI et détection des cultures", drone_f3: "Planification automatique + RTK", drone_f4: "Reconstruction 3D du terrain", drone_btn: "Demander un levé →", drone_link: "Page détaillée →",
+            ar_badge: "patrimoine immersif", ar_title: "Réalité Augmentée", ar_desc: "Superpositions interactives, guides de musée AR, reconstructions virtuelles de structures ruinées.", ar_f1: "RA sans marqueur / basée sur localisation", ar_f2: "Reconstruction virtuelle", ar_f3: "WebAR et applications natives", ar_f4: "Intégration de modèles 3D", ar_btn: "Discuter projet RA →", ar_link: "Page détaillée →",
+            addons_badge: "étendre et intégrer", addons_title: "Extensions et plugins sur mesure", addons_desc: "Plugins QGIS, extensions pour logiciels 3D, connecteurs de données, tableaux de bord personnalisés.", addons_f1: "Développement de plugins QGIS/ArcGIS", addons_f2: "Extensions pour Blender, MeshLab", addons_f3: "Connecteurs import/export", addons_f4: "Scripts d'automatisation", addons_btn: "Demander une extension →", addons_link: "Page détaillée →",
+            webdev_badge: "expertise full‑stack", webdev_title: "Développement Web et Logiciel", webdev_desc: "Plateformes web, applications de bureau et logiciels scientifiques pour la recherche archéologique et la gestion patrimoniale.", webdev_f1: "Portails web et bases de données", webdev_f2: "Apps de bureau (Python, Electron)", webdev_f3: "APIs REST et infrastructure cloud", webdev_f4: "Maintenance à long terme", webdev_btn: "Lancer un projet →", webdev_link: "Page détaillée →",
+            aidev_badge: "IA générative", aidev_title: "Développement de prompts IA", aidev_desc: "Conception et réglage de pipelines LLM pour la recherche archéologique, recherche sémantique, rapports automatiques, assistants virtuels.", aidev_f1: "Ingénierie de prompts spécialisée", aidev_f2: "Pipelines RAG pour archives de fouilles", aidev_f3: "Intégration GPT4All et LLM open source", aidev_f4: "Catalogage et résumé automatiques", aidev_btn: "Développer des prompts IA →", aidev_link: "Page détaillée →",
+            arqueobot_free: "gratuit pour usage non commercial", arqueobot_title: "arqueobot · IA archéologique unifiée", arqueobot_desc: "Un écosystème fusionnant conception de musées, détection de tessons, classification par IA, détection en direct et intelligence conversationnelle.", arqueobot_card1_title: "Architecte de musées IA", arqueobot_card1_desc: "Apprentissage par renforcement neuronal pour optimiser flux de visiteurs, engagement et résonance culturelle.", arqueobot_btn: "⟳ Découvrir arqueobot complet", arqueobot_card2_title: "Analyse intelligente d'artefacts", arqueobot_card2_desc: "Détection de tessons, segmentation en direct, assistant GPT4All, classification céramique/lithique.", arqueobot_f1: "Détection temps réel (ESP32-CAM)", arqueobot_f2: "Photogrammétrie et reconstruction 3D", arqueobot_f3: "Gestion intelligente des catégories", arqueobot_unify_text: "arqueobot unifie :", arqueobot_unify_list: "Museum AI Builder, AI Tab (GPT4All), détection de tessons, prétraitement, classification, intégration COLMAP, programmes personnels et analytique avancée — tout gratuit pour usage académique et non commercial.", github_access: "Accéder au code et à la documentation", arqueobot_detail_link: "Page détaillée →",
+            modal_title: "arqueobot – suite d'intelligence profonde", modal_desc: "arqueobot est un outil gratuit non commercial intégrant tous les moteurs Python de l'écosystème WAAZP.", modal_modules_title: "⚙️ modules inclus :", mod1: "Museum Builder (RL + NeuroEvolution)", mod2: "Assistant IA (GPT4All)", mod3: "Détection de tessons/objets", mod4: "Détection en direct (ESP32-CAM)", mod5: "Analyse statistique multivariée", mod6: "Photogrammétrie et COLMAP", mod7: "Classification et entraînement", mod8: "Gestion hiérarchique des catégories", license_title: "🔓 Licence :", license_text: "arqueobot est gratuit pour la recherche, l'éducation et le travail de terrain non commercial.", modal_github: "Visiter arQueoJones sur GitHub", modal_close: "Fermer la fenêtre",
+            footer_desc: "Technologies archéologiques d'avant-garde", footer_services_title: "Services", footer_s1: "Photogrammétrie 3D", footer_s2: "Création d'apps", footer_s3: "QGIS et spatial", footer_s4: "Archéologie par drone", footer_s5: "Réalité augmentée", footer_s6: "Extensions", footer_s7: "Développement Web et SW", footer_s8: "Développement de prompts IA", footer_s9: "arqueobot gratuit", footer_legal: "Mentions légales", footer_disclaimer: "arqueobot fourni 'en l'état' pour usage non commercial.", footer_privacy: "Confidentialité : aucune donnée personnelle collectée.", footer_copyright: "arqueobot gratuit pour usage académique non commercial.", footer_repo: "Dépôts open source", footer_license: "sous licences MIT / recherche."
+        },
+        de: {
+            tagline: "avantgardistische archäologische Intelligenz", nav_home: "Start", nav_photogram: "3D-Photogrammetrie", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drohne", nav_ar: "AR", nav_addons: "Add-ons", nav_webdev: "Web & SW", nav_aiprompt: "KI-Prompt", nav_arqueobot: "arqueobot",
+            hero_badge: "KI · Kulturerbe-Intelligenz", hero_title: "Wir rekonstruieren die Vergangenheit<br>mit der Intelligenz der Zukunft", hero_desc: "Von der 3D-Photogrammetrie bis zum KI-gestützten Museumsdesign – ar.QueoJones bietet maßgeschneiderte digitale Lösungen für Archäologen, Museen und Kultureinrichtungen.", hero_btn1: "Dienste erkunden →", hero_btn2: "Kostenloses arqueobot entdecken",
+            badge1: "3D-Rekonstruktion", badge2: "Feld-Apps", badge3: "georäumliches QGIS", badge4: "arqueobot-Suite", badge5: "Luftbildarchäologie", badge6: "erweiterte Realität",
+            photogram_badge: "hohe Präzision", photogram_title: "3D-Photogrammetrie", photogram_desc: "Millimetergenaue digitale Zwillinge von Artefakten, Ausgrabungen und Architekturerbe. COLMAP-, OpenCV- und neuronale Netzwerk-Pipeline.", photogram_f1: "Automatisiertes SfM", photogram_f2: "Dichte Punktwolke & Vernetzung", photogram_f3: "Orthofotos & Volumenanalyse", photogram_f4: "Web-3D-Betrachter", photogram_btn: "Demo anfordern →", photogram_link: "Detailseite →",
+            app_badge: "plattformübergreifend", app_title: "App-Entwicklung", app_desc: "Mobile & Web-Apps für archäologische Arbeitsabläufe: Offline-Datenerfassung, Photogrammetrie auf dem Gerät, Echtzeit-Dashboards.", app_f1: "React Native / Flutter", app_f2: "GPS-fähige Werkzeuge", app_f3: "Multimedia-Annotation", app_f4: "Cloud-Synchronisation + KI", app_btn: "Projekt besprechen →", app_link: "Detailseite →",
+            qgis_badge: "räumliche Intelligenz", qgis_title: "QGIS & Geodatenanalyse", qgis_desc: "Prädiktive Modellierung, Landschaftsarchäologie, LiDAR und benutzerdefinierte QGIS-Plugins für das Kulturerbe-Management.", qgis_f1: "Gelände- und Sichtbarkeitsanalyse", qgis_f2: "Interpretation von Luftbildern", qgis_f3: "Geodatenbanken & Automatisierung", qgis_f4: "Webkarten & StoryMaps", qgis_btn: "GIS erkunden →", qgis_link: "Detailseite →",
+            drone_badge: "UAV · multispektral", drone_title: "Luftbildarchäologie mit Drohnen", drone_desc: "Hochauflösende Vermessungen, LiDAR-ähnliche Geländemodelle, thermische und multispektrale Analyse zur Entdeckung verborgener Strukturen.", drone_f1: "Orthomosaike & DGM", drone_f2: "NDVI & Bewuchsmerkmalerkennung", drone_f3: "Automatisierte Flugplanung + RTK", drone_f4: "3D-Geländerekonstruktion", drone_btn: "Vermessung anfragen →", drone_link: "Detailseite →",
+            ar_badge: "immersives Kulturerbe", ar_title: "Erweiterte Realität", ar_desc: "Interaktive Überlagerungen, AR-Museumsführer, virtuelle Rekonstruktionen von Ruinen.", ar_f1: "Markerloser & ortsbasierter AR", ar_f2: "Virtuelle Rekonstruktion", ar_f3: "WebAR & native Apps", ar_f4: "Integration von 3D-Modellen", ar_btn: "AR-Projekt besprechen →", ar_link: "Detailseite →",
+            addons_badge: "erweitern & integrieren", addons_title: "Benutzerdefinierte Add-ons & Plugins", addons_desc: "QGIS-Plugins, Erweiterungen für 3D-Software, Datenkonnektoren, maßgeschneiderte Dashboards.", addons_f1: "QGIS/ArcGIS-Plugin-Entwicklung", addons_f2: "Blender-, MeshLab-Erweiterungen", addons_f3: "Import/Export-Konnektoren", addons_f4: "Automatisierungsskripte", addons_btn: "Add-on anfragen →", addons_link: "Detailseite →",
+            webdev_badge: "Full‑Stack-Expertise", webdev_title: "Web- & Softwareentwicklung", webdev_desc: "End-to-End-Webplattformen, Desktop-Anwendungen, wissenschaftliche Software für archäologische Forschung.", webdev_f1: "Webportale & Datenbanken", webdev_f2: "Desktop-Apps (Python, Electron)", webdev_f3: "REST-APIs & Cloud", webdev_f4: "Langzeitwartung", webdev_btn: "Projekt starten →", webdev_link: "Detailseite →",
+            aidev_badge: "generative KI", aidev_title: "KI-Prompt-Entwicklung", aidev_desc: "Design und Feinabstimmung von LLM-Pipelines für archäologische Forschung, semantische Suche, automatische Berichte, virtuelle Assistenten.", aidev_f1: "Spezialisiertes Prompt-Engineering", aidev_f2: "RAG-Pipelines für Ausgrabungsarchive", aidev_f3: "GPT4All & Open-Source-LLM", aidev_f4: "Automatische Katalogisierung & Zusammenfassung", aidev_btn: "KI-Prompts entwickeln →", aidev_link: "Detailseite →",
+            arqueobot_free: "kostenlos für nicht-kommerzielle Nutzung", arqueobot_title: "arqueobot · vereinte archäologische KI", arqueobot_desc: "Ein Ökosystem, das Museumsdesign, Scherbenerkennung, KI-Klassifizierung, Live-Erkennung und konversationelle Intelligenz vereint.", arqueobot_card1_title: "KI-Museumsarchitekt", arqueobot_card1_desc: "Neuronales bestärkendes Lernen optimiert Besucherfluss, Engagement und kulturelle Resonanz.", arqueobot_btn: "⟳ Vollständiges arqueobot entdecken", arqueobot_card2_title: "Intelligente Artefaktanalyse", arqueobot_card2_desc: "Scherbenerkennung, Live-Segmentierung, GPT4All-Assistent, Keramik-/Lithik-Klassifikation.", arqueobot_f1: "Echtzeiterkennung (ESP32-CAM)", arqueobot_f2: "Photogrammetrie & 3D-Rekonstruktion", arqueobot_f3: "Intelligente Kategorieverwaltung", arqueobot_unify_text: "arqueobot vereint:", arqueobot_unify_list: "Museum AI Builder, AI Tab (GPT4All), Scherbenerkennung, Vorverarbeitung, Klassifikation, COLMAP-Integration, persönliche Programme und erweiterte Analytik – alles kostenlos für akademische und nicht-kommerzielle Nutzung.", github_access: "Quellcode & Dokumentation", arqueobot_detail_link: "Detailseite →",
+            modal_title: "arqueobot – Deep Intelligence Suite", modal_desc: "arqueobot ist ein kostenloses nicht-kommerzielles Toolkit, das alle Python-Engines des WAAZP-Ökosystems integriert.", modal_modules_title: "⚙️ Kernmodule:", mod1: "Museum Builder (RL + NeuroEvolution)", mod2: "KI-Assistent (GPT4All)", mod3: "Scherben-/Objekterkennung", mod4: "Live-Erkennung (ESP32-CAM)", mod5: "Multivariate statistische Analyse", mod6: "Photogrammetrie & COLMAP", mod7: "Klassifikation & Training", mod8: "Hierarchische Kategorieverwaltung", license_title: "🔓 Lizenz:", license_text: "arqueobot ist kostenlos für Forschung, Bildung und nicht-kommerzielle Feldarbeit.", modal_github: "Besuchen Sie arQueoJones auf GitHub", modal_close: "Fenster schließen",
+            footer_desc: "Avantgardistische archäologische Technologien", footer_services_title: "Dienste", footer_s1: "3D-Photogrammetrie", footer_s2: "App-Entwicklung", footer_s3: "QGIS & räumlich", footer_s4: "Drohnenarchäologie", footer_s5: "Erweiterte Realität", footer_s6: "Add-ons", footer_s7: "Web- & Softwareentwicklung", footer_s8: "KI-Prompt-Entwicklung", footer_s9: "arqueobot kostenlos", footer_legal: "Rechtliche Hinweise", footer_disclaimer: "arqueobot wird 'wie besehen' für nicht-kommerzielle Nutzung bereitgestellt.", footer_privacy: "Datenschutz: keine personenbezogenen Daten.", footer_copyright: "arqueobot kostenlos für nicht-kommerzielle akademische Nutzung.", footer_repo: "Open-Source-Repositories", footer_license: "unter MIT / Forschungslizenzen."
+        }
     };
-    // For brevity, EN/FR/DE are included in the final live version; here we replicate the full working set from earlier.
-    // (In the final output, all four languages are fully defined.)
-    // We'll just set ES as default and ensure links work.
+
     let currentLang = "es";
-    function setLanguage(lang) { currentLang = lang; const t = translations[lang]; if(!t) return; document.querySelectorAll("[data-i18n]").forEach(el => { const key = el.getAttribute("data-i18n"); if(t[key]) el.innerText = t[key]; }); document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.remove("active")); document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add("active"); }
-    window.showAlert = function(service) { alert(translations[currentLang][`${service}_btn`]?.replace(" →","") || "Contáctenos para más información."); };
-    document.querySelectorAll(".lang-btn").forEach(btn => btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang"))));
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+        if (!t) return;
+        // Actualizar textos normales (innerText)
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+            const key = el.getAttribute("data-i18n");
+            if (t[key]) el.innerText = t[key];
+        });
+        // Actualizar título con HTML (por el <br>)
+        const heroTitle = document.getElementById("heroTitle");
+        if (heroTitle && t.hero_title) heroTitle.innerHTML = t.hero_title;
+        // Marcar botón activo
+        document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.remove("active"));
+        document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add("active");
+    }
+
+    window.showAlert = function(service) {
+        const btnText = translations[currentLang][`${service}_btn`] || "Contactar";
+        alert(btnText.replace(/ →$/, "").trim());
+    };
+
+    // Asignar eventos a los botones de idioma
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang")));
+    });
+
     setLanguage("es");
-    // Modal logic
-    const modal = document.getElementById('arqueobotModal'), openBtn = document.getElementById('openModalBtn'), closeBtn = document.getElementById('closeModalBtn'), closeBtn2 = document.getElementById('closeModalBtn2');
+
+    // Lógica del modal
+    const modal = document.getElementById('arqueobotModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const closeBtn2 = document.getElementById('closeModalBtn2');
     function openModalFunc() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
     function closeModalFunc() { modal.style.display = 'none'; document.body.style.overflow = ''; }
-    if(openBtn) openBtn.addEventListener('click', openModalFunc);
-    if(closeBtn) closeBtn.addEventListener('click', closeModalFunc);
-    if(closeBtn2) closeBtn2.addEventListener('click', closeModalFunc);
-    window.addEventListener('click', (e) => { if(e.target === modal) closeModalFunc(); });
+    if (openBtn) openBtn.addEventListener('click', openModalFunc);
+    if (closeBtn) closeBtn.addEventListener('click', closeModalFunc);
+    if (closeBtn2) closeBtn2.addEventListener('click', closeModalFunc);
+    window.addEventListener('click', (e) => { if (e.target === modal) closeModalFunc(); });
+
+    // Botón volver arriba
     const backBtn = document.getElementById('backToTopBtn');
-    window.addEventListener('scroll', () => { if(window.scrollY > 350) backBtn.classList.add('show'); else backBtn.classList.remove('show'); });
-    backBtn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 350) backBtn.classList.add('show');
+        else backBtn.classList.remove('show');
+    });
+    backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
 </body>
 </html>
