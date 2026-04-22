@@ -7,20 +7,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== RESET Y ESTILOS BASE (sin cambios importantes) ===== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1e2b; scroll-behavior: smooth; line-height: 1.5; }
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-        
-        /* HEADER STICKY CON FONDO SEMITRANSPARENTE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a1e2b;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        /* Cabecera fija semitransparente */
         .site-header {
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             z-index: 100;
-            padding: 18px 0;
+            padding: 12px 0;
         }
         .header-inner {
             display: flex;
@@ -29,27 +41,27 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-        
-        /* ===== NUEVO ESTILO PARA EL LOGO ===== */
+        /* Área del logotipo */
         .logo-area {
             display: flex;
             align-items: center;
             gap: 20px;
         }
         .logo-placeholder {
-            background: none;    /* Sin fondo opaco */
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
+            max-height: 80px;
         }
         .logo-placeholder img {
-            height: 70px;        /* Altura deseada, ajustable */
+            height: 70px;
             width: auto;
-            max-width: 220px;
+            max-width: 140px;
             object-fit: contain;
             display: block;
         }
-        /* Texto del logo (ar.QueoJones) */
+        /* Texto del logo (nombre) */
         .logo-text h1 {
             font-family: 'Space Grotesk', monospace;
             font-weight: 600;
@@ -66,48 +78,294 @@
             color: #5b6e8c;
             display: block;
         }
-        
-        /* RESTO DEL CSS (igual que antes) */
-        .nav-links { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
-        .nav-links a { text-decoration: none; font-weight: 500; color: #1e2a3e; transition: all 0.2s ease; font-size: 0.95rem; border-bottom: 1px solid transparent; padding-bottom: 4px; }
-        .nav-links a:hover, .nav-links a.active { border-bottom-color: #c9772e; color: #c9772e; }
-        .github-link { background: #f0f2f5; padding: 8px 18px; border-radius: 40px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
-        .github-link:hover { background: #e4e7ec; color: #c9772e; border-bottom: none; }
-        .lang-switch { display: flex; gap: 10px; margin-left: 15px; }
-        .lang-btn { background: none; border: 1px solid #cfdde6; border-radius: 30px; padding: 5px 12px; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.8rem; color: #2c3e50; }
-        .lang-btn.active { background: #1e2a3e; color: white; border-color: #1e2a3e; }
-        section { padding: 100px 0; border-bottom: 1px solid #f0f0f0; scroll-margin-top: 90px; }
-        .section-title { font-size: 2.6rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 24px; color: #0f172a; }
-        .section-sub { font-size: 1.1rem; color: #4a5a72; max-width: 720px; margin-bottom: 56px; }
-        .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; align-items: center; }
-        .service-card { background: #ffffff; border-radius: 36px; padding: 32px; box-shadow: 0 8px 30px rgba(0,0,0,0.02); border: 1px solid #edf2f7; transition: transform 0.25s ease; }
-        .service-card:hover { transform: translateY(-4px); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08); border-color: #e2e8f0; }
-        .service-icon { font-size: 2.8rem; color: #c9772e; margin-bottom: 20px; }
-        .service-card h3 { font-size: 1.7rem; font-weight: 600; margin-bottom: 16px; }
-        .btn-soft { margin-top: 28px; display: inline-block; background: none; border: 1px solid #cfdde6; padding: 8px 22px; border-radius: 40px; font-weight: 500; transition: all 0.2s; cursor: pointer; font-family: inherit; font-size: 0.9rem; margin-right: 12px; text-decoration: none; color: #1e2a3e; }
-        .btn-soft:hover { background: #f8fafc; border-color: #c9772e; color: #c9772e; }
-        .detail-link { display: inline-block; margin-top: 28px; font-size: 0.9rem; color: #c9772e; text-decoration: none; font-weight: 500; border-bottom: 1px dashed #c9772e; }
-        .hero { padding: 120px 0 80px; background: linear-gradient(145deg, #ffffff, #fbfdff); }
-        .hero-content h2 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; background: linear-gradient(125deg, #1f2f40, #2b4b6e); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
-        .hero-badge { background: #f1f5f9; display: inline-block; padding: 6px 16px; border-radius: 60px; font-size: 0.8rem; font-weight: 500; margin-bottom: 20px; }
-        .free-badge { background: #e6f4ea; color: #2c6e3c; border-radius: 40px; padding: 4px 14px; font-size: 0.8rem; font-weight: 500; display: inline-block; }
-        .feature-list { list-style: none; margin-top: 24px; }
-        .feature-list li { margin: 12px 0; display: flex; align-items: center; gap: 12px; }
-        .feature-list i { color: #c9772e; width: 24px; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center; }
-        .modal-content { background: #ffffff; max-width: 750px; width: 90%; border-radius: 48px; padding: 40px; position: relative; max-height: 85vh; overflow-y: auto; }
-        .close-modal { position: absolute; top: 24px; right: 28px; font-size: 28px; cursor: pointer; }
-        .back-to-top { position: fixed; bottom: 32px; right: 32px; background: #1e2a3e; color: white; width: 52px; height: 52px; border-radius: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: 0.25s; z-index: 99; }
-        .back-to-top.show { opacity: 1; visibility: visible; }
-        footer { background: #fafcff; padding: 56px 0 40px; border-top: 1px solid #eef2f6; margin-top: 40px; }
-        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
-        .footer-col { max-width: 300px; }
-        .footer-tagline { margin: 16px 0 20px; font-size: 0.85rem; color: #5b6e8c; border-top: 1px solid #e9edf2; padding-top: 16px; }
-        hr { border: none; border-top: 1px solid #e9edf2; margin: 28px 0; }
-        @media (max-width: 900px) { .grid-2col { grid-template-columns: 1fr; gap: 32px; } .hero-content h2 { font-size: 2.5rem; } .container { padding: 0 24px; } .nav-links { gap: 18px; } }
-        @media (max-width: 680px) { .header-inner { flex-direction: column; align-items: flex-start; } .logo-area { width: 100%; justify-content: space-between; } }
-        img.mock-img { width: 100%; border-radius: 32px; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1); }
-        .pillar-img { background: #f4f7fc; border-radius: 32px; display: flex; align-items: center; justify-content: center; min-height: 260px; }
+        /* Navegación */
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e2a3e;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 4px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            border-bottom-color: #c9772e;
+            color: #c9772e;
+        }
+        .github-link {
+            background: #f0f2f5;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .github-link:hover {
+            background: #e4e7ec;
+            color: #c9772e;
+            border-bottom: none;
+        }
+        /* Selector de idioma */
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+            margin-left: 15px;
+        }
+        .lang-btn {
+            background: none;
+            border: 1px solid #cfdde6;
+            border-radius: 30px;
+            padding: 5px 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.8rem;
+            color: #2c3e50;
+        }
+        .lang-btn.active {
+            background: #1e2a3e;
+            color: white;
+            border-color: #1e2a3e;
+        }
+        /* Secciones */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid #f0f0f0;
+            scroll-margin-top: 90px;
+        }
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: #0f172a;
+        }
+        .section-sub {
+            font-size: 1.1rem;
+            color: #4a5a72;
+            max-width: 720px;
+            margin-bottom: 56px;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            align-items: center;
+        }
+        .service-card {
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 32px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+            border: 1px solid #edf2f7;
+            transition: transform 0.25s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            border-color: #e2e8f0;
+        }
+        .service-icon {
+            font-size: 2.8rem;
+            color: #c9772e;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .btn-soft {
+            margin-top: 28px;
+            display: inline-block;
+            background: none;
+            border: 1px solid #cfdde6;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            margin-right: 12px;
+            text-decoration: none;
+            color: #1e2a3e;
+        }
+        .btn-soft:hover {
+            background: #f8fafc;
+            border-color: #c9772e;
+            color: #c9772e;
+        }
+        .detail-link {
+            display: inline-block;
+            margin-top: 28px;
+            font-size: 0.9rem;
+            color: #c9772e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #c9772e;
+        }
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(145deg, #ffffff, #fbfdff);
+        }
+        .hero-content h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(125deg, #1f2f40, #2b4b6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        .hero-badge {
+            background: #f1f5f9;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .free-badge {
+            background: #e6f4ea;
+            color: #2c6e3c;
+            border-radius: 40px;
+            padding: 4px 14px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .feature-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+        .feature-list li {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .feature-list i {
+            color: #c9772e;
+            width: 24px;
+        }
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #ffffff;
+            max-width: 750px;
+            width: 90%;
+            border-radius: 48px;
+            padding: 40px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .close-modal {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        /* Botón subir */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: #1e2a3e;
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.25s;
+            z-index: 99;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Footer */
+        footer {
+            background: #fafcff;
+            padding: 56px 0 40px;
+            border-top: 1px solid #eef2f6;
+            margin-top: 40px;
+        }
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col {
+            max-width: 320px;
+        }
+        .footer-tagline {
+            margin: 16px 0 20px;
+            font-size: 0.85rem;
+            color: #5b6e8c;
+            border-top: 1px solid #e9edf2;
+            padding-top: 16px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e9edf2;
+            margin: 28px 0;
+        }
+        @media (max-width: 900px) {
+            .grid-2col { grid-template-columns: 1fr; gap: 32px; }
+            .hero-content h2 { font-size: 2.5rem; }
+            .container { padding: 0 24px; }
+            .nav-links { gap: 18px; }
+        }
+        @media (max-width: 680px) {
+            .header-inner { flex-direction: column; align-items: flex-start; }
+            .logo-area { width: 100%; justify-content: space-between; }
+        }
+        img.mock-img {
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+        }
+        .pillar-img {
+            background: #f4f7fc;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
+        }
     </style>
 </head>
 <body>
@@ -115,8 +373,8 @@
     <div class="container header-inner">
         <div class="logo-area">
             <div class="logo-placeholder">
-                <!-- Aquí se carga el logo desde la misma carpeta -->
-                <img src="logo.png" alt="ar.QueoJones logo">
+                <!-- Cambia el nombre del archivo si es necesario: logo.png, logo.webp, etc. -->
+                <img src="logo.jpg" alt="ar.QueoJones logo">
             </div>
             <div class="logo-text">
                 <h1>ar.QueoJones</h1>
@@ -146,7 +404,9 @@
         </div>
     </div>
 </header>
+
 <main>
+    <!-- Hero -->
     <section id="hero" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -172,20 +432,28 @@
     <!-- Fotogrametría 3D -->
     <section id="photogrammetry"><div class="container"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-camera"></i> <span data-i18n="photogram_badge">alta precisión</span></span><h2 class="section-title" data-i18n="photogram_title">Fotogrametría 3D</h2><p data-i18n="photogram_desc">Gemelos digitales milimétricos de artefactos, excavaciones y patrimonio arquitectónico. Integración COLMAP, OpenCV y redes neuronales.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f1">SfM automatizado</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f2">Nube densa y mallado</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f3">Ortofotos y análisis volumétrico</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f4">Visor web 3D</span></li></ul><button class="btn-soft" data-i18n="photogram_btn" onclick="showAlert('photogram')">Solicitar demo →</button><a href="3dphotogrammetry.html" class="detail-link" data-i18n="photogram_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/104/600/450" alt="3d photogrammetry" class="mock-img"></div></div></div></section>
 
+    <!-- Apps -->
     <section id="app-building"><div class="container"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-code-branch"></i> <span data-i18n="app_badge">multiplataforma</span></span><h2 class="section-title" data-i18n="app_title">Creación de Apps</h2><p data-i18n="app_desc">Apps móviles y web para flujos arqueológicos: recogida offline, procesamiento fotogramétrico y paneles colaborativos.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f1">React Native / Flutter</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f2">Herramientas con GPS</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f3">Anotación multimedia</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f4">Sincronización cloud + IA</span></li></ul><button class="btn-soft" data-i18n="app_btn" onclick="showAlert('app')">Hablar del proyecto →</button><a href="appbuilding.html" class="detail-link" data-i18n="app_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/20/600/450" alt="mobile app" class="mock-img"></div></div></div></section>
 
+    <!-- QGIS -->
     <section id="qgis"><div class="container"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-draw-polygon"></i> <span data-i18n="qgis_badge">inteligencia espacial</span></span><h2 class="section-title" data-i18n="qgis_title">QGIS y Análisis Geoespacial</h2><p data-i18n="qgis_desc">Modelado predictivo, arqueología del paisaje, LiDAR y plugins QGIS personalizados para gestión patrimonial.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f1">Análisis de terreno y cuencas visuales</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f2">Interpretación de imágenes aéreas</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f3">Geodatabases y automatización</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f4">Mapas web y StoryMaps</span></li></ul><button class="btn-soft" data-i18n="qgis_btn" onclick="showAlert('qgis')">Explorar GIS →</button><a href="qgis.html" class="detail-link" data-i18n="qgis_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/15/600/450" alt="qgis map" class="mock-img"></div></div></div></section>
 
+    <!-- Dron -->
     <section id="drone"><div class="container"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-drone"></i> <span data-i18n="drone_badge">UAV · multiespectral</span></span><h2 class="section-title" data-i18n="drone_title">Arqueología Aérea con Dron</h2><p data-i18n="drone_desc">Levantamientos de alta resolución, modelos de terreno tipo LiDAR, análisis térmico y multiespectral para detectar rasgos ocultos.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f1">Ortomosaicos y MDT</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f2">NDVI y detección de cultivos</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f3">Planificación automática + RTK</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f4">Reconstrucción 3D del terreno</span></li></ul><button class="btn-soft" data-i18n="drone_btn" onclick="showAlert('drone')">Solicitar levantamiento →</button><a href="drone.html" class="detail-link" data-i18n="drone_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/96/600/450" alt="drone archaeology" class="mock-img"></div></div></div></section>
 
+    <!-- Realidad Aumentada -->
     <section id="augmented-reality"><div class="container"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-vr-cardboard"></i> <span data-i18n="ar_badge">patrimonio inmersivo</span></span><h2 class="section-title" data-i18n="ar_title">Realidad Aumentada</h2><p data-i18n="ar_desc">Superposiciones interactivas, guías de museo AR y reconstrucciones virtuales de estructuras arruinadas.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f1">AR sin marcadores / basada en ubicación</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f2">Reconstrucción virtual</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f3">WebAR y apps nativas</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f4">Integración con modelos 3D</span></li></ul><button class="btn-soft" data-i18n="ar_btn" onclick="showAlert('ar')">Discutir proyecto AR →</button><a href="ar.html" class="detail-link" data-i18n="ar_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/42/600/450" alt="augmented reality" class="mock-img"></div></div></div></section>
 
+    <!-- Complementos -->
     <section id="addons"><div class="container"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-puzzle-piece"></i> <span data-i18n="addons_badge">extiende e integra</span></span><h2 class="section-title" data-i18n="addons_title">Complementos y Plugins a Medida</h2><p data-i18n="addons_desc">Plugins para QGIS, extensiones para software 3D, conectores de datos y paneles de control personalizados.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f1">Desarrollo de plugins QGIS/ArcGIS</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f2">Extensiones para Blender, MeshLab</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f3">Conectores import/export</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f4">Scripts de automatización</span></li></ul><button class="btn-soft" data-i18n="addons_btn" onclick="showAlert('addons')">Solicitar complemento →</button><a href="addons.html" class="detail-link" data-i18n="addons_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/26/600/450" alt="custom addons" class="mock-img"></div></div></div></section>
 
+    <!-- Desarrollo Web y SW -->
     <section id="webdev"><div class="container"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-globe"></i> <span data-i18n="webdev_badge">experiencia full‑stack</span></span><h2 class="section-title" data-i18n="webdev_title">Desarrollo Web y de Software</h2><p data-i18n="webdev_desc">Plataformas web, aplicaciones de escritorio y software científico para investigación arqueológica y gestión patrimonial.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f1">Portales web y bases de datos</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f2">Apps de escritorio (Python, Electron)</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f3">APIs REST e infraestructura cloud</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f4">Mantenimiento a largo plazo</span></li></ul><button class="btn-soft" data-i18n="webdev_btn" onclick="showAlert('webdev')">Iniciar proyecto →</button><a href="web&sw.html" class="detail-link" data-i18n="webdev_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/0/600/450" alt="software development" class="mock-img"></div></div></div></section>
 
+    <!-- IA Prompt -->
     <section id="aidev"><div class="container"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-comment-dots"></i> <span data-i18n="aidev_badge">IA generativa</span></span><h2 class="section-title" data-i18n="aidev_title">Desarrollo de Prompts IA</h2><p data-i18n="aidev_desc">Diseño y ajuste de pipelines de LLM para investigación arqueológica, búsqueda semántica, informes automáticos y asistentes virtuales.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f1">Ingeniería de prompts especializada</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f2">Pipelines RAG para archivos de excavación</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f3">Integración GPT4All y LLM open source</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f4">Catalogación y resumen automático</span></li></ul><button class="btn-soft" data-i18n="aidev_btn" onclick="showAlert('aidev')">Desarrollar prompts IA →</button><a href="aiprompt.html" class="detail-link" data-i18n="aidev_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/169/600/450" alt="AI prompt engineering" class="mock-img"></div></div></div></section>
 
+    <!-- arqueobot -->
     <section id="arqueobot" style="background: #ffffff;">
         <div class="container">
             <div style="text-align: center; max-width: 800px; margin: 0 auto 48px;">
@@ -217,6 +485,7 @@
     </section>
 </main>
 
+<!-- Modal arqueobot -->
 <div id="arqueobotModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeModalBtn">&times;</span><h3><i class="fas fa-microchip"></i> <span data-i18n="modal_title">arqueobot – suite de inteligencia profunda</span></h3><div class="modal-grid"><p data-i18n="modal_desc">arqueobot es una herramienta gratuita no comercial que integra todos los motores Python del ecosistema WAAZP. Diseñada para arqueólogos, investigadores y profesionales del patrimonio.</p><div style="background:#F8FAFE; padding:20px; border-radius:28px;"><h4 data-i18n="modal_modules_title">⚙️ módulos incluidos:</h4><ul style="columns:2; column-gap:32px; margin-top:16px; list-style:none;"><li><i class="fas fa-cube"></i> <span data-i18n="mod1">Museum Builder (RL + NeuroEvolution)</span></li><li><i class="fas fa-language"></i> <span data-i18n="mod2">Asistente IA (GPT4All)</span></li><li><i class="fas fa-shield-alt"></i> <span data-i18n="mod3">Detección de fragmentos/objetos</span></li><li><i class="fas fa-video"></i> <span data-i18n="mod4">Detección en vivo (ESP32-CAM)</span></li><li><i class="fas fa-chart-simple"></i> <span data-i18n="mod5">Análisis estadístico multivariante</span></li><li><i class="fas fa-draw-polygon"></i> <span data-i18n="mod6">Fotogrametría y COLMAP</span></li><li><i class="fas fa-tags"></i> <span data-i18n="mod7">Clasificación y entrenamiento</span></li><li><i class="fas fa-database"></i> <span data-i18n="mod8">Gestión jerárquica de categorías</span></li></ul></div><p><strong data-i18n="license_title">🔓 Licencia:</strong> <span data-i18n="license_text">arqueobot es gratuito para investigación, educación y trabajo de campo no comercial. Licencias comerciales disponibles para funciones empresariales.</span></p><div style="margin-top:20px;"><a href="https://github.com/arQueoJones" target="_blank" style="background:#1e2a3e; color:white; padding:12px 20px; border-radius:48px; text-decoration:none; display:inline-flex; gap:12px;"><i class="fab fa-github"></i> <span data-i18n="modal_github">Visitar arQueoJones en GitHub</span></a><button class="btn-soft" id="closeModalBtn2" style="margin-left:16px;" data-i18n="modal_close">Cerrar ventana</button></div></div></div></div>
 
 <div class="back-to-top" id="backToTopBtn"><i class="fas fa-arrow-up"></i></div>
@@ -315,6 +584,7 @@
     };
 
     let currentLang = "es";
+
     function setLanguage(lang) {
         currentLang = lang;
         const t = translations[lang];
@@ -337,7 +607,7 @@
     document.querySelectorAll(".lang-btn").forEach(btn => btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang"))));
     setLanguage("es");
 
-    // Modal logic
+    // Modal
     const modal = document.getElementById('arqueobotModal');
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
@@ -349,6 +619,7 @@
     if (closeBtn2) closeBtn2.addEventListener('click', closeModalFunc);
     window.addEventListener('click', (e) => { if (e.target === modal) closeModalFunc(); });
 
+    // Back to top
     const backBtn = document.getElementById('backToTopBtn');
     window.addEventListener('scroll', () => { if(window.scrollY > 350) backBtn.classList.add('show'); else backBtn.classList.remove('show'); });
     backBtn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
