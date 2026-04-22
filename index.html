@@ -24,7 +24,7 @@
             margin: 0 auto;
             padding: 0 32px;
         }
-        /* Cabecera fija semitransparente - diseño armonioso */
+        /* Cabecera fija semitransparente - diseño armonioso y grande */
         .site-header {
             position: sticky;
             top: 0;
@@ -32,20 +32,20 @@
             backdrop-filter: blur(14px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             z-index: 100;
-            padding: 16px 0;
+            padding: 24px 0;  /* Aumentado para dar más presencia */
         }
         .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 24px;
+            gap: 32px;
             flex-wrap: wrap;
         }
-        /* Logotipo - tamaño reducido y proporcionado */
+        /* Logotipo - tamaño grande y visible */
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
             flex-shrink: 0;
         }
         .logo-placeholder {
@@ -55,16 +55,16 @@
             justify-content: center;
         }
         .logo-placeholder img {
-            height: 80px;
+            height: 110px;   /* Aumentado para mejor visibilidad */
             width: auto;
-            max-width: 160px;
+            max-width: 220px;
             object-fit: contain;
             display: block;
         }
         .logo-text h1 {
             font-family: 'Space Grotesk', monospace;
-            font-weight: 700;
-            font-size: 1.7rem;
+            font-weight: 800;
+            font-size: 2.2rem;  /* Texto más grande */
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #1a2a3a, #2c4a6e);
             -webkit-background-clip: text;
@@ -72,28 +72,28 @@
             color: transparent;
         }
         .logo-text span {
-            font-size: 0.75rem;
-            font-weight: 400;
+            font-size: 0.9rem;
+            font-weight: 500;
             color: #5b6e8c;
             display: block;
         }
-        /* Navegación centrada */
+        /* Navegación centrada con fuente más grande */
         .nav-links {
             flex: 1;
             display: flex;
             justify-content: center;
-            gap: 28px;
+            gap: 32px;
             flex-wrap: wrap;
             align-items: center;
         }
         .nav-links a {
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;  /* Más negrita */
             color: #1e2a3e;
             transition: all 0.2s ease;
-            font-size: 0.95rem;
+            font-size: 1.1rem;  /* Aumentado un 20% */
             border-bottom: 2px solid transparent;
-            padding-bottom: 6px;
+            padding-bottom: 8px;
             white-space: nowrap;
         }
         .nav-links a:hover, .nav-links a.active {
@@ -102,9 +102,10 @@
         }
         .github-link {
             background: #f0f2f5;
-            padding: 6px 16px;
+            padding: 8px 20px;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1rem;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -116,21 +117,21 @@
             color: #c9772e;
             border-bottom: none;
         }
-        /* Selector de idioma - siempre a la derecha */
+        /* Selector de idioma - siempre a la derecha y más grande */
         .lang-switch {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             flex-shrink: 0;
         }
         .lang-btn {
             background: none;
             border: 1px solid #cfdde6;
-            border-radius: 30px;
-            padding: 6px 14px;
-            font-weight: 600;
+            border-radius: 40px;
+            padding: 8px 18px;
+            font-weight: 700;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             color: #2c3e50;
         }
         .lang-btn.active {
@@ -141,11 +142,11 @@
         .lang-btn:hover {
             background: #eef2f6;
         }
-        /* Secciones */
+        /* Secciones (sin cambios relevantes) */
         section {
             padding: 100px 0;
             border-bottom: 1px solid #f0f0f0;
-            scroll-margin-top: 90px;
+            scroll-margin-top: 100px;
         }
         .section-title {
             font-size: 2.6rem;
@@ -361,18 +362,36 @@
             border-top: 1px solid #e9edf2;
             margin: 28px 0;
         }
-        /* Responsive */
-        @media (max-width: 1100px) {
+        /* Responsive: ajustes para pantallas más pequeñas */
+        @media (max-width: 1200px) {
             .nav-links {
-                gap: 20px;
+                gap: 24px;
             }
             .nav-links a {
+                font-size: 1rem;
+            }
+            .logo-placeholder img {
+                height: 90px;
+                max-width: 180px;
+            }
+            .logo-text h1 {
+                font-size: 1.9rem;
+            }
+        }
+        @media (max-width: 1000px) {
+            .nav-links {
+                gap: 18px;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            .lang-btn {
+                padding: 6px 14px;
                 font-size: 0.85rem;
-                white-space: normal;
             }
             .github-link {
-                padding: 4px 12px;
-                font-size: 0.8rem;
+                padding: 6px 16px;
+                font-size: 0.9rem;
             }
         }
         @media (max-width: 900px) {
@@ -380,31 +399,27 @@
             .hero-content h2 { font-size: 2.5rem; }
             .container { padding: 0 24px; }
             .logo-placeholder img {
-                height: 60px;
-                max-width: 120px;
+                height: 70px;
+                max-width: 140px;
             }
             .logo-text h1 {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             .logo-text span {
-                font-size: 0.65rem;
-            }
-            .nav-links {
-                gap: 12px;
-            }
-            .lang-switch {
-                gap: 5px;
-            }
-            .lang-btn {
-                padding: 4px 10px;
                 font-size: 0.7rem;
+            }
+            .site-header {
+                padding: 18px 0;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
             }
         }
         @media (max-width: 780px) {
             .header-inner {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 16px;
+                gap: 20px;
             }
             .logo-area {
                 justify-content: center;
@@ -418,7 +433,7 @@
                 order: 3;
             }
             .logo-placeholder img {
-                height: 50px;
+                height: 60px;
             }
         }
         img.mock-img {
