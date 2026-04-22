@@ -7,16 +7,67 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ===== RESET Y ESTILOS BASE (sin cambios importantes) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1e2b; scroll-behavior: smooth; line-height: 1.5; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-        .site-header { position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 100; padding: 18px 0; }
-        .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-        .logo-area { display: flex; align-items: center; gap: 20px; }
-        .logo-placeholder { width: 60px; height: 60px; background: #f0f2f5; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid #e2e8f0; }
-        .logo-placeholder i { font-size: 32px; color: #c9772e; }
-        .logo-text h1 { font-family: 'Space Grotesk', monospace; font-weight: 600; font-size: 1.9rem; letter-spacing: -0.02em; background: linear-gradient(135deg, #1a2a3a, #2c4a6e); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .logo-text span { font-size: 0.85rem; font-weight: 400; color: #5b6e8c; display: block; }
+        
+        /* HEADER STICKY CON FONDO SEMITRANSPARENTE */
+        .site-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            padding: 18px 0;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        /* ===== NUEVO ESTILO PARA EL LOGO ===== */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .logo-placeholder {
+            background: none;    /* Sin fondo opaco */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-placeholder img {
+            height: 70px;        /* Altura deseada, ajustable */
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            display: block;
+        }
+        /* Texto del logo (ar.QueoJones) */
+        .logo-text h1 {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 600;
+            font-size: 1.9rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1a2a3a, #2c4a6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo-text span {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #5b6e8c;
+            display: block;
+        }
+        
+        /* RESTO DEL CSS (igual que antes) */
         .nav-links { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
         .nav-links a { text-decoration: none; font-weight: 500; color: #1e2a3e; transition: all 0.2s ease; font-size: 0.95rem; border-bottom: 1px solid transparent; padding-bottom: 4px; }
         .nav-links a:hover, .nav-links a.active { border-bottom-color: #c9772e; color: #c9772e; }
@@ -63,8 +114,14 @@
 <header class="site-header">
     <div class="container header-inner">
         <div class="logo-area">
-            <div class="logo-placeholder"><i class="fas fa-landmark"></i></div>
-            <div class="logo-text"><h1>ar.QueoJones</h1><span data-i18n="tagline">inteligencia arqueológica de vanguardia</span></div>
+            <div class="logo-placeholder">
+                <!-- Aquí se carga el logo desde la misma carpeta -->
+                <img src="logo.png" alt="ar.QueoJones logo">
+            </div>
+            <div class="logo-text">
+                <h1>ar.QueoJones</h1>
+                <span data-i18n="tagline">inteligencia arqueológica de vanguardia</span>
+            </div>
         </div>
         <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
             <div class="nav-links">
