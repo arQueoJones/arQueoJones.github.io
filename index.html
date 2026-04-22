@@ -7,12 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: radial-gradient(circle at 10% 30%, #ffffff, #f5f9ff);
@@ -24,8 +19,6 @@
             position: relative;
             overflow-x: hidden;
         }
-
-        /* Fondo decorativo animado */
         body::before {
             content: "";
             position: absolute;
@@ -37,18 +30,15 @@
             animation: slowRotate 40s linear infinite;
             z-index: 0;
         }
-
         @keyframes slowRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-
         .landing-container {
             position: relative;
             z-index: 2;
             max-width: 1100px;
             width: 100%;
-            margin: 0 auto;
             text-align: center;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
@@ -58,16 +48,11 @@
             border: 1px solid rgba(255,255,255,0.6);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         .landing-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 40px 60px -20px rgba(0, 0, 0, 0.2);
         }
-
-        /* Logotipo - máxima resolución, grande y centrado */
-        .logo-wrapper {
-            margin-bottom: 2rem;
-        }
+        .logo-wrapper { margin-bottom: 2rem; }
         .logo-full {
             max-width: 85%;
             height: auto;
@@ -77,11 +62,7 @@
             transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             filter: drop-shadow(0 12px 20px rgba(0,0,0,0.08));
         }
-        .logo-full:hover {
-            transform: scale(1.02);
-        }
-
-        /* Título más pequeño y elegante */
+        .logo-full:hover { transform: scale(1.02); }
         .welcome-title {
             font-size: 1.2rem;
             font-weight: 500;
@@ -97,19 +78,8 @@
             border-radius: 60px;
             padding: 0.6rem 1.8rem;
         }
-        .welcome-title i {
-            margin-right: 8px;
-            color: #c9772e;
-        }
-
-        /* Lista de idiomas */
-        .language-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            margin-top: 0.5rem;
-        }
-
+        .welcome-title i { margin-right: 8px; color: #c9772e; }
+        .language-list { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 0.5rem; }
         .language-card {
             background: #ffffff;
             border-radius: 80px;
@@ -129,25 +99,9 @@
             box-shadow: 0 20px 30px -12px rgba(201, 119, 46, 0.2);
             background: #fefaf5;
         }
-
-        .lang-info {
-            text-align: left;
-            flex: 1;
-        }
-        .lang-name {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -0.3px;
-            color: #1e2a3e;
-            margin-bottom: 0.2rem;
-        }
-        .lang-motto {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #5b6e8c;
-            line-height: 1.4;
-        }
-
+        .lang-info { text-align: left; flex: 1; }
+        .lang-name { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.3px; color: #1e2a3e; margin-bottom: 0.2rem; }
+        .lang-motto { font-size: 1rem; font-weight: 500; color: #5b6e8c; line-height: 1.4; }
         .lang-arrow {
             background: #f0f2f5;
             border-radius: 60px;
@@ -169,8 +123,6 @@
             transform: scale(1.08);
             box-shadow: 0 8px 18px rgba(201,119,46,0.3);
         }
-
-        /* Footer */
         .footer-note {
             margin-top: 3rem;
             font-size: 0.75rem;
@@ -179,49 +131,19 @@
             padding-top: 1.8rem;
             letter-spacing: 0.3px;
         }
-
-        /* Responsive */
         @media (max-width: 760px) {
-            .landing-container {
-                padding: 2rem 1.5rem;
-                border-radius: 48px;
-            }
-            .language-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.5rem;
-                border-radius: 60px;
-            }
-            .lang-info {
-                text-align: center;
-            }
-            .lang-name {
-                font-size: 1.3rem;
-            }
-            .lang-motto {
-                font-size: 0.9rem;
-            }
-            .lang-arrow {
-                width: 56px;
-                height: 56px;
-                font-size: 1.5rem;
-            }
-            .logo-full {
-                max-width: 95%;
-            }
-            .welcome-title {
-                font-size: 1rem;
-                padding: 0.4rem 1.2rem;
-            }
+            .landing-container { padding: 2rem 1.5rem; border-radius: 48px; }
+            .language-card { flex-direction: column; text-align: center; padding: 1.5rem; border-radius: 60px; }
+            .lang-info { text-align: center; }
+            .lang-name { font-size: 1.3rem; }
+            .lang-motto { font-size: 0.9rem; }
+            .lang-arrow { width: 56px; height: 56px; font-size: 1.5rem; }
+            .logo-full { max-width: 95%; }
+            .welcome-title { font-size: 1rem; padding: 0.4rem 1.2rem; }
         }
-
         @media (max-width: 480px) {
-            .lang-name {
-                font-size: 1.2rem;
-            }
-            .lang-motto {
-                font-size: 0.8rem;
-            }
+            .lang-name { font-size: 1.2rem; }
+            .lang-motto { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -233,60 +155,42 @@
         <div class="welcome-title">
             <i class="fas fa-globe-americas"></i> elige tu idioma · choose your language
         </div>
-
         <div class="language-list">
-            <!-- Español -->
             <div class="language-card">
                 <div class="lang-info">
                     <div class="lang-name">Español</div>
                     <div class="lang-motto">ar.QueoJones · inteligencia arqueológica de vanguardia</div>
                 </div>
-                <a href="afterlanding.html?lang=es" class="lang-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <a href="afterlanding.html?lang=es" class="lang-arrow"><i class="fas fa-arrow-right"></i></a>
             </div>
-
-            <!-- English -->
             <div class="language-card">
                 <div class="lang-info">
                     <div class="lang-name">English</div>
                     <div class="lang-motto">ar.QueoJones · avant‑garde archaeological intelligence</div>
                 </div>
-                <a href="afterlanding.html?lang=en" class="lang-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <a href="afterlanding.html?lang=en" class="lang-arrow"><i class="fas fa-arrow-right"></i></a>
             </div>
-
-            <!-- Français -->
             <div class="language-card">
                 <div class="lang-info">
                     <div class="lang-name">Français</div>
                     <div class="lang-motto">ar.QueoJones · intelligence archéologique d'avant-garde</div>
                 </div>
-                <a href="afterlanding.html?lang=fr" class="lang-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <a href="afterlanding.html?lang=fr" class="lang-arrow"><i class="fas fa-arrow-right"></i></a>
             </div>
-
-            <!-- Deutsch -->
             <div class="language-card">
                 <div class="lang-info">
                     <div class="lang-name">Deutsch</div>
                     <div class="lang-motto">ar.QueoJones · avantgardistische archäologische Intelligenz</div>
                 </div>
-                <a href="afterlanding.html?lang=de" class="lang-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <a href="afterlanding.html?lang=de" class="lang-arrow"><i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
-
         <div class="footer-note">
             <i class="fas fa-archway"></i> Tecnología para el patrimonio · Technology for heritage · Technologie pour le patrimoine · Technologie für das Kulturerbe
         </div>
     </div>
-
     <script>
-        // Animación de entrada para las tarjetas (más fluida)
+        // animación de entrada
         const cards = document.querySelectorAll('.language-card');
         cards.forEach((card, idx) => {
             card.style.opacity = '0';
