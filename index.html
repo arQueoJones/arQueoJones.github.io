@@ -79,12 +79,22 @@
             color: #5b6e8c;
             display: block;
         }
-        /* Navegación */
+        /* Contenedor de navegación + idioma: ocupa el espacio restante y alinea a la derecha */
+        .nav-lang-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        /* Enlaces de navegación */
         .nav-links {
             display: flex;
             gap: 28px;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: flex-end;
         }
         .nav-links a {
             text-decoration: none;
@@ -94,6 +104,7 @@
             font-size: 0.95rem;
             border-bottom: 1px solid transparent;
             padding-bottom: 4px;
+            white-space: nowrap;
         }
         .nav-links a:hover, .nav-links a.active {
             border-bottom-color: #c9772e;
@@ -108,17 +119,18 @@
             align-items: center;
             gap: 8px;
             transition: all 0.2s;
+            white-space: nowrap;
         }
         .github-link:hover {
             background: #e4e7ec;
             color: #c9772e;
             border-bottom: none;
         }
-        /* Selector de idioma */
+        /* Selector de idioma - siempre a la derecha */
         .lang-switch {
             display: flex;
             gap: 10px;
-            margin-left: 15px;
+            flex-shrink: 0;
         }
         .lang-btn {
             background: none;
@@ -356,21 +368,56 @@
             border-top: 1px solid #e9edf2;
             margin: 28px 0;
         }
-        /* Responsive: reducir tamaño del logo en pantallas pequeñas */
+        /* Responsive: reducir tamaño del logo y ajustar navegación */
+        @media (max-width: 1100px) {
+            .nav-links a {
+                font-size: 0.85rem;
+                white-space: normal;
+            }
+            .github-link {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            .nav-links {
+                gap: 15px;
+            }
+        }
         @media (max-width: 900px) {
             .grid-2col { grid-template-columns: 1fr; gap: 32px; }
             .hero-content h2 { font-size: 2.5rem; }
             .container { padding: 0 24px; }
-            .nav-links { gap: 18px; }
             .logo-placeholder img {
                 height: 80px;
                 max-width: 160px;
             }
             .site-header { padding: 12px 0; }
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+            .lang-switch {
+                gap: 5px;
+            }
+            .lang-btn {
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
         }
         @media (max-width: 680px) {
             .header-inner { flex-direction: column; align-items: flex-start; }
             .logo-area { width: 100%; justify-content: space-between; }
+            .nav-lang-container {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+            .nav-links {
+                justify-content: flex-start;
+                width: 100%;
+            }
+            .lang-switch {
+                margin-top: 10px;
+                justify-content: flex-start;
+            }
             .logo-placeholder img {
                 height: 60px;
                 max-width: 120px;
@@ -396,7 +443,7 @@
     <div class="container header-inner">
         <div class="logo-area">
             <div class="logo-placeholder">
-                <!-- Logotipo en cabecera - cambiar nombre de archivo si es necesario -->
+                <!-- Cambia el nombre del archivo si es necesario: logo.png, logo.webp, etc. -->
                 <img src="logo.jpg" alt="ar.QueoJones logo">
             </div>
             <div class="logo-text">
@@ -404,7 +451,7 @@
                 <span data-i18n="tagline">inteligencia arqueológica de vanguardia</span>
             </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+        <div class="nav-lang-container">
             <div class="nav-links">
                 <a href="#hero" data-i18n="nav_home">Inicio</a>
                 <a href="#photogrammetry" data-i18n="nav_photogram">Fotogrametría 3D</a>
