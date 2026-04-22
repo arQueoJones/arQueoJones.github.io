@@ -478,7 +478,7 @@
             <a href="https://github.com/arQueoJones" target="_blank" class="github-link"><i class="fab fa-github"></i> GitHub</a>
         </div>
         <div class="lang-switch">
-            <button class="lang-btn active" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="es">ES</button>
             <button class="lang-btn" data-lang="en">EN</button>
             <button class="lang-btn" data-lang="fr">FR</button>
             <button class="lang-btn" data-lang="de">DE</button>
@@ -688,8 +688,20 @@
         alert(btnText.replace(/ →$/, "").trim());
     };
 
-    document.querySelectorAll(".lang-btn").forEach(btn => btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang"))));
-    setLanguage("es");
+    // Asignar eventos a los botones de idioma
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang")));
+    });
+
+    // --- DETECCIÓN DE IDIOMA DESDE LA URL (landing page) ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const langFromUrl = urlParams.get('lang');
+    if (langFromUrl && ['es', 'en', 'fr', 'de'].includes(langFromUrl)) {
+        setLanguage(langFromUrl);
+    } else {
+        setLanguage('es');  // idioma por defecto
+    }
+    // -------------------------------------------------------
 
     // Modal
     const modal = document.getElementById('arqueobotModal');
