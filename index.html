@@ -20,33 +20,33 @@
             line-height: 1.5;
         }
         .container {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 32px;
         }
-        /* Cabecera fija semitransparente */
+        /* Cabecera fija semitransparente - diseño armonioso */
         .site-header {
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             z-index: 100;
-            padding: 15px 0;
+            padding: 16px 0;
         }
         .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 24px;
             flex-wrap: wrap;
-            gap: 20px;
         }
-        /* Área del logotipo */
+        /* Logotipo - tamaño reducido y proporcionado */
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 16px;
+            flex-shrink: 0;
         }
         .logo-placeholder {
             background: transparent;
@@ -54,19 +54,17 @@
             align-items: center;
             justify-content: center;
         }
-        /* Tamaño del logo: 140px de alto, ancho automático, máximo 280px */
         .logo-placeholder img {
-            height: 140px;
+            height: 80px;
             width: auto;
-            max-width: 280px;
+            max-width: 160px;
             object-fit: contain;
             display: block;
         }
-        /* Texto del logo (nombre) */
         .logo-text h1 {
             font-family: 'Space Grotesk', monospace;
-            font-weight: 600;
-            font-size: 1.9rem;
+            font-weight: 700;
+            font-size: 1.7rem;
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #1a2a3a, #2c4a6e);
             -webkit-background-clip: text;
@@ -74,36 +72,28 @@
             color: transparent;
         }
         .logo-text span {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 400;
             color: #5b6e8c;
             display: block;
         }
-        /* Contenedor de navegación + idioma: ocupa el espacio restante y alinea a la derecha */
-        .nav-lang-container {
+        /* Navegación centrada */
+        .nav-links {
             flex: 1;
             display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        /* Enlaces de navegación */
-        .nav-links {
-            display: flex;
+            justify-content: center;
             gap: 28px;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: flex-end;
         }
         .nav-links a {
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             color: #1e2a3e;
             transition: all 0.2s ease;
             font-size: 0.95rem;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 6px;
             white-space: nowrap;
         }
         .nav-links a:hover, .nav-links a.active {
@@ -112,9 +102,9 @@
         }
         .github-link {
             background: #f0f2f5;
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: 40px;
-            font-weight: 500;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -129,15 +119,15 @@
         /* Selector de idioma - siempre a la derecha */
         .lang-switch {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-shrink: 0;
         }
         .lang-btn {
             background: none;
             border: 1px solid #cfdde6;
             border-radius: 30px;
-            padding: 5px 12px;
-            font-weight: 500;
+            padding: 6px 14px;
+            font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
             font-size: 0.8rem;
@@ -148,6 +138,9 @@
             color: white;
             border-color: #1e2a3e;
         }
+        .lang-btn:hover {
+            background: #eef2f6;
+        }
         /* Secciones */
         section {
             padding: 100px 0;
@@ -156,7 +149,7 @@
         }
         .section-title {
             font-size: 2.6rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 24px;
             color: #0f172a;
@@ -193,7 +186,7 @@
         }
         .service-card h3 {
             font-size: 1.7rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 16px;
         }
         .btn-soft {
@@ -203,7 +196,7 @@
             border: 1px solid #cfdde6;
             padding: 8px 22px;
             border-radius: 40px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.2s;
             cursor: pointer;
             font-family: inherit;
@@ -223,7 +216,7 @@
             font-size: 0.9rem;
             color: #c9772e;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             border-bottom: 1px dashed #c9772e;
         }
         .hero {
@@ -232,7 +225,7 @@
         }
         .hero-content h2 {
             font-size: 3.5rem;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.2;
             letter-spacing: -0.02em;
             background: linear-gradient(125deg, #1f2f40, #2b4b6e);
@@ -247,7 +240,7 @@
             padding: 6px 16px;
             border-radius: 60px;
             font-size: 0.8rem;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 20px;
         }
         .free-badge {
@@ -256,7 +249,7 @@
             border-radius: 40px;
             padding: 4px 14px;
             font-size: 0.8rem;
-            font-weight: 500;
+            font-weight: 600;
             display: inline-block;
         }
         .feature-list {
@@ -368,18 +361,18 @@
             border-top: 1px solid #e9edf2;
             margin: 28px 0;
         }
-        /* Responsive: reducir tamaño del logo y ajustar navegación */
+        /* Responsive */
         @media (max-width: 1100px) {
+            .nav-links {
+                gap: 20px;
+            }
             .nav-links a {
                 font-size: 0.85rem;
                 white-space: normal;
             }
             .github-link {
-                padding: 6px 12px;
+                padding: 4px 12px;
                 font-size: 0.8rem;
-            }
-            .nav-links {
-                gap: 15px;
             }
         }
         @media (max-width: 900px) {
@@ -387,40 +380,45 @@
             .hero-content h2 { font-size: 2.5rem; }
             .container { padding: 0 24px; }
             .logo-placeholder img {
-                height: 80px;
-                max-width: 160px;
+                height: 60px;
+                max-width: 120px;
             }
-            .site-header { padding: 12px 0; }
-            .nav-links a {
-                font-size: 0.8rem;
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+            .logo-text span {
+                font-size: 0.65rem;
+            }
+            .nav-links {
+                gap: 12px;
             }
             .lang-switch {
                 gap: 5px;
             }
             .lang-btn {
-                padding: 4px 8px;
+                padding: 4px 10px;
                 font-size: 0.7rem;
             }
         }
-        @media (max-width: 680px) {
-            .header-inner { flex-direction: column; align-items: flex-start; }
-            .logo-area { width: 100%; justify-content: space-between; }
-            .nav-lang-container {
-                width: 100%;
-                justify-content: flex-start;
-                flex-wrap: wrap;
+        @media (max-width: 780px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+            }
+            .logo-area {
+                justify-content: center;
             }
             .nav-links {
-                justify-content: flex-start;
-                width: 100%;
+                justify-content: center;
+                order: 2;
             }
             .lang-switch {
-                margin-top: 10px;
-                justify-content: flex-start;
+                justify-content: center;
+                order: 3;
             }
             .logo-placeholder img {
-                height: 60px;
-                max-width: 120px;
+                height: 50px;
             }
         }
         img.mock-img {
@@ -451,26 +449,24 @@
                 <span data-i18n="tagline">inteligencia arqueológica de vanguardia</span>
             </div>
         </div>
-        <div class="nav-lang-container">
-            <div class="nav-links">
-                <a href="#hero" data-i18n="nav_home">Inicio</a>
-                <a href="#photogrammetry" data-i18n="nav_photogram">Fotogrametría 3D</a>
-                <a href="#app-building" data-i18n="nav_app">Apps</a>
-                <a href="#qgis" data-i18n="nav_qgis">QGIS</a>
-                <a href="#drone" data-i18n="nav_drone">Dron</a>
-                <a href="#augmented-reality" data-i18n="nav_ar">RA</a>
-                <a href="#addons" data-i18n="nav_addons">Complementos</a>
-                <a href="#webdev" data-i18n="nav_webdev">Web & SW</a>
-                <a href="#aidev" data-i18n="nav_aiprompt">IA Prompt</a>
-                <a href="#arqueobot" data-i18n="nav_arqueobot">arqueobot</a>
-                <a href="https://github.com/arQueoJones" target="_blank" class="github-link"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-            <div class="lang-switch">
-                <button class="lang-btn active" data-lang="es">ES</button>
-                <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="fr">FR</button>
-                <button class="lang-btn" data-lang="de">DE</button>
-            </div>
+        <div class="nav-links">
+            <a href="#hero" data-i18n="nav_home">Inicio</a>
+            <a href="#photogrammetry" data-i18n="nav_photogram">Fotogrametría 3D</a>
+            <a href="#app-building" data-i18n="nav_app">Apps</a>
+            <a href="#qgis" data-i18n="nav_qgis">QGIS</a>
+            <a href="#drone" data-i18n="nav_drone">Dron</a>
+            <a href="#augmented-reality" data-i18n="nav_ar">RA</a>
+            <a href="#addons" data-i18n="nav_addons">Complementos</a>
+            <a href="#webdev" data-i18n="nav_webdev">Web & SW</a>
+            <a href="#aidev" data-i18n="nav_aiprompt">IA Prompt</a>
+            <a href="#arqueobot" data-i18n="nav_arqueobot">arqueobot</a>
+            <a href="https://github.com/arQueoJones" target="_blank" class="github-link"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="fr">FR</button>
+            <button class="lang-btn" data-lang="de">DE</button>
         </div>
     </div>
 </header>
@@ -565,7 +561,6 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <div class="footer-logo-small">
-                    <!-- Logotipo pequeño en el pie de página -->
                     <img src="logo.jpg" alt="ar.QueoJones logo">
                     <h4>ar.QueoJones</h4>
                 </div>
