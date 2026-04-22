@@ -24,7 +24,6 @@
             margin: 0 auto;
             padding: 0 32px;
         }
-        /* Cabecera fija semitransparente - diseño armonioso y grande */
         .site-header {
             position: sticky;
             top: 0;
@@ -32,7 +31,7 @@
             backdrop-filter: blur(14px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             z-index: 100;
-            padding: 24px 0;  /* Aumentado para dar más presencia */
+            padding: 24px 0;
         }
         .header-inner {
             display: flex;
@@ -41,21 +40,14 @@
             gap: 32px;
             flex-wrap: wrap;
         }
-        /* Logotipo - tamaño grande y visible */
         .logo-area {
             display: flex;
             align-items: center;
             gap: 20px;
             flex-shrink: 0;
         }
-        .logo-placeholder {
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
         .logo-placeholder img {
-            height: 110px;   /* Aumentado para mejor visibilidad */
+            height: 110px;
             width: auto;
             max-width: 220px;
             object-fit: contain;
@@ -64,7 +56,7 @@
         .logo-text h1 {
             font-family: 'Space Grotesk', monospace;
             font-weight: 800;
-            font-size: 2.2rem;  /* Texto más grande */
+            font-size: 2.2rem;
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, #1a2a3a, #2c4a6e);
             -webkit-background-clip: text;
@@ -77,7 +69,6 @@
             color: #5b6e8c;
             display: block;
         }
-        /* Navegación centrada con fuente más grande */
         .nav-links {
             flex: 1;
             display: flex;
@@ -88,10 +79,10 @@
         }
         .nav-links a {
             text-decoration: none;
-            font-weight: 700;  /* Más negrita */
+            font-weight: 700;
             color: #1e2a3e;
             transition: all 0.2s ease;
-            font-size: 1.1rem;  /* Aumentado un 20% */
+            font-size: 1.1rem;
             border-bottom: 2px solid transparent;
             padding-bottom: 8px;
             white-space: nowrap;
@@ -117,7 +108,6 @@
             color: #c9772e;
             border-bottom: none;
         }
-        /* Selector de idioma - siempre a la derecha y más grande */
         .lang-switch {
             display: flex;
             gap: 12px;
@@ -142,7 +132,6 @@
         .lang-btn:hover {
             background: #eef2f6;
         }
-        /* Secciones (sin cambios relevantes) */
         section {
             padding: 100px 0;
             border-bottom: 1px solid #f0f0f0;
@@ -267,7 +256,6 @@
             color: #c9772e;
             width: 24px;
         }
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -298,7 +286,6 @@
             font-size: 28px;
             cursor: pointer;
         }
-        /* Botón subir */
         .back-to-top {
             position: fixed;
             bottom: 32px;
@@ -321,7 +308,6 @@
             opacity: 1;
             visibility: visible;
         }
-        /* Footer */
         footer {
             background: #fafcff;
             padding: 56px 0 40px;
@@ -362,79 +348,34 @@
             border-top: 1px solid #e9edf2;
             margin: 28px 0;
         }
-        /* Responsive: ajustes para pantallas más pequeñas */
         @media (max-width: 1200px) {
-            .nav-links {
-                gap: 24px;
-            }
-            .nav-links a {
-                font-size: 1rem;
-            }
-            .logo-placeholder img {
-                height: 90px;
-                max-width: 180px;
-            }
-            .logo-text h1 {
-                font-size: 1.9rem;
-            }
+            .nav-links { gap: 24px; }
+            .nav-links a { font-size: 1rem; }
+            .logo-placeholder img { height: 90px; max-width: 180px; }
+            .logo-text h1 { font-size: 1.9rem; }
         }
         @media (max-width: 1000px) {
-            .nav-links {
-                gap: 18px;
-            }
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-            .lang-btn {
-                padding: 6px 14px;
-                font-size: 0.85rem;
-            }
-            .github-link {
-                padding: 6px 16px;
-                font-size: 0.9rem;
-            }
+            .nav-links { gap: 18px; }
+            .nav-links a { font-size: 0.9rem; }
+            .lang-btn { padding: 6px 14px; font-size: 0.85rem; }
+            .github-link { padding: 6px 16px; font-size: 0.9rem; }
         }
         @media (max-width: 900px) {
             .grid-2col { grid-template-columns: 1fr; gap: 32px; }
             .hero-content h2 { font-size: 2.5rem; }
             .container { padding: 0 24px; }
-            .logo-placeholder img {
-                height: 70px;
-                max-width: 140px;
-            }
-            .logo-text h1 {
-                font-size: 1.5rem;
-            }
-            .logo-text span {
-                font-size: 0.7rem;
-            }
-            .site-header {
-                padding: 18px 0;
-            }
-            .nav-links a {
-                font-size: 0.85rem;
-            }
+            .logo-placeholder img { height: 70px; max-width: 140px; }
+            .logo-text h1 { font-size: 1.5rem; }
+            .logo-text span { font-size: 0.7rem; }
+            .site-header { padding: 18px 0; }
+            .nav-links a { font-size: 0.85rem; }
         }
         @media (max-width: 780px) {
-            .header-inner {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 20px;
-            }
-            .logo-area {
-                justify-content: center;
-            }
-            .nav-links {
-                justify-content: center;
-                order: 2;
-            }
-            .lang-switch {
-                justify-content: center;
-                order: 3;
-            }
-            .logo-placeholder img {
-                height: 60px;
-            }
+            .header-inner { flex-direction: column; align-items: stretch; gap: 20px; }
+            .logo-area { justify-content: center; }
+            .nav-links { justify-content: center; order: 2; }
+            .lang-switch { justify-content: center; order: 3; }
+            .logo-placeholder img { height: 60px; }
         }
         img.mock-img {
             width: 100%;
@@ -456,7 +397,6 @@
     <div class="container header-inner">
         <div class="logo-area">
             <div class="logo-placeholder">
-                <!-- Cambia el nombre del archivo si es necesario: logo.png, logo.webp, etc. -->
                 <img src="logo.jpg" alt="ar.QueoJones logo">
             </div>
             <div class="logo-text">
@@ -599,7 +539,7 @@
 </footer>
 
 <script>
-    // Traducciones completas para ES, EN, FR, DE (incluyendo alemán)
+    // ==================== TRADUCCIONES COMPLETAS ====================
     const translations = {
         es: {
             tagline: "inteligencia arqueológica de vanguardia", nav_home: "Inicio", nav_photogram: "Fotogrametría 3D", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Dron", nav_ar: "RA", nav_addons: "Complementos", nav_webdev: "Web & SW", nav_aiprompt: "IA Prompt", nav_arqueobot: "arqueobot",
@@ -688,20 +628,21 @@
         alert(btnText.replace(/ →$/, "").trim());
     };
 
-    // Asignar eventos a los botones de idioma
+    // --- DETECCIÓN DEL IDIOMA DESDE LA URL (PARÁMETRO 'lang') ---
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const langParam = urlParams.get('lang');
+        if (langParam && ['es', 'en', 'fr', 'de'].includes(langParam)) {
+            setLanguage(langParam);
+        } else {
+            setLanguage('es'); // español por defecto
+        }
+    })();
+
+    // Eventos para los botones de idioma (cambio manual)
     document.querySelectorAll(".lang-btn").forEach(btn => {
         btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang")));
     });
-
-    // --- DETECCIÓN DE IDIOMA DESDE LA URL (landing page) ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const langFromUrl = urlParams.get('lang');
-    if (langFromUrl && ['es', 'en', 'fr', 'de'].includes(langFromUrl)) {
-        setLanguage(langFromUrl);
-    } else {
-        setLanguage('es');  // idioma por defecto
-    }
-    // -------------------------------------------------------
 
     // Modal
     const modal = document.getElementById('arqueobotModal');
