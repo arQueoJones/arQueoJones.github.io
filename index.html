@@ -15,31 +15,58 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            background: radial-gradient(circle at 10% 30%, #ffffff, #f5f9ff);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Contenedor principal */
+        /* Fondo decorativo animado */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(201,119,46,0.03) 0%, transparent 70%);
+            animation: slowRotate 40s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes slowRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .landing-container {
+            position: relative;
+            z-index: 2;
             max-width: 1100px;
             width: 100%;
             margin: 0 auto;
             text-align: center;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(2px);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
             border-radius: 72px;
             padding: 3rem 2rem;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .landing-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 40px 60px -20px rgba(0, 0, 0, 0.2);
         }
 
         /* Logotipo - máxima resolución, grande y centrado */
         .logo-wrapper {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
         .logo-full {
             max-width: 85%;
@@ -47,49 +74,59 @@
             display: block;
             margin: 0 auto;
             border-radius: 28px;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.08));
         }
         .logo-full:hover {
-            transform: scale(1.01);
+            transform: scale(1.02);
         }
 
-        /* Título sutil */
+        /* Título más pequeño y elegante */
         .welcome-title {
-            font-size: 1.6rem;
+            font-size: 1.2rem;
             font-weight: 500;
-            color: #4a5a72;
-            letter-spacing: -0.3px;
-            margin-bottom: 2rem;
+            color: #6c7e9e;
+            letter-spacing: 0.5px;
+            margin-bottom: 2.2rem;
             border-top: 1px solid #e2e8f0;
             display: inline-block;
-            padding-top: 1.5rem;
+            padding-top: 1.2rem;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 0.6rem 1.8rem;
+        }
+        .welcome-title i {
+            margin-right: 8px;
+            color: #c9772e;
         }
 
         /* Lista de idiomas */
         .language-list {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            gap: 1.2rem;
+            margin-top: 0.5rem;
         }
 
         .language-card {
             background: #ffffff;
-            border-radius: 60px;
-            padding: 1.2rem 2rem;
+            border-radius: 80px;
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 1rem;
-            transition: all 0.25s ease;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             border: 1px solid #eef2f8;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
         .language-card:hover {
-            transform: translateX(8px);
+            transform: translateX(12px) scale(1.01);
             border-color: #c9772e;
-            box-shadow: 0 12px 24px -12px rgba(201, 119, 46, 0.2);
+            box-shadow: 0 20px 30px -12px rgba(201, 119, 46, 0.2);
             background: #fefaf5;
         }
 
@@ -102,10 +139,10 @@
             font-weight: 800;
             letter-spacing: -0.3px;
             color: #1e2a3e;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
         }
         .lang-motto {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             color: #5b6e8c;
             line-height: 1.4;
@@ -119,26 +156,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
-            cursor: pointer;
+            transition: all 0.25s ease;
             text-decoration: none;
             color: #1e2a3e;
             font-size: 1.8rem;
             font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
         .lang-arrow:hover {
             background: #c9772e;
             color: white;
-            transform: scale(1.05);
+            transform: scale(1.08);
+            box-shadow: 0 8px 18px rgba(201,119,46,0.3);
         }
 
-        /* Pequeño footer */
+        /* Footer */
         .footer-note {
             margin-top: 3rem;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #8a9bb0;
             border-top: 1px solid #eef2f8;
-            padding-top: 2rem;
+            padding-top: 1.8rem;
+            letter-spacing: 0.3px;
         }
 
         /* Responsive */
@@ -151,6 +190,7 @@
                 flex-direction: column;
                 text-align: center;
                 padding: 1.5rem;
+                border-radius: 60px;
             }
             .lang-info {
                 text-align: center;
@@ -159,7 +199,7 @@
                 font-size: 1.3rem;
             }
             .lang-motto {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
             }
             .lang-arrow {
                 width: 56px;
@@ -169,6 +209,10 @@
             .logo-full {
                 max-width: 95%;
             }
+            .welcome-title {
+                font-size: 1rem;
+                padding: 0.4rem 1.2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -176,7 +220,7 @@
                 font-size: 1.2rem;
             }
             .lang-motto {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -184,7 +228,6 @@
 <body>
     <div class="landing-container">
         <div class="logo-wrapper">
-            <!-- Logotipo en máxima resolución (ajusta el nombre de archivo si es necesario) -->
             <img src="logo.jpg" alt="ar.QueoJones" class="logo-full">
         </div>
         <div class="welcome-title">
@@ -242,14 +285,13 @@
         </div>
     </div>
 
-    <!-- Pequeño script para añadir un efecto de entrada sutil (opcional) -->
     <script>
-        // Animación de entrada suave para las tarjetas
+        // Animación de entrada para las tarjetas (más fluida)
         const cards = document.querySelectorAll('.language-card');
         cards.forEach((card, idx) => {
             card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = `opacity 0.4s ease ${idx * 0.1}s, transform 0.4s ease ${idx * 0.1}s`;
+            card.style.transform = 'translateY(25px)';
+            card.style.transition = `opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) ${idx * 0.08}s, transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) ${idx * 0.08}s`;
             setTimeout(() => {
                 card.style.opacity = '1';
                 card.style.transform = 'translateY(0)';
