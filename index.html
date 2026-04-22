@@ -24,7 +24,7 @@
             margin: 0 auto;
             padding: 0 32px;
         }
-        /* Cabecera fija semitransparente */
+        /* Cabecera fija semitransparente - adaptada para logo grande */
         .site-header {
             position: sticky;
             top: 0;
@@ -32,32 +32,33 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             z-index: 100;
-            padding: 12px 0;
+            padding: 20px 0;  /* Aumentado para dar espacio al logo grande */
         }
         .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
         }
         /* Área del logotipo */
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 30px;
+            flex-wrap: wrap;
         }
         .logo-placeholder {
             background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            max-height: 80px;
         }
+        /* Tamaño grande del logo según solicitud */
         .logo-placeholder img {
-            height: 210px;
+            height: 420px;          /* Altura fija grande */
             width: auto;
-            max-width: 420px;
+            max-width: 840px;
             object-fit: contain;
             display: block;
         }
@@ -331,6 +332,18 @@
         .footer-col {
             max-width: 320px;
         }
+        .footer-logo-small {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .footer-logo-small img {
+            height: 50px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
         .footer-tagline {
             margin: 16px 0 20px;
             font-size: 0.85rem;
@@ -343,15 +356,25 @@
             border-top: 1px solid #e9edf2;
             margin: 28px 0;
         }
+        /* Responsive: reducir tamaño del logo en pantallas pequeñas */
         @media (max-width: 900px) {
             .grid-2col { grid-template-columns: 1fr; gap: 32px; }
             .hero-content h2 { font-size: 2.5rem; }
             .container { padding: 0 24px; }
             .nav-links { gap: 18px; }
+            .logo-placeholder img {
+                height: 180px;  /* más pequeño en móvil */
+                max-width: 360px;
+            }
+            .site-header { padding: 15px 0; }
         }
         @media (max-width: 680px) {
             .header-inner { flex-direction: column; align-items: flex-start; }
             .logo-area { width: 100%; justify-content: space-between; }
+            .logo-placeholder img {
+                height: 120px;
+                max-width: 240px;
+            }
         }
         img.mock-img {
             width: 100%;
@@ -373,7 +396,7 @@
     <div class="container header-inner">
         <div class="logo-area">
             <div class="logo-placeholder">
-                <!-- Cambia el nombre del archivo si es necesario: logo.png, logo.webp, etc. -->
+                <!-- Logotipo grande en cabecera -->
                 <img src="logo.jpg" alt="ar.QueoJones logo">
             </div>
             <div class="logo-text">
@@ -494,7 +517,11 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>ar.QueoJones</h4>
+                <div class="footer-logo-small">
+                    <!-- Logotipo pequeño en el pie de página -->
+                    <img src="logo.jpg" alt="ar.QueoJones logo">
+                    <h4>ar.QueoJones</h4>
+                </div>
                 <div class="footer-tagline" data-i18n="footer_tagline">Advanced archaeological technologies · 3D scanning · artificial intelligence · GIS · heritage software</div>
                 <p data-i18n="footer_desc">Tecnologías arqueológicas de vanguardia · escáner 3D · IA · SIG · software patrimonial</p>
             </div>
