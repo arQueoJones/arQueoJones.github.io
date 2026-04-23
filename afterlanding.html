@@ -12,503 +12,814 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
-            background: #f2efe8;
-            min-height: 100vh;
+            background: #f2efe8;  /* beige cálido */
+            color: #1a1e2b;
+            scroll-behavior: smooth;
+            line-height: 1.5;
             position: relative;
-            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Canvas de fondo animado (geometría platónica) */
-        #bg-canvas {
+        /* Canvas laterales: izquierdo y derecho */
+        .side-canvas {
+            position: fixed;
+            top: 0;
+            width: 15vw;
+            min-width: 180px;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .left-canvas {
+            left: 0;
+        }
+        .right-canvas {
+            right: 0;
+        }
+
+        /* Contenedor principal (centrado) */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 56px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+            border: 2px solid #cdd9e8;
+        }
+
+        /* Ajustes para que el contenido respire */
+        .site-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            padding: 24px 0;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+        .logo-placeholder img {
+            height: 110px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            display: block;
+        }
+        .logo-text h1 {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 800;
+            font-size: 2.2rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1a2a3a, #2c4a6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo-text span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #5b6e8c;
+            display: block;
+        }
+        .nav-links {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 700;
+            color: #1e2a3e;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 8px;
+            white-space: nowrap;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            border-bottom-color: #c9772e;
+            color: #c9772e;
+        }
+        .github-link {
+            background: #f0f2f5;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .github-link:hover {
+            background: #e4e7ec;
+            color: #c9772e;
+            border-bottom: none;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .lang-btn {
+            background: none;
+            border: 1px solid #cfdde6;
+            border-radius: 40px;
+            padding: 8px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+        .lang-btn.active {
+            background: #1e2a3e;
+            color: white;
+            border-color: #1e2a3e;
+        }
+        .lang-btn:hover {
+            background: #eef2f6;
+        }
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid #f0f0f0;
+            scroll-margin-top: 100px;
+        }
+        .section-title {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: #0f172a;
+        }
+        .section-sub {
+            font-size: 1.1rem;
+            color: #4a5a72;
+            max-width: 720px;
+            margin-bottom: 56px;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            align-items: center;
+        }
+        .service-card {
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 32px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.02);
+            border: 1px solid #edf2f7;
+            transition: transform 0.25s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            border-color: #e2e8f0;
+        }
+        .service-icon {
+            font-size: 2.8rem;
+            color: #c9772e;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .btn-soft {
+            margin-top: 28px;
+            display: inline-block;
+            background: none;
+            border: 1px solid #cfdde6;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            margin-right: 12px;
+            text-decoration: none;
+            color: #1e2a3e;
+        }
+        .btn-soft:hover {
+            background: #f8fafc;
+            border-color: #c9772e;
+            color: #c9772e;
+        }
+        .detail-link {
+            display: inline-block;
+            margin-top: 28px;
+            font-size: 0.9rem;
+            color: #c9772e;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed #c9772e;
+        }
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(145deg, #ffffff, #fbfdff);
+        }
+        .hero-content h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(125deg, #1f2f40, #2b4b6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        .hero-badge {
+            background: #f1f5f9;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .free-badge {
+            background: #e6f4ea;
+            color: #2c6e3c;
+            border-radius: 40px;
+            padding: 4px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .feature-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+        .feature-list li {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .feature-list i {
+            color: #c9772e;
+            width: 24px;
+        }
+        .modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.55;
-        }
-
-        /* Contenedor principal estilo carrete de cine */
-        .film-reel {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            max-width: 1600px;
-            width: 90%;
-            margin: 2rem auto;
-            gap: 24px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(3px);
-            border-radius: 72px;
-            box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.15);
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(100, 70, 40, 0.25);
-        }
-
-        /* Laterales (tiras de película) */
-        .film-strip {
-            width: 200px;
-            background: rgba(238, 242, 248, 0.85);
-            backdrop-filter: blur(2px);
-            border-radius: 48px;
-            display: flex;
-            flex-direction: column;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
             align-items: center;
-            justify-content: space-between;
-            padding: 30px 0;
-            gap: 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            border: 2px solid #b3c0d0;
+            justify-content: center;
         }
-
-        .strip-left {
-            border-right: 8px solid #8b5a2b;
-        }
-        .strip-right {
-            border-left: 8px solid #8b5a2b;
-        }
-
-        .film-perf {
-            width: 160px;
-            height: 180px;
+        .modal-content {
             background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            max-width: 750px;
+            width: 90%;
+            border-radius: 48px;
+            padding: 40px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .close-modal {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            font-size: 28px;
             cursor: pointer;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
-            border: 4px solid #d0d8e5;
         }
-        .film-perf img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: #1e2a3e;
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.25s;
+            z-index: 99;
         }
-        .film-perf:hover {
-            transform: scale(1.08);
-            z-index: 10;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-            border-color: #c9772e;
-        }
-
-        /* Zona central - contiene toda la página original */
-        .center-stage {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.96);
-            border-radius: 56px;
-            padding: 2rem;
-            border: 2px solid #cdd9e8;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.02);
-            overflow: hidden;
-        }
-
-        /* Ajustes para que el contenido original se adapte */
-        .container {
-            max-width: 100%;
-            padding: 0 1rem;
-        }
-
-        /* El resto de estilos originales se mantienen, solo ajustamos algunos márgenes */
-        .site-header {
-            background: transparent;
-            backdrop-filter: none;
-            border-bottom: none;
-            padding: 1rem 0;
-        }
-        .hero {
-            padding: 60px 0 40px;
-        }
-        section {
-            padding: 60px 0;
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
         }
         footer {
             background: transparent;
-            padding: 40px 0 20px;
+            padding: 56px 0 40px;
             border-top: none;
+            margin-top: 40px;
+        }
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col {
+            max-width: 320px;
+        }
+        .footer-logo-small {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .footer-logo-small img {
+            height: 50px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
         }
         .footer-tagline {
-            border-top-color: #e2e8f0;
+            margin: 16px 0 20px;
+            font-size: 0.85rem;
+            color: #5b6e8c;
+            border-top: 1px solid #e9edf2;
+            padding-top: 16px;
         }
-        .modal {
-            z-index: 2000;
+        hr {
+            border: none;
+            border-top: 1px solid #e9edf2;
+            margin: 28px 0;
         }
-
-        /* Responsive: en móviles ocultar las tiras laterales */
+        @media (max-width: 1200px) {
+            .nav-links { gap: 24px; }
+            .nav-links a { font-size: 1rem; }
+            .logo-placeholder img { height: 90px; max-width: 180px; }
+            .logo-text h1 { font-size: 1.9rem; }
+        }
         @media (max-width: 1000px) {
-            .film-strip {
-                display: none;
-            }
-            .film-reel {
-                width: 95%;
-                padding: 20px;
-            }
-            .center-stage {
-                padding: 1rem;
-            }
+            .nav-links { gap: 18px; }
+            .nav-links a { font-size: 0.9rem; }
+            .lang-btn { padding: 6px 14px; font-size: 0.85rem; }
+            .github-link { padding: 6px 16px; font-size: 0.9rem; }
+            .side-canvas { display: none; } /* ocultar en móviles */
+        }
+        @media (max-width: 900px) {
+            .grid-2col { grid-template-columns: 1fr; gap: 32px; }
+            .hero-content h2 { font-size: 2.5rem; }
+            .container { padding: 0 24px; }
+            .logo-placeholder img { height: 70px; max-width: 140px; }
+            .logo-text h1 { font-size: 1.5rem; }
+            .logo-text span { font-size: 0.7rem; }
+            .site-header { padding: 18px 0; }
+            .nav-links a { font-size: 0.85rem; }
+        }
+        @media (max-width: 780px) {
+            .header-inner { flex-direction: column; align-items: stretch; gap: 20px; }
+            .logo-area { justify-content: center; }
+            .nav-links { justify-content: center; order: 2; }
+            .lang-switch { justify-content: center; order: 3; }
+            .logo-placeholder img { height: 60px; }
+        }
+        img.mock-img {
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+        }
+        .pillar-img {
+            background: #f4f7fc;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
         }
     </style>
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
+    <!-- Canvas izquierdo (geometría animada) -->
+    <canvas id="leftCanvas" class="side-canvas left-canvas"></canvas>
+    <!-- Canvas derecho (geometría animada) -->
+    <canvas id="rightCanvas" class="side-canvas right-canvas"></canvas>
 
-    <div class="film-reel">
-        <!-- Tira izquierda: imágenes 1 a 6 -->
-        <div class="film-strip strip-left">
-            <div class="film-perf"><img src="chainpic_1.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_2.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_3.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_4.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_5.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_6.jpg" alt="film frame" loading="lazy"></div>
-        </div>
-
-        <!-- Zona central: aquí va TODO el contenido original -->
-        <div class="center-stage">
-            <header class="site-header">
-                <div class="container header-inner" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
-                    <div class="logo-area" style="display: flex; align-items: center; gap: 20px;">
-                        <div class="logo-placeholder">
-                            <img src="logo.jpg" alt="ar.QueoJones logo">
-                        </div>
-                        <div class="logo-text">
-                            <h1>ar.QueoJones</h1>
-                            <span data-i18n="tagline">inteligencia arqueológica de vanguardia</span>
-                        </div>
+    <div class="container">
+        <header class="site-header">
+            <div class="header-inner">
+                <div class="logo-area">
+                    <div class="logo-placeholder">
+                        <img src="logo.jpg" alt="ar.QueoJones logo">
                     </div>
-                    <div class="nav-links" style="display: flex; gap: 28px; flex-wrap: wrap; align-items: center;">
-                        <a href="#hero" data-i18n="nav_home">Inicio</a>
-                        <a href="#photogrammetry" data-i18n="nav_photogram">Fotogrametría 3D</a>
-                        <a href="#app-building" data-i18n="nav_app">Apps</a>
-                        <a href="#qgis" data-i18n="nav_qgis">QGIS</a>
-                        <a href="#drone" data-i18n="nav_drone">Dron</a>
-                        <a href="#augmented-reality" data-i18n="nav_ar">RA</a>
-                        <a href="#addons" data-i18n="nav_addons">Complementos</a>
-                        <a href="#webdev" data-i18n="nav_webdev">Web & SW</a>
-                        <a href="#aidev" data-i18n="nav_aiprompt">IA Prompt</a>
-                        <a href="#arqueobot" data-i18n="nav_arqueobot">arqueobot</a>
-                        <a href="https://github.com/arQueoJones" target="_blank" class="github-link" style="background:#f0f2f5; padding:8px 18px; border-radius:40px; font-weight:700; display:inline-flex; align-items:center; gap:8px;"><i class="fab fa-github"></i> GitHub</a>
-                    </div>
-                    <div class="lang-switch" style="display: flex; gap: 12px;">
-                        <button class="lang-btn" data-lang="es">ES</button>
-                        <button class="lang-btn" data-lang="en">EN</button>
-                        <button class="lang-btn" data-lang="fr">FR</button>
-                        <button class="lang-btn" data-lang="de">DE</button>
+                    <div class="logo-text">
+                        <h1>ar.QueoJones</h1>
+                        <span data-i18n="tagline">inteligencia arqueológica de vanguardia</span>
                     </div>
                 </div>
-            </header>
-
-            <main>
-                <!-- Hero Section -->
-                <section id="hero" class="hero">
-                    <div class="container">
-                        <div class="hero-content">
-                            <div class="hero-badge"><i class="fas fa-robot"></i> <span data-i18n="hero_badge">IA · inteligencia patrimonial</span></div>
-                            <h2 id="heroTitle" data-i18n="hero_title">Reconstruimos el pasado con la inteligencia del futuro</h2>
-                            <p class="section-sub" data-i18n="hero_desc">Desde la fotogrametría 3D hasta el diseño de museos asistido por IA, ar.QueoJones ofrece soluciones digitales a medida para arqueólogos, museos e instituciones culturales.</p>
-                            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                                <a href="#photogrammetry" class="btn-soft" style="background:#1e2a3e; color:white; border:none;" data-i18n="hero_btn1">Explorar servicios <i class="fas fa-arrow-right"></i></a>
-                                <a href="#arqueobot" class="btn-soft" data-i18n="hero_btn2"><i class="fas fa-gem"></i> Descubrir arqueobot gratis</a>
-                            </div>
-                        </div>
-                        <div style="margin-top: 48px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between;">
-                            <div style="flex:1; min-width: 150px;"><i class="fas fa-cubes"></i> <span data-i18n="badge1">reconstrucción 3D</span></div>
-                            <div style="flex:1; min-width: 150px;"><i class="fas fa-mobile-alt"></i> <span data-i18n="badge2">apps de campo</span></div>
-                            <div style="flex:1; min-width: 150px;"><i class="fas fa-map-marked-alt"></i> <span data-i18n="badge3">QGIS geoespacial</span></div>
-                            <div style="flex:1; min-width: 150px;"><i class="fas fa-brain"></i> <span data-i18n="badge4">suite arqueobot</span></div>
-                            <div style="flex:1; min-width: 150px;"><i class="fas fa-drone"></i> <span data-i18n="badge5">arqueología aérea</span></div>
-                            <div style="flex:1; min-width: 150px;"><i class="fas fa-vr-cardboard"></i> <span data-i18n="badge6">realidad aumentada</span></div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Fotogrametría 3D -->
-                <section id="photogrammetry"><div class="container"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-camera"></i> <span data-i18n="photogram_badge">alta precisión</span></span><h2 class="section-title" data-i18n="photogram_title">Fotogrametría 3D</h2><p data-i18n="photogram_desc">Gemelos digitales milimétricos de artefactos, excavaciones y patrimonio arquitectónico. Integración COLMAP, OpenCV y redes neuronales.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f1">SfM automatizado</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f2">Nube densa y mallado</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f3">Ortofotos y análisis volumétrico</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f4">Visor web 3D</span></li></ul><button class="btn-soft" data-i18n="photogram_btn" onclick="showAlert('photogram')">Solicitar demo →</button><a href="3dphotogrammetry.html" class="detail-link" data-i18n="photogram_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/104/600/450" alt="3d photogrammetry" class="mock-img"></div></div></div></section>
-
-                <!-- Apps -->
-                <section id="app-building"><div class="container"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-code-branch"></i> <span data-i18n="app_badge">multiplataforma</span></span><h2 class="section-title" data-i18n="app_title">Creación de Apps</h2><p data-i18n="app_desc">Apps móviles y web para flujos arqueológicos: recogida offline, procesamiento fotogramétrico y paneles colaborativos.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f1">React Native / Flutter</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f2">Herramientas con GPS</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f3">Anotación multimedia</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f4">Sincronización cloud + IA</span></li></ul><button class="btn-soft" data-i18n="app_btn" onclick="showAlert('app')">Hablar del proyecto →</button><a href="appbuilding.html" class="detail-link" data-i18n="app_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/20/600/450" alt="mobile app" class="mock-img"></div></div></div></section>
-
-                <!-- QGIS -->
-                <section id="qgis"><div class="container"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-draw-polygon"></i> <span data-i18n="qgis_badge">inteligencia espacial</span></span><h2 class="section-title" data-i18n="qgis_title">QGIS y Análisis Geoespacial</h2><p data-i18n="qgis_desc">Modelado predictivo, arqueología del paisaje, LiDAR y plugins QGIS personalizados para gestión patrimonial.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f1">Análisis de terreno y cuencas visuales</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f2">Interpretación de imágenes aéreas</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f3">Geodatabases y automatización</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f4">Mapas web y StoryMaps</span></li></ul><button class="btn-soft" data-i18n="qgis_btn" onclick="showAlert('qgis')">Explorar GIS →</button><a href="qgis.html" class="detail-link" data-i18n="qgis_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/15/600/450" alt="qgis map" class="mock-img"></div></div></div></section>
-
-                <!-- Dron -->
-                <section id="drone"><div class="container"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-drone"></i> <span data-i18n="drone_badge">UAV · multiespectral</span></span><h2 class="section-title" data-i18n="drone_title">Arqueología Aérea con Dron</h2><p data-i18n="drone_desc">Levantamientos de alta resolución, modelos de terreno tipo LiDAR, análisis térmico y multiespectral para detectar rasgos ocultos.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f1">Ortomosaicos y MDT</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f2">NDVI y detección de cultivos</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f3">Planificación automática + RTK</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f4">Reconstrucción 3D del terreno</span></li></ul><button class="btn-soft" data-i18n="drone_btn" onclick="showAlert('drone')">Solicitar levantamiento →</button><a href="drone.html" class="detail-link" data-i18n="drone_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/96/600/450" alt="drone archaeology" class="mock-img"></div></div></div></section>
-
-                <!-- Realidad Aumentada -->
-                <section id="augmented-reality"><div class="container"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-vr-cardboard"></i> <span data-i18n="ar_badge">patrimonio inmersivo</span></span><h2 class="section-title" data-i18n="ar_title">Realidad Aumentada</h2><p data-i18n="ar_desc">Superposiciones interactivas, guías de museo AR y reconstrucciones virtuales de estructuras arruinadas.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f1">AR sin marcadores / basada en ubicación</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f2">Reconstrucción virtual</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f3">WebAR y apps nativas</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f4">Integración con modelos 3D</span></li></ul><button class="btn-soft" data-i18n="ar_btn" onclick="showAlert('ar')">Discutir proyecto AR →</button><a href="ar.html" class="detail-link" data-i18n="ar_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/42/600/450" alt="augmented reality" class="mock-img"></div></div></div></section>
-
-                <!-- Complementos -->
-                <section id="addons"><div class="container"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-puzzle-piece"></i> <span data-i18n="addons_badge">extiende e integra</span></span><h2 class="section-title" data-i18n="addons_title">Complementos y Plugins a Medida</h2><p data-i18n="addons_desc">Plugins para QGIS, extensiones para software 3D, conectores de datos y paneles de control personalizados.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f1">Desarrollo de plugins QGIS/ArcGIS</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f2">Extensiones para Blender, MeshLab</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f3">Conectores import/export</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f4">Scripts de automatización</span></li></ul><button class="btn-soft" data-i18n="addons_btn" onclick="showAlert('addons')">Solicitar complemento →</button><a href="addons.html" class="detail-link" data-i18n="addons_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/26/600/450" alt="custom addons" class="mock-img"></div></div></div></section>
-
-                <!-- Desarrollo Web y SW -->
-                <section id="webdev"><div class="container"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-globe"></i> <span data-i18n="webdev_badge">experiencia full‑stack</span></span><h2 class="section-title" data-i18n="webdev_title">Desarrollo Web y de Software</h2><p data-i18n="webdev_desc">Plataformas web, aplicaciones de escritorio y software científico para investigación arqueológica y gestión patrimonial.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f1">Portales web y bases de datos</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f2">Apps de escritorio (Python, Electron)</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f3">APIs REST e infraestructura cloud</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f4">Mantenimiento a largo plazo</span></li></ul><button class="btn-soft" data-i18n="webdev_btn" onclick="showAlert('webdev')">Iniciar proyecto →</button><a href="web&sw.html" class="detail-link" data-i18n="webdev_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/0/600/450" alt="software development" class="mock-img"></div></div></div></section>
-
-                <!-- IA Prompt -->
-                <section id="aidev"><div class="container"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-comment-dots"></i> <span data-i18n="aidev_badge">IA generativa</span></span><h2 class="section-title" data-i18n="aidev_title">Desarrollo de Prompts IA</h2><p data-i18n="aidev_desc">Diseño y ajuste de pipelines de LLM para investigación arqueológica, búsqueda semántica, informes automáticos y asistentes virtuales.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f1">Ingeniería de prompts especializada</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f2">Pipelines RAG para archivos de excavación</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f3">Integración GPT4All y LLM open source</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f4">Catalogación y resumen automático</span></li></ul><button class="btn-soft" data-i18n="aidev_btn" onclick="showAlert('aidev')">Desarrollar prompts IA →</button><a href="aiprompt.html" class="detail-link" data-i18n="aidev_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/169/600/450" alt="AI prompt engineering" class="mock-img"></div></div></div></section>
-
-                <!-- arqueobot -->
-                <section id="arqueobot" style="background: #ffffff;">
-                    <div class="container">
-                        <div style="text-align: center; max-width: 800px; margin: 0 auto 48px;">
-                            <span class="free-badge"><i class="fas fa-leaf"></i> <span data-i18n="arqueobot_free">gratuito para uso no comercial</span></span>
-                            <h2 class="section-title" data-i18n="arqueobot_title">arqueobot · IA arqueológica unificada</h2>
-                            <p class="section-sub" data-i18n="arqueobot_desc">Un ecosistema que fusiona diseño de museos, detección de fragmentos, clasificación por IA, detección en vivo e inteligencia conversacional.</p>
-                        </div>
-                        <div class="grid-2col" style="align-items: start;">
-                            <div class="service-card">
-                                <div class="service-icon"><i class="fas fa-robot"></i></div>
-                                <h3 data-i18n="arqueobot_card1_title">Arquitecto de Museos IA</h3>
-                                <p data-i18n="arqueobot_card1_desc">Aprendizaje por refuerzo neuronal para optimizar el flujo de visitantes, engagement y resonancia cultural.</p>
-                                <button class="btn-soft" id="openModalBtn" data-i18n="arqueobot_btn">⟳ Descubrir arqueobot completo <i class="fas fa-external-link-alt"></i></button>
-                                <a href="arqueobot.html" class="detail-link" data-i18n="arqueobot_detail_link">Página detallada →</a>
-                            </div>
-                            <div class="service-card">
-                                <div class="service-icon"><i class="fas fa-archive"></i></div>
-                                <h3 data-i18n="arqueobot_card2_title">Análisis Inteligente de Artefactos</h3>
-                                <p data-i18n="arqueobot_card2_desc">Detección de fragmentos, segmentación en vivo, asistente GPT4All y clasificación de cerámica/lítica.</p>
-                                <ul class="feature-list"><li><i class="fas fa-microchip"></i> <span data-i18n="arqueobot_f1">Detección en tiempo real (ESP32-CAM)</span></li><li><i class="fas fa-chart-line"></i> <span data-i18n="arqueobot_f2">Fotogrametría y reconstrucción 3D</span></li><li><i class="fas fa-database"></i> <span data-i18n="arqueobot_f3">Gestión inteligente de categorías</span></li></ul>
-                            </div>
-                        </div>
-                        <div style="margin-top: 48px; background: #F9FBFE; border-radius: 48px; padding: 32px; text-align: center;">
-                            <i class="fas fa-infinity" style="font-size: 2rem; color: #c9772e;"></i>
-                            <p style="margin-top: 16px;"><strong data-i18n="arqueobot_unify_text">arqueobot unifica:</strong> <span data-i18n="arqueobot_unify_list">Museum AI Builder, AI Tab (GPT4All), detección de fragmentos, preprocesado, clasificación, integración COLMAP, programas personales y analítica avanzada — todo gratuito para uso académico y no comercial.</span></p>
-                            <a href="https://github.com/arQueoJones" target="_blank" style="margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: #1e2a3e; color: white; padding: 12px 28px; border-radius: 60px; text-decoration: none;"><i class="fab fa-github"></i> <span data-i18n="github_access">Acceder al código y documentación</span></a>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <!-- Modal arqueobot -->
-            <div id="arqueobotModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeModalBtn">&times;</span><h3><i class="fas fa-microchip"></i> <span data-i18n="modal_title">arqueobot – suite de inteligencia profunda</span></h3><div class="modal-grid"><p data-i18n="modal_desc">arqueobot es una herramienta gratuita no comercial que integra todos los motores Python del ecosistema WAAZP. Diseñada para arqueólogos, investigadores y profesionales del patrimonio.</p><div style="background:#F8FAFE; padding:20px; border-radius:28px;"><h4 data-i18n="modal_modules_title">⚙️ módulos incluidos:</h4><ul style="columns:2; column-gap:32px; margin-top:16px; list-style:none;"><li><i class="fas fa-cube"></i> <span data-i18n="mod1">Museum Builder (RL + NeuroEvolution)</span></li><li><i class="fas fa-language"></i> <span data-i18n="mod2">Asistente IA (GPT4All)</span></li><li><i class="fas fa-shield-alt"></i> <span data-i18n="mod3">Detección de fragmentos/objetos</span></li><li><i class="fas fa-video"></i> <span data-i18n="mod4">Detección en vivo (ESP32-CAM)</span></li><li><i class="fas fa-chart-simple"></i> <span data-i18n="mod5">Análisis estadístico multivariante</span></li><li><i class="fas fa-draw-polygon"></i> <span data-i18n="mod6">Fotogrametría y COLMAP</span></li><li><i class="fas fa-tags"></i> <span data-i18n="mod7">Clasificación y entrenamiento</span></li><li><i class="fas fa-database"></i> <span data-i18n="mod8">Gestión jerárquica de categorías</span></li></ul></div><p><strong data-i18n="license_title">🔓 Licencia:</strong> <span data-i18n="license_text">arqueobot es gratuito para investigación, educación y trabajo de campo no comercial. Licencias comerciales disponibles para funciones empresariales.</span></p><div style="margin-top:20px;"><a href="https://github.com/arQueoJones" target="_blank" style="background:#1e2a3e; color:white; padding:12px 20px; border-radius:48px; text-decoration:none; display:inline-flex; gap:12px;"><i class="fab fa-github"></i> <span data-i18n="modal_github">Visitar arQueoJones en GitHub</span></a><button class="btn-soft" id="closeModalBtn2" style="margin-left:16px;" data-i18n="modal_close">Cerrar ventana</button></div></div></div></div>
-
-            <div class="back-to-top" id="backToTopBtn"><i class="fas fa-arrow-up"></i></div>
-
-            <footer>
-                <div class="container">
-                    <div class="footer-grid">
-                        <div class="footer-col">
-                            <div class="footer-logo-small">
-                                <img src="logo.jpg" alt="ar.QueoJones logo">
-                                <h4>ar.QueoJones</h4>
-                            </div>
-                            <div class="footer-tagline" data-i18n="footer_tagline">Advanced archaeological technologies · 3D scanning · artificial intelligence · GIS · heritage software</div>
-                            <p data-i18n="footer_desc">Tecnologías arqueológicas de vanguardia · escáner 3D · IA · SIG · software patrimonial</p>
-                        </div>
-                        <div class="footer-col">
-                            <h4 data-i18n="footer_services_title">Servicios</h4>
-                            <p data-i18n="footer_s1">Fotogrametría 3D</p><p data-i18n="footer_s2">Creación de Apps</p><p data-i18n="footer_s3">QGIS y Espacial</p><p data-i18n="footer_s4">Arqueología con Dron</p><p data-i18n="footer_s5">Realidad Aumentada</p><p data-i18n="footer_s6">Complementos</p><p data-i18n="footer_s7">Desarrollo Web y SW</p><p data-i18n="footer_s8">Desarrollo de Prompts IA</p><p data-i18n="footer_s9">arqueobot gratuito</p>
-                        </div>
-                        <div class="footer-col">
-                            <h4 data-i18n="footer_legal">Aviso legal y políticas</h4>
-                            <p data-i18n="footer_disclaimer">arqueobot se proporciona "tal cual" para uso no comercial. Sin garantía para resultados específicos. El resto de servicios sujetos a acuerdo comercial.</p>
-                            <p data-i18n="footer_privacy">Política de privacidad: no recopilamos datos personales a través de esta página. Los repositorios de GitHub tienen sus propias políticas.</p>
-                            <p>© 2025 ar.QueoJones – laboratorio de inteligencia patrimonial.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div style="font-size:0.8rem; text-align:center; color:#6c7a91;"><i class="fas fa-balance-scale"></i> <span data-i18n="footer_copyright">arqueobot es gratuito para uso académico no comercial. Derechos comerciales reservados para fotogrametría, desarrollo de apps, levantamientos con dron, RA, complementos, desarrollo de software, servicios IA prompt y consultoría QGIS.</span> <a href="https://github.com/arQueoJones" target="_blank" style="color:#c9772e;" data-i18n="footer_repo">Repositorios open source</a> <span data-i18n="footer_license">bajo licencias MIT / investigación.</span></div>
+                <div class="nav-links">
+                    <a href="#hero" data-i18n="nav_home">Inicio</a>
+                    <a href="#photogrammetry" data-i18n="nav_photogram">Fotogrametría 3D</a>
+                    <a href="#app-building" data-i18n="nav_app">Apps</a>
+                    <a href="#qgis" data-i18n="nav_qgis">QGIS</a>
+                    <a href="#drone" data-i18n="nav_drone">Dron</a>
+                    <a href="#augmented-reality" data-i18n="nav_ar">RA</a>
+                    <a href="#addons" data-i18n="nav_addons">Complementos</a>
+                    <a href="#webdev" data-i18n="nav_webdev">Web & SW</a>
+                    <a href="#aidev" data-i18n="nav_aiprompt">IA Prompt</a>
+                    <a href="#arqueobot" data-i18n="nav_arqueobot">arqueobot</a>
+                    <a href="https://github.com/arQueoJones" target="_blank" class="github-link"><i class="fab fa-github"></i> GitHub</a>
                 </div>
-            </footer>
-        </div> <!-- fin center-stage -->
+                <div class="lang-switch">
+                    <button class="lang-btn" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="fr">FR</button>
+                    <button class="lang-btn" data-lang="de">DE</button>
+                </div>
+            </div>
+        </header>
 
-        <!-- Tira derecha: imágenes 7 a 12 -->
-        <div class="film-strip strip-right">
-            <div class="film-perf"><img src="chainpic_7.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_8.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_9.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_10.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_11.jpg" alt="film frame" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_12.jpg" alt="film frame" loading="lazy"></div>
-        </div>
-    </div>
+        <main>
+            <!-- Hero -->
+            <section id="hero" class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fas fa-robot"></i> <span data-i18n="hero_badge">IA · inteligencia patrimonial</span></div>
+                    <h2 id="heroTitle" data-i18n="hero_title">Reconstruimos el pasado con la inteligencia del futuro</h2>
+                    <p class="section-sub" data-i18n="hero_desc">Desde la fotogrametría 3D hasta el diseño de museos asistido por IA, ar.QueoJones ofrece soluciones digitales a medida para arqueólogos, museos e instituciones culturales.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <a href="#photogrammetry" class="btn-soft" style="background:#1e2a3e; color:white; border:none;" data-i18n="hero_btn1">Explorar servicios <i class="fas fa-arrow-right"></i></a>
+                        <a href="#arqueobot" class="btn-soft" data-i18n="hero_btn2"><i class="fas fa-gem"></i> Descubrir arqueobot gratis</a>
+                    </div>
+                </div>
+                <div style="margin-top: 48px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between;">
+                    <div style="flex:1; min-width: 150px;"><i class="fas fa-cubes"></i> <span data-i18n="badge1">reconstrucción 3D</span></div>
+                    <div style="flex:1; min-width: 150px;"><i class="fas fa-mobile-alt"></i> <span data-i18n="badge2">apps de campo</span></div>
+                    <div style="flex:1; min-width: 150px;"><i class="fas fa-map-marked-alt"></i> <span data-i18n="badge3">QGIS geoespacial</span></div>
+                    <div style="flex:1; min-width: 150px;"><i class="fas fa-brain"></i> <span data-i18n="badge4">suite arqueobot</span></div>
+                    <div style="flex:1; min-width: 150px;"><i class="fas fa-drone"></i> <span data-i18n="badge5">arqueología aérea</span></div>
+                    <div style="flex:1; min-width: 150px;"><i class="fas fa-vr-cardboard"></i> <span data-i18n="badge6">realidad aumentada</span></div>
+                </div>
+            </section>
 
-    <!-- Modal para ampliar imágenes laterales (mismo que en index.html) -->
-    <div id="imageModal" class="modal-overlay" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:2000; align-items:center; justify-content:center; cursor:pointer;">
-        <div class="modal-content" style="position:relative; max-width:85vw; max-height:85vh; background:#fff; border-radius:32px; padding:20px; border:6px solid #c9772e; transform:scale(0.2); transition:transform 0.2s cubic-bezier(0.34,1.2,0.64,1);">
-            <div class="modal-close" style="position:absolute; top:-18px; right:-18px; width:44px; height:44px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:bold; color:#c9772e; cursor:pointer; border:2px solid #c9772e;">&times;</div>
-            <img id="modalImage" src="" alt="Ampliada" style="width:auto; max-width:100%; max-height:70vh; display:block; border-radius:20px; object-fit:contain;">
-        </div>
+            <!-- Fotogrametría 3D -->
+            <section id="photogrammetry"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-camera"></i> <span data-i18n="photogram_badge">alta precisión</span></span><h2 class="section-title" data-i18n="photogram_title">Fotogrametría 3D</h2><p data-i18n="photogram_desc">Gemelos digitales milimétricos de artefactos, excavaciones y patrimonio arquitectónico. Integración COLMAP, OpenCV y redes neuronales.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f1">SfM automatizado</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f2">Nube densa y mallado</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f3">Ortofotos y análisis volumétrico</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="photogram_f4">Visor web 3D</span></li></ul><button class="btn-soft" data-i18n="photogram_btn" onclick="showAlert('photogram')">Solicitar demo →</button><a href="3dphotogrammetry.html" class="detail-link" data-i18n="photogram_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/104/600/450" alt="3d photogrammetry" class="mock-img"></div></div></section>
+
+            <!-- Apps -->
+            <section id="app-building"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-code-branch"></i> <span data-i18n="app_badge">multiplataforma</span></span><h2 class="section-title" data-i18n="app_title">Creación de Apps</h2><p data-i18n="app_desc">Apps móviles y web para flujos arqueológicos: recogida offline, procesamiento fotogramétrico y paneles colaborativos.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f1">React Native / Flutter</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f2">Herramientas con GPS</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f3">Anotación multimedia</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="app_f4">Sincronización cloud + IA</span></li></ul><button class="btn-soft" data-i18n="app_btn" onclick="showAlert('app')">Hablar del proyecto →</button><a href="appbuilding.html" class="detail-link" data-i18n="app_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/20/600/450" alt="mobile app" class="mock-img"></div></div></section>
+
+            <!-- QGIS -->
+            <section id="qgis"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-draw-polygon"></i> <span data-i18n="qgis_badge">inteligencia espacial</span></span><h2 class="section-title" data-i18n="qgis_title">QGIS y Análisis Geoespacial</h2><p data-i18n="qgis_desc">Modelado predictivo, arqueología del paisaje, LiDAR y plugins QGIS personalizados para gestión patrimonial.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f1">Análisis de terreno y cuencas visuales</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f2">Interpretación de imágenes aéreas</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f3">Geodatabases y automatización</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="qgis_f4">Mapas web y StoryMaps</span></li></ul><button class="btn-soft" data-i18n="qgis_btn" onclick="showAlert('qgis')">Explorar GIS →</button><a href="qgis.html" class="detail-link" data-i18n="qgis_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/15/600/450" alt="qgis map" class="mock-img"></div></div></section>
+
+            <!-- Dron -->
+            <section id="drone"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-drone"></i> <span data-i18n="drone_badge">UAV · multiespectral</span></span><h2 class="section-title" data-i18n="drone_title">Arqueología Aérea con Dron</h2><p data-i18n="drone_desc">Levantamientos de alta resolución, modelos de terreno tipo LiDAR, análisis térmico y multiespectral para detectar rasgos ocultos.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f1">Ortomosaicos y MDT</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f2">NDVI y detección de cultivos</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f3">Planificación automática + RTK</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="drone_f4">Reconstrucción 3D del terreno</span></li></ul><button class="btn-soft" data-i18n="drone_btn" onclick="showAlert('drone')">Solicitar levantamiento →</button><a href="drone.html" class="detail-link" data-i18n="drone_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/96/600/450" alt="drone archaeology" class="mock-img"></div></div></section>
+
+            <!-- Realidad Aumentada -->
+            <section id="augmented-reality"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-vr-cardboard"></i> <span data-i18n="ar_badge">patrimonio inmersivo</span></span><h2 class="section-title" data-i18n="ar_title">Realidad Aumentada</h2><p data-i18n="ar_desc">Superposiciones interactivas, guías de museo AR y reconstrucciones virtuales de estructuras arruinadas.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f1">AR sin marcadores / basada en ubicación</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f2">Reconstrucción virtual</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f3">WebAR y apps nativas</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="ar_f4">Integración con modelos 3D</span></li></ul><button class="btn-soft" data-i18n="ar_btn" onclick="showAlert('ar')">Discutir proyecto AR →</button><a href="ar.html" class="detail-link" data-i18n="ar_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/42/600/450" alt="augmented reality" class="mock-img"></div></div></section>
+
+            <!-- Complementos -->
+            <section id="addons"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-puzzle-piece"></i> <span data-i18n="addons_badge">extiende e integra</span></span><h2 class="section-title" data-i18n="addons_title">Complementos y Plugins a Medida</h2><p data-i18n="addons_desc">Plugins para QGIS, extensiones para software 3D, conectores de datos y paneles de control personalizados.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f1">Desarrollo de plugins QGIS/ArcGIS</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f2">Extensiones para Blender, MeshLab</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f3">Conectores import/export</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="addons_f4">Scripts de automatización</span></li></ul><button class="btn-soft" data-i18n="addons_btn" onclick="showAlert('addons')">Solicitar complemento →</button><a href="addons.html" class="detail-link" data-i18n="addons_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/26/600/450" alt="custom addons" class="mock-img"></div></div></section>
+
+            <!-- Desarrollo Web y SW -->
+            <section id="webdev"><div class="grid-2col"><div><span class="free-badge"><i class="fas fa-globe"></i> <span data-i18n="webdev_badge">experiencia full‑stack</span></span><h2 class="section-title" data-i18n="webdev_title">Desarrollo Web y de Software</h2><p data-i18n="webdev_desc">Plataformas web, aplicaciones de escritorio y software científico para investigación arqueológica y gestión patrimonial.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f1">Portales web y bases de datos</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f2">Apps de escritorio (Python, Electron)</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f3">APIs REST e infraestructura cloud</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="webdev_f4">Mantenimiento a largo plazo</span></li></ul><button class="btn-soft" data-i18n="webdev_btn" onclick="showAlert('webdev')">Iniciar proyecto →</button><a href="web&sw.html" class="detail-link" data-i18n="webdev_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/0/600/450" alt="software development" class="mock-img"></div></div></section>
+
+            <!-- IA Prompt -->
+            <section id="aidev"><div class="grid-2col" style="direction: rtl;"><div style="direction: ltr;"><span class="free-badge"><i class="fas fa-comment-dots"></i> <span data-i18n="aidev_badge">IA generativa</span></span><h2 class="section-title" data-i18n="aidev_title">Desarrollo de Prompts IA</h2><p data-i18n="aidev_desc">Diseño y ajuste de pipelines de LLM para investigación arqueológica, búsqueda semántica, informes automáticos y asistentes virtuales.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f1">Ingeniería de prompts especializada</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f2">Pipelines RAG para archivos de excavación</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f3">Integración GPT4All y LLM open source</span></li><li><i class="fas fa-check-circle"></i> <span data-i18n="aidev_f4">Catalogación y resumen automático</span></li></ul><button class="btn-soft" data-i18n="aidev_btn" onclick="showAlert('aidev')">Desarrollar prompts IA →</button><a href="aiprompt.html" class="detail-link" data-i18n="aidev_link">Página detallada →</a></div><div class="pillar-img"><img src="https://picsum.photos/id/169/600/450" alt="AI prompt engineering" class="mock-img"></div></div></section>
+
+            <!-- arqueobot -->
+            <section id="arqueobot" style="background: #ffffff;">
+                <div style="text-align: center; max-width: 800px; margin: 0 auto 48px;">
+                    <span class="free-badge"><i class="fas fa-leaf"></i> <span data-i18n="arqueobot_free">gratuito para uso no comercial</span></span>
+                    <h2 class="section-title" data-i18n="arqueobot_title">arqueobot · IA arqueológica unificada</h2>
+                    <p class="section-sub" data-i18n="arqueobot_desc">Un ecosistema que fusiona diseño de museos, detección de fragmentos, clasificación por IA, detección en vivo e inteligencia conversacional.</p>
+                </div>
+                <div class="grid-2col" style="align-items: start;">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-robot"></i></div>
+                        <h3 data-i18n="arqueobot_card1_title">Arquitecto de Museos IA</h3>
+                        <p data-i18n="arqueobot_card1_desc">Aprendizaje por refuerzo neuronal para optimizar el flujo de visitantes, engagement y resonancia cultural.</p>
+                        <button class="btn-soft" id="openModalBtn" data-i18n="arqueobot_btn">⟳ Descubrir arqueobot completo <i class="fas fa-external-link-alt"></i></button>
+                        <a href="arqueobot.html" class="detail-link" data-i18n="arqueobot_detail_link">Página detallada →</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-archive"></i></div>
+                        <h3 data-i18n="arqueobot_card2_title">Análisis Inteligente de Artefactos</h3>
+                        <p data-i18n="arqueobot_card2_desc">Detección de fragmentos, segmentación en vivo, asistente GPT4All y clasificación de cerámica/lítica.</p>
+                        <ul class="feature-list"><li><i class="fas fa-microchip"></i> <span data-i18n="arqueobot_f1">Detección en tiempo real (ESP32-CAM)</span></li><li><i class="fas fa-chart-line"></i> <span data-i18n="arqueobot_f2">Fotogrametría y reconstrucción 3D</span></li><li><i class="fas fa-database"></i> <span data-i18n="arqueobot_f3">Gestión inteligente de categorías</span></li></ul>
+                    </div>
+                </div>
+                <div style="margin-top: 48px; background: #F9FBFE; border-radius: 48px; padding: 32px; text-align: center;">
+                    <i class="fas fa-infinity" style="font-size: 2rem; color: #c9772e;"></i>
+                    <p style="margin-top: 16px;"><strong data-i18n="arqueobot_unify_text">arqueobot unifica:</strong> <span data-i18n="arqueobot_unify_list">Museum AI Builder, AI Tab (GPT4All), detección de fragmentos, preprocesado, clasificación, integración COLMAP, programas personales y analítica avanzada — todo gratuito para uso académico y no comercial.</span></p>
+                    <a href="https://github.com/arQueoJones" target="_blank" style="margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: #1e2a3e; color: white; padding: 12px 28px; border-radius: 60px; text-decoration: none;"><i class="fab fa-github"></i> <span data-i18n="github_access">Acceder al código y documentación</span></a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal arqueobot -->
+        <div id="arqueobotModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeModalBtn">&times;</span><h3><i class="fas fa-microchip"></i> <span data-i18n="modal_title">arqueobot – suite de inteligencia profunda</span></h3><div class="modal-grid"><p data-i18n="modal_desc">arqueobot es una herramienta gratuita no comercial que integra todos los motores Python del ecosistema WAAZP. Diseñada para arqueólogos, investigadores y profesionales del patrimonio.</p><div style="background:#F8FAFE; padding:20px; border-radius:28px;"><h4 data-i18n="modal_modules_title">⚙️ módulos incluidos:</h4><ul style="columns:2; column-gap:32px; margin-top:16px; list-style:none;"><li><i class="fas fa-cube"></i> <span data-i18n="mod1">Museum Builder (RL + NeuroEvolution)</span></li><li><i class="fas fa-language"></i> <span data-i18n="mod2">Asistente IA (GPT4All)</span></li><li><i class="fas fa-shield-alt"></i> <span data-i18n="mod3">Detección de fragmentos/objetos</span></li><li><i class="fas fa-video"></i> <span data-i18n="mod4">Detección en vivo (ESP32-CAM)</span></li><li><i class="fas fa-chart-simple"></i> <span data-i18n="mod5">Análisis estadístico multivariante</span></li><li><i class="fas fa-draw-polygon"></i> <span data-i18n="mod6">Fotogrametría y COLMAP</span></li><li><i class="fas fa-tags"></i> <span data-i18n="mod7">Clasificación y entrenamiento</span></li><li><i class="fas fa-database"></i> <span data-i18n="mod8">Gestión jerárquica de categorías</span></li></ul></div><p><strong data-i18n="license_title">🔓 Licencia:</strong> <span data-i18n="license_text">arqueobot es gratuito para investigación, educación y trabajo de campo no comercial. Licencias comerciales disponibles para funciones empresariales.</span></p><div style="margin-top:20px;"><a href="https://github.com/arQueoJones" target="_blank" style="background:#1e2a3e; color:white; padding:12px 20px; border-radius:48px; text-decoration:none; display:inline-flex; gap:12px;"><i class="fab fa-github"></i> <span data-i18n="modal_github">Visitar arQueoJones en GitHub</span></a><button class="btn-soft" id="closeModalBtn2" style="margin-left:16px;" data-i18n="modal_close">Cerrar ventana</button></div></div></div></div>
+
+        <div class="back-to-top" id="backToTopBtn"><i class="fas fa-arrow-up"></i></div>
+
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo-small">
+                        <img src="logo.jpg" alt="ar.QueoJones logo">
+                        <h4>ar.QueoJones</h4>
+                    </div>
+                    <div class="footer-tagline" data-i18n="footer_tagline">Advanced archaeological technologies · 3D scanning · artificial intelligence · GIS · heritage software</div>
+                    <p data-i18n="footer_desc">Tecnologías arqueológicas de vanguardia · escáner 3D · IA · SIG · software patrimonial</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_services_title">Servicios</h4>
+                    <p data-i18n="footer_s1">Fotogrametría 3D</p><p data-i18n="footer_s2">Creación de Apps</p><p data-i18n="footer_s3">QGIS y Espacial</p><p data-i18n="footer_s4">Arqueología con Dron</p><p data-i18n="footer_s5">Realidad Aumentada</p><p data-i18n="footer_s6">Complementos</p><p data-i18n="footer_s7">Desarrollo Web y SW</p><p data-i18n="footer_s8">Desarrollo de Prompts IA</p><p data-i18n="footer_s9">arqueobot gratuito</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_legal">Aviso legal y políticas</h4>
+                    <p data-i18n="footer_disclaimer">arqueobot se proporciona "tal cual" para uso no comercial. Sin garantía para resultados específicos. El resto de servicios sujetos a acuerdo comercial.</p>
+                    <p data-i18n="footer_privacy">Política de privacidad: no recopilamos datos personales a través de esta página. Los repositorios de GitHub tienen sus propias políticas.</p>
+                    <p>© 2025 ar.QueoJones – laboratorio de inteligencia patrimonial.</p>
+                </div>
+            </div>
+            <hr>
+            <div style="font-size:0.8rem; text-align:center; color:#6c7a91;"><i class="fas fa-balance-scale"></i> <span data-i18n="footer_copyright">arqueobot es gratuito para uso académico no comercial. Derechos comerciales reservados para fotogrametría, desarrollo de apps, levantamientos con dron, RA, complementos, desarrollo de software, servicios IA prompt y consultoría QGIS.</span> <a href="https://github.com/arQueoJones" target="_blank" style="color:#c9772e;" data-i18n="footer_repo">Repositorios open source</a> <span data-i18n="footer_license">bajo licencias MIT / investigación.</span></div>
+        </footer>
     </div>
 
     <script>
-        // ==================== ANIMACIÓN DE FONDO: GEOMETRÍA PLATÓNICA ====================
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let mouseX = 0, mouseY = 0;
-        let time = 0;
+        // ==================== ANIMACIÓN DE FONDO (GEOMETRÍA PLATÓNICA EN LATERALES) ====================
+        (function() {
+            const leftCanvas = document.getElementById('leftCanvas');
+            const rightCanvas = document.getElementById('rightCanvas');
+            if (!leftCanvas || !rightCanvas) return;
 
-        const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2;
-        const shapes = [];
-        const numShapes = 28;
+            let width, height;
+            let mouseX = 0, mouseY = 0;
+            let time = 0;
+            const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2;
+            const shapes = [];
+            const numShapes = 20; // suficientes para los laterales
 
-        class PlatonicShape {
-            constructor(type, x, y, size, rotationSpeed, color) {
-                this.type = type;
-                this.x = x;
-                this.y = y;
-                this.size = size;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = rotationSpeed;
-                this.color = color;
-                this.alpha = 0.12 + Math.random() * 0.1;
-            }
+            class PlatonicShape {
+                constructor(type, x, y, size, rotationSpeed, color, canvasSide) {
+                    this.type = type;
+                    this.x = x;
+                    this.y = y;
+                    this.size = size;
+                    this.rotation = Math.random() * Math.PI * 2;
+                    this.rotationSpeed = rotationSpeed;
+                    this.color = color;
+                    this.alpha = 0.12 + Math.random() * 0.1;
+                    this.canvasSide = canvasSide; // 'left' o 'right'
+                }
+                draw(ctx, time, mouseInfluenceX, mouseInfluenceY) {
+                    const rot = this.rotation + time * this.rotationSpeed;
+                    const puls = 1 + Math.sin(time * 0.8 + this.x * 0.01) * 0.03;
+                    const currentSize = this.size * puls;
+                    const dx = mouseInfluenceX * 0.02;
+                    const dy = mouseInfluenceY * 0.02;
+                    const drawX = this.x + dx;
+                    const drawY = this.y + dy;
 
-            draw(ctx, time, mouseInfluenceX, mouseInfluenceY) {
-                const rot = this.rotation + time * this.rotationSpeed;
-                const puls = 1 + Math.sin(time * 0.8 + this.x * 0.01) * 0.03;
-                const currentSize = this.size * puls;
-                const dx = mouseInfluenceX * 0.02;
-                const dy = mouseInfluenceY * 0.02;
-                const drawX = this.x + dx;
-                const drawY = this.y + dy;
+                    ctx.save();
+                    ctx.translate(drawX, drawY);
+                    ctx.rotate(rot);
+                    ctx.globalAlpha = this.alpha;
+                    ctx.strokeStyle = this.color;
+                    ctx.fillStyle = this.color;
+                    ctx.lineWidth = 1.5;
 
-                ctx.save();
-                ctx.translate(drawX, drawY);
-                ctx.rotate(rot);
-                ctx.globalAlpha = this.alpha;
-                ctx.strokeStyle = this.color;
-                ctx.fillStyle = this.color;
-                ctx.lineWidth = 1.5;
-
-                if (this.type === 'circle') {
-                    ctx.beginPath();
-                    ctx.arc(0, 0, currentSize, 0, Math.PI * 2);
-                    ctx.stroke();
-                    if (Math.sin(time * 1.2 + this.x) > 0.5) {
+                    if (this.type === 'circle') {
                         ctx.beginPath();
-                        ctx.arc(0, 0, currentSize * 0.6, 0, Math.PI * 2);
+                        ctx.arc(0, 0, currentSize, 0, Math.PI * 2);
+                        ctx.stroke();
+                        if (Math.sin(time * 1.2 + this.x) > 0.5) {
+                            ctx.beginPath();
+                            ctx.arc(0, 0, currentSize * 0.6, 0, Math.PI * 2);
+                            ctx.stroke();
+                        }
+                    } else if (this.type === 'triangle') {
+                        ctx.beginPath();
+                        for (let i = 0; i < 3; i++) {
+                            const angle = (i * Math.PI * 2 / 3);
+                            const x1 = Math.cos(angle) * currentSize;
+                            const y1 = Math.sin(angle) * currentSize;
+                            if (i === 0) ctx.moveTo(x1, y1);
+                            else ctx.lineTo(x1, y1);
+                        }
+                        ctx.closePath();
+                        ctx.stroke();
+                    } else if (this.type === 'square') {
+                        ctx.strokeRect(-currentSize, -currentSize, currentSize * 2, currentSize * 2);
+                    } else if (this.type === 'pentagon') {
+                        ctx.beginPath();
+                        for (let i = 0; i < 5; i++) {
+                            const angle = (i * Math.PI * 2 / 5) - Math.PI / 2;
+                            const x1 = Math.cos(angle) * currentSize;
+                            const y1 = Math.sin(angle) * currentSize;
+                            if (i === 0) ctx.moveTo(x1, y1);
+                            else ctx.lineTo(x1, y1);
+                        }
+                        ctx.closePath();
+                        ctx.stroke();
+                    } else if (this.type === 'spiral') {
+                        ctx.beginPath();
+                        let r = 2;
+                        const maxR = currentSize;
+                        const steps = 40;
+                        for (let i = 0; i <= steps; i++) {
+                            const t = i / steps;
+                            const rad = r + t * (maxR - r);
+                            const angle = t * Math.PI * 4 * GOLDEN_RATIO;
+                            const x1 = Math.cos(angle) * rad;
+                            const y1 = Math.sin(angle) * rad;
+                            if (i === 0) ctx.moveTo(x1, y1);
+                            else ctx.lineTo(x1, y1);
+                        }
                         ctx.stroke();
                     }
-                } else if (this.type === 'triangle') {
-                    ctx.beginPath();
-                    for (let i = 0; i < 3; i++) {
-                        const angle = (i * Math.PI * 2 / 3);
-                        const x1 = Math.cos(angle) * currentSize;
-                        const y1 = Math.sin(angle) * currentSize;
-                        if (i === 0) ctx.moveTo(x1, y1);
-                        else ctx.lineTo(x1, y1);
-                    }
-                    ctx.closePath();
-                    ctx.stroke();
-                } else if (this.type === 'square') {
-                    ctx.strokeRect(-currentSize, -currentSize, currentSize * 2, currentSize * 2);
-                } else if (this.type === 'pentagon') {
-                    ctx.beginPath();
-                    for (let i = 0; i < 5; i++) {
-                        const angle = (i * Math.PI * 2 / 5) - Math.PI / 2;
-                        const x1 = Math.cos(angle) * currentSize;
-                        const y1 = Math.sin(angle) * currentSize;
-                        if (i === 0) ctx.moveTo(x1, y1);
-                        else ctx.lineTo(x1, y1);
-                    }
-                    ctx.closePath();
-                    ctx.stroke();
-                } else if (this.type === 'spiral') {
-                    ctx.beginPath();
-                    let r = 2;
-                    const maxR = currentSize;
-                    const steps = 40;
-                    for (let i = 0; i <= steps; i++) {
-                        const t = i / steps;
-                        const rad = r + t * (maxR - r);
-                        const angle = t * Math.PI * 4 * GOLDEN_RATIO;
-                        const x1 = Math.cos(angle) * rad;
-                        const y1 = Math.sin(angle) * rad;
-                        if (i === 0) ctx.moveTo(x1, y1);
-                        else ctx.lineTo(x1, y1);
-                    }
-                    ctx.stroke();
+                    ctx.restore();
                 }
+            }
+
+            function initShapesForCanvas(canvasSide, canvasWidth, canvasHeight) {
+                const types = ['circle', 'triangle', 'square', 'pentagon', 'spiral'];
+                const colors = ['#c9a87b', '#b58b5a', '#d4b48c', '#a67c52', '#c29a6b', '#e0c8a8'];
+                const shapesArr = [];
+                for (let i = 0; i < numShapes; i++) {
+                    const type = types[Math.floor(Math.random() * types.length)];
+                    const x = Math.random() * canvasWidth;
+                    const y = Math.random() * canvasHeight;
+                    const size = 20 + Math.random() * 80;
+                    const rotationSpeed = (Math.random() - 0.5) * 0.02;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    shapesArr.push(new PlatonicShape(type, x, y, size, rotationSpeed, color, canvasSide));
+                }
+                return shapesArr;
+            }
+
+            function resizeAndSetup() {
+                const leftRect = leftCanvas.getBoundingClientRect();
+                const rightRect = rightCanvas.getBoundingClientRect();
+                leftCanvas.width = leftRect.width;
+                leftCanvas.height = window.innerHeight;
+                rightCanvas.width = rightRect.width;
+                rightCanvas.height = window.innerHeight;
+
+                // Reiniciar shapes para cada canvas
+                window.leftShapes = initShapesForCanvas('left', leftCanvas.width, leftCanvas.height);
+                window.rightShapes = initShapesForCanvas('right', rightCanvas.width, rightCanvas.height);
+            }
+
+            function drawCanvas(canvas, shapes, time, mouseXNorm, mouseYNorm) {
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const mouseInfluenceX = (mouseXNorm - 0.5) * 100;
+                const mouseInfluenceY = (mouseYNorm - 0.5) * 80;
+                for (let shape of shapes) {
+                    shape.draw(ctx, time, mouseInfluenceX, mouseInfluenceY);
+                }
+                // Espiral áurea central pequeña opcional (muy sutil)
+                ctx.save();
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(time * 0.02);
+                ctx.globalAlpha = 0.05;
+                ctx.strokeStyle = '#b28b5e';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                let r = 10;
+                const maxR = Math.min(canvas.width, canvas.height) * 0.4;
+                const steps = 150;
+                for (let i = 0; i <= steps; i++) {
+                    const t = i / steps;
+                    const rad = r + t * (maxR - r);
+                    const angle = t * Math.PI * 8 * GOLDEN_RATIO;
+                    const x = Math.cos(angle) * rad;
+                    const y = Math.sin(angle) * rad;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
                 ctx.restore();
             }
-        }
 
-        function initShapes() {
-            const types = ['circle', 'triangle', 'square', 'pentagon', 'spiral'];
-            const colors = ['#c9a87b', '#b58b5a', '#d4b48c', '#a67c52', '#c29a6b', '#e0c8a8'];
-            for (let i = 0; i < numShapes; i++) {
-                const type = types[Math.floor(Math.random() * types.length)];
-                const x = Math.random() * width;
-                const y = Math.random() * height;
-                const size = 25 + Math.random() * 90;
-                const rotationSpeed = (Math.random() - 0.5) * 0.02;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                shapes.push(new PlatonicShape(type, x, y, size, rotationSpeed, color));
+            function animate() {
+                time += 0.008;
+                const mouseXNorm = mouseX / window.innerWidth;
+                const mouseYNorm = mouseY / window.innerHeight;
+
+                if (leftCanvas && window.leftShapes) {
+                    drawCanvas(leftCanvas, window.leftShapes, time, mouseXNorm, mouseYNorm);
+                }
+                if (rightCanvas && window.rightShapes) {
+                    drawCanvas(rightCanvas, window.rightShapes, time, mouseXNorm, mouseYNorm);
+                }
+                requestAnimationFrame(animate);
             }
-        }
 
-        function resizeCanvas() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            shapes.forEach(shape => {
-                shape.x = Math.random() * width;
-                shape.y = Math.random() * height;
+            window.addEventListener('resize', () => {
+                resizeAndSetup();
             });
-        }
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
 
-        function animate() {
-            if (!ctx) return;
-            ctx.clearRect(0, 0, width, height);
-            time += 0.008;
-            const mouseInfluenceX = (mouseX / width - 0.5) * 100;
-            const mouseInfluenceY = (mouseY / height - 0.5) * 80;
+            resizeAndSetup();
+            animate();
+        })();
 
-            for (let shape of shapes) {
-                shape.draw(ctx, time, mouseInfluenceX, mouseInfluenceY);
-            }
-
-            ctx.save();
-            ctx.translate(width / 2, height / 2);
-            ctx.rotate(time * 0.02);
-            ctx.globalAlpha = 0.06;
-            ctx.strokeStyle = '#b28b5e';
-            ctx.lineWidth = 2.5;
-            ctx.beginPath();
-            let r = 30;
-            const maxR = Math.min(width, height) * 0.45;
-            const steps = 200;
-            for (let i = 0; i <= steps; i++) {
-                const t = i / steps;
-                const rad = r + t * (maxR - r);
-                const angle = t * Math.PI * 8 * GOLDEN_RATIO;
-                const x = Math.cos(angle) * rad;
-                const y = Math.sin(angle) * rad;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            ctx.restore();
-
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
-        resizeCanvas();
-        initShapes();
-        animate();
-
-        // ==================== FUNCIONALIDADES EXISTENTES (idiomas, modales, etc.) ====================
+        // ==================== TRADUCCIONES COMPLETAS ====================
         const translations = {
-            es: { /* igual que el original, ya incluido arriba pero por brevedad lo omitimos aquí; en el código real está completo */ },
-            en: { /* completo */ },
-            fr: { /* completo */ },
-            de: { /* completo */ }
+            es: {
+                tagline: "inteligencia arqueológica de vanguardia", nav_home: "Inicio", nav_photogram: "Fotogrametría 3D", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Dron", nav_ar: "RA", nav_addons: "Complementos", nav_webdev: "Web & SW", nav_aiprompt: "IA Prompt", nav_arqueobot: "arqueobot",
+                hero_badge: "IA · inteligencia patrimonial", hero_title: "Reconstruimos el pasado con la inteligencia del futuro", hero_desc: "Desde la fotogrametría 3D hasta el diseño de museos asistido por IA, ar.QueoJones ofrece soluciones digitales a medida para arqueólogos, museos e instituciones culturales.", hero_btn1: "Explorar servicios →", hero_btn2: "Descubrir arqueobot gratis",
+                badge1: "reconstrucción 3D", badge2: "apps de campo", badge3: "QGIS geoespacial", badge4: "suite arqueobot", badge5: "arqueología aérea", badge6: "realidad aumentada",
+                photogram_badge: "alta precisión", photogram_title: "Fotogrametría 3D", photogram_desc: "Gemelos digitales milimétricos de artefactos, excavaciones y patrimonio arquitectónico.", photogram_f1: "SfM automatizado", photogram_f2: "Nube densa y mallado", photogram_f3: "Ortofotos y análisis volumétrico", photogram_f4: "Visor web 3D", photogram_btn: "Solicitar demo →", photogram_link: "Página detallada →",
+                app_badge: "multiplataforma", app_title: "Creación de Apps", app_desc: "Apps móviles y web para flujos arqueológicos.", app_f1: "React Native / Flutter", app_f2: "Herramientas con GPS", app_f3: "Anotación multimedia", app_f4: "Sincronización cloud + IA", app_btn: "Hablar del proyecto →", app_link: "Página detallada →",
+                qgis_badge: "inteligencia espacial", qgis_title: "QGIS y Análisis Geoespacial", qgis_desc: "Modelado predictivo, arqueología del paisaje, LiDAR y plugins QGIS.", qgis_f1: "Análisis de terreno y cuencas visuales", qgis_f2: "Interpretación de imágenes aéreas", qgis_f3: "Geodatabases y automatización", qgis_f4: "Mapas web y StoryMaps", qgis_btn: "Explorar GIS →", qgis_link: "Página detallada →",
+                drone_badge: "UAV · multiespectral", drone_title: "Arqueología Aérea con Dron", drone_desc: "Levantamientos de alta resolución, modelos de terreno tipo LiDAR.", drone_f1: "Ortomosaicos y MDT", drone_f2: "NDVI y detección de cultivos", drone_f3: "Planificación automática + RTK", drone_f4: "Reconstrucción 3D del terreno", drone_btn: "Solicitar levantamiento →", drone_link: "Página detallada →",
+                ar_badge: "patrimonio inmersivo", ar_title: "Realidad Aumentada", ar_desc: "Superposiciones interactivas, guías de museo AR.", ar_f1: "AR sin marcadores", ar_f2: "Reconstrucción virtual", ar_f3: "WebAR y apps nativas", ar_f4: "Integración con modelos 3D", ar_btn: "Discutir proyecto AR →", ar_link: "Página detallada →",
+                addons_badge: "extiende e integra", addons_title: "Complementos y Plugins a Medida", addons_desc: "Plugins para QGIS, extensiones para software 3D.", addons_f1: "Desarrollo de plugins QGIS/ArcGIS", addons_f2: "Extensiones para Blender, MeshLab", addons_f3: "Conectores import/export", addons_f4: "Scripts de automatización", addons_btn: "Solicitar complemento →", addons_link: "Página detallada →",
+                webdev_badge: "experiencia full‑stack", webdev_title: "Desarrollo Web y de Software", webdev_desc: "Plataformas web, aplicaciones de escritorio y software científico.", webdev_f1: "Portales web y bases de datos", webdev_f2: "Apps de escritorio", webdev_f3: "APIs REST", webdev_f4: "Mantenimiento a largo plazo", webdev_btn: "Iniciar proyecto →", webdev_link: "Página detallada →",
+                aidev_badge: "IA generativa", aidev_title: "Desarrollo de Prompts IA", aidev_desc: "Diseño y ajuste de pipelines de LLM para arqueología.", aidev_f1: "Ingeniería de prompts", aidev_f2: "Pipelines RAG", aidev_f3: "GPT4All y LLM", aidev_f4: "Catalogación automática", aidev_btn: "Desarrollar prompts IA →", aidev_link: "Página detallada →",
+                arqueobot_free: "gratuito para uso no comercial", arqueobot_title: "arqueobot · IA arqueológica unificada", arqueobot_desc: "Un ecosistema que fusiona diseño de museos, detección de fragmentos, clasificación por IA, detección en vivo e inteligencia conversacional.", arqueobot_card1_title: "Arquitecto de Museos IA", arqueobot_card1_desc: "Aprendizaje por refuerzo neuronal.", arqueobot_btn: "⟳ Descubrir arqueobot completo", arqueobot_card2_title: "Análisis Inteligente de Artefactos", arqueobot_card2_desc: "Detección de fragmentos, segmentación en vivo, asistente GPT4All.", arqueobot_f1: "Detección en tiempo real", arqueobot_f2: "Fotogrametría y reconstrucción 3D", arqueobot_f3: "Gestión inteligente de categorías", arqueobot_unify_text: "arqueobot unifica:", arqueobot_unify_list: "Museum AI Builder, AI Tab, detección de fragmentos, preprocesado, clasificación, COLMAP, programas personales y analítica avanzada — todo gratuito para uso académico y no comercial.", github_access: "Acceder al código y documentación", arqueobot_detail_link: "Página detallada →",
+                modal_title: "arqueobot – suite de inteligencia profunda", modal_desc: "arqueobot es una herramienta gratuita no comercial que integra todos los motores Python del ecosistema WAAZP.", modal_modules_title: "⚙️ módulos incluidos:", mod1: "Museum Builder", mod2: "Asistente IA (GPT4All)", mod3: "Detección de fragmentos", mod4: "Detección en vivo", mod5: "Análisis estadístico", mod6: "Fotogrametría y COLMAP", mod7: "Clasificación y entrenamiento", mod8: "Gestión jerárquica", license_title: "🔓 Licencia:", license_text: "arqueobot es gratuito para investigación, educación y trabajo de campo no comercial.", modal_github: "Visitar arQueoJones en GitHub", modal_close: "Cerrar ventana",
+                footer_tagline: "Advanced archaeological technologies · 3D scanning · artificial intelligence · GIS · heritage software", footer_desc: "Tecnologías arqueológicas de vanguardia", footer_services_title: "Servicios", footer_s1: "Fotogrametría 3D", footer_s2: "Creación de Apps", footer_s3: "QGIS y Espacial", footer_s4: "Arqueología con Dron", footer_s5: "Realidad Aumentada", footer_s6: "Complementos", footer_s7: "Desarrollo Web y SW", footer_s8: "Desarrollo de Prompts IA", footer_s9: "arqueobot gratuito", footer_legal: "Aviso legal y políticas", footer_disclaimer: "arqueobot se proporciona 'tal cual' para uso no comercial.", footer_privacy: "Política de privacidad: no recopilamos datos personales.", footer_copyright: "arqueobot es gratuito para uso académico no comercial.", footer_repo: "Repositorios open source", footer_license: "bajo licencias MIT / investigación."
+            },
+            en: {
+                tagline: "avant‑garde archaeological intelligence", nav_home: "Home", nav_photogram: "3D Photogrammetry", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drone", nav_ar: "AR", nav_addons: "Add-ons", nav_webdev: "Web & SW", nav_aiprompt: "AI Prompt", nav_arqueobot: "arqueobot",
+                hero_badge: "AI · heritage intelligence", hero_title: "We reconstruct the past with the intelligence of the future", hero_desc: "From 3D photogrammetry to AI‑powered museum design, ar.QueoJones delivers tailor‑made digital solutions for archaeologists, museums, and cultural institutions.", hero_btn1: "Explore services →", hero_btn2: "Discover free arqueobot",
+                badge1: "3D reconstruction", badge2: "field apps", badge3: "geospatial QGIS", badge4: "arqueobot suite", badge5: "aerial archaeology", badge6: "augmented reality",
+                photogram_badge: "high precision", photogram_title: "3D Photogrammetry", photogram_desc: "Millimeter‑accurate digital twins of artefacts, excavations and architectural heritage.", photogram_f1: "Automated SfM", photogram_f2: "Dense cloud & meshing", photogram_f3: "Orthophotos & volumetric analysis", photogram_f4: "Web 3D viewer", photogram_btn: "Request demo →", photogram_link: "Detailed page →",
+                app_badge: "cross‑platform", app_title: "App Building", app_desc: "Mobile & web apps for archaeological workflows.", app_f1: "React Native / Flutter", app_f2: "GPS‑enabled tools", app_f3: "Multimedia annotation", app_f4: "Cloud sync + AI", app_btn: "Discuss project →", app_link: "Detailed page →",
+                qgis_badge: "spatial intelligence", qgis_title: "QGIS & Geospatial Analysis", qgis_desc: "Predictive modelling, landscape archaeology, LiDAR and custom QGIS plugins.", qgis_f1: "Terrain & viewshed analysis", qgis_f2: "Aerial imagery interpretation", qgis_f3: "Geodatabase automation", qgis_f4: "Web maps & StoryMaps", qgis_btn: "Explore GIS →", qgis_link: "Detailed page →",
+                drone_badge: "UAV · multispectral", drone_title: "Aerial Archaeology via Drone", drone_desc: "High‑resolution surveys, LiDAR‑like terrain models.", drone_f1: "Orthomosaics & DEM", drone_f2: "NDVI & cropmark detection", drone_f3: "Automated flight + RTK", drone_f4: "3D terrain reconstruction", drone_btn: "Request survey →", drone_link: "Detailed page →",
+                ar_badge: "immersive heritage", ar_title: "Augmented Reality", ar_desc: "Interactive overlays, museum AR guides, virtual reconstructions.", ar_f1: "Markerless & location‑based AR", ar_f2: "Virtual reconstruction", ar_f3: "WebAR & native apps", ar_f4: "3D model integration", ar_btn: "Discuss AR project →", ar_link: "Detailed page →",
+                addons_badge: "extend & integrate", addons_title: "Custom Add-ons & Plugins", addons_desc: "QGIS plugins, 3D software extensions, data connectors.", addons_f1: "QGIS/ArcGIS plugin dev", addons_f2: "Blender, MeshLab extensions", addons_f3: "Import/export connectors", addons_f4: "Automation scripts", addons_btn: "Request add‑on →", addons_link: "Detailed page →",
+                webdev_badge: "full‑stack expertise", webdev_title: "Web & Software Development", webdev_desc: "Web platforms, desktop applications, scientific software.", webdev_f1: "Web portals & databases", webdev_f2: "Desktop apps", webdev_f3: "REST APIs", webdev_f4: "Long‑term maintenance", webdev_btn: "Start project →", webdev_link: "Detailed page →",
+                aidev_badge: "generative AI", aidev_title: "AI Prompt Development", aidev_desc: "Design and fine‑tune LLM pipelines for archaeological research.", aidev_f1: "Prompt engineering", aidev_f2: "RAG pipelines", aidev_f3: "GPT4All & open‑source LLM", aidev_f4: "Auto cataloguing", aidev_btn: "Develop AI prompts →", aidev_link: "Detailed page →",
+                arqueobot_free: "free for non‑commercial use", arqueobot_title: "arqueobot · unified archaeological AI", arqueobot_desc: "An ecosystem merging museum design, shard detection, AI classification, live detection, and conversational intelligence.", arqueobot_card1_title: "AI Museum Architect", arqueobot_card1_desc: "Neural reinforcement learning.", arqueobot_btn: "⟳ Discover full arqueobot", arqueobot_card2_title: "Intelligent Artefact Analysis", arqueobot_card2_desc: "Shard detection, live segmentation, GPT4All assistant.", arqueobot_f1: "Real‑time detection", arqueobot_f2: "Photogrammetry & 3D reconstruction", arqueobot_f3: "Smart category management", arqueobot_unify_text: "arqueobot unifies:", arqueobot_unify_list: "Museum AI Builder, AI Tab, shard detection, preprocessing, classification, COLMAP, personal programs, advanced analytics — all free for academic & non‑commercial use.", github_access: "Access source code & docs", arqueobot_detail_link: "Detailed page →",
+                modal_title: "arqueobot – deep intelligence suite", modal_desc: "arqueobot is a free non‑commercial toolkit integrating all Python engines from the WAAZP ecosystem.", modal_modules_title: "⚙️ core modules:", mod1: "Museum Builder", mod2: "AI Assistant (GPT4All)", mod3: "Shard / Object Detection", mod4: "Live detection", mod5: "Multivariate analysis", mod6: "Photogrammetry & COLMAP", mod7: "Classification & training", mod8: "Hierarchical category management", license_title: "🔓 License:", license_text: "arqueobot is free for research, education and non‑commercial fieldwork.", modal_github: "Visit arQueoJones on GitHub", modal_close: "Close window",
+                footer_tagline: "Advanced archaeological technologies · 3D scanning · artificial intelligence · GIS · heritage software", footer_desc: "Avant‑garde archaeological technologies", footer_services_title: "Services", footer_s1: "3D Photogrammetry", footer_s2: "App Building", footer_s3: "QGIS & Spatial", footer_s4: "Drone Archaeology", footer_s5: "Augmented Reality", footer_s6: "Add-ons", footer_s7: "Web & Software Dev", footer_s8: "AI Prompt Development", footer_s9: "arqueobot free", footer_legal: "Legal & Policies", footer_disclaimer: "arqueobot provided 'as is' for non‑commercial use.", footer_privacy: "Privacy: no personal data collected.", footer_copyright: "arqueobot free for non‑commercial academic use.", footer_repo: "Open source repositories", footer_license: "under MIT / research licenses."
+            },
+            fr: {
+                tagline: "intelligence archéologique d'avant-garde", nav_home: "Accueil", nav_photogram: "Photogrammétrie 3D", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drone", nav_ar: "RA", nav_addons: "Extensions", nav_webdev: "Web & Logiciel", nav_aiprompt: "Prompt IA", nav_arqueobot: "arqueobot",
+                hero_badge: "IA · intelligence patrimoniale", hero_title: "Nous reconstruisons le passé avec l'intelligence du futur", hero_desc: "De la photogrammétrie 3D à la conception de musées par IA, ar.QueoJones propose des solutions numériques sur mesure.", hero_btn1: "Explorer les services →", hero_btn2: "Découvrir arqueobot gratuit",
+                badge1: "reconstruction 3D", badge2: "apps terrain", badge3: "QGIS géospatial", badge4: "suite arqueobot", badge5: "archéologie aérienne", badge6: "réalité augmentée",
+                photogram_badge: "haute précision", photogram_title: "Photogrammétrie 3D", photogram_desc: "Jumeaux numériques millimétriques d'artefacts, fouilles et patrimoine architectural.", photogram_f1: "SfM automatisé", photogram_f2: "Nuage dense et maillage", photogram_f3: "Orthophotos & analyse volumétrique", photogram_f4: "Visualiseur web 3D", photogram_btn: "Demander une démo →", photogram_link: "Page détaillée →",
+                app_badge: "multiplateforme", app_title: "Création d'applications", app_desc: "Apps mobiles et web pour flux archéologiques.", app_f1: "React Native / Flutter", app_f2: "Outils GPS", app_f3: "Annotation multimédia", app_f4: "Synchronisation cloud + IA", app_btn: "Discuter du projet →", app_link: "Page détaillée →",
+                qgis_badge: "intelligence spatiale", qgis_title: "QGIS & Analyse géospatiale", qgis_desc: "Modélisation prédictive, archéologie du paysage, LiDAR et plugins QGIS.", qgis_f1: "Analyse de terrain", qgis_f2: "Interprétation d'images aériennes", qgis_f3: "Géodatabases", qgis_f4: "Cartes web", qgis_btn: "Explorer SIG →", qgis_link: "Page détaillée →",
+                drone_badge: "UAV · multispectral", drone_title: "Archéologie aérienne par drone", drone_desc: "Levés haute résolution, modèles de terrain type LiDAR.", drone_f1: "Orthomosaïques et MNT", drone_f2: "NDVI", drone_f3: "Planification automatique + RTK", drone_f4: "Reconstruction 3D", drone_btn: "Demander un levé →", drone_link: "Page détaillée →",
+                ar_badge: "patrimoine immersif", ar_title: "Réalité Augmentée", ar_desc: "Superpositions interactives, guides de musée AR.", ar_f1: "RA sans marqueur", ar_f2: "Reconstruction virtuelle", ar_f3: "WebAR et apps natives", ar_f4: "Intégration 3D", ar_btn: "Discuter projet RA →", ar_link: "Page détaillée →",
+                addons_badge: "étendre et intégrer", addons_title: "Extensions et plugins sur mesure", addons_desc: "Plugins QGIS, extensions pour logiciels 3D.", addons_f1: "Développement de plugins", addons_f2: "Extensions Blender, MeshLab", addons_f3: "Connecteurs import/export", addons_f4: "Scripts d'automatisation", addons_btn: "Demander une extension →", addons_link: "Page détaillée →",
+                webdev_badge: "expertise full‑stack", webdev_title: "Développement Web et Logiciel", webdev_desc: "Plateformes web, applications de bureau, logiciels scientifiques.", webdev_f1: "Portails web", webdev_f2: "Apps de bureau", webdev_f3: "APIs REST", webdev_f4: "Maintenance", webdev_btn: "Lancer un projet →", webdev_link: "Page détaillée →",
+                aidev_badge: "IA générative", aidev_title: "Développement de prompts IA", aidev_desc: "Conception et réglage de pipelines LLM pour l'archéologie.", aidev_f1: "Ingénierie de prompts", aidev_f2: "Pipelines RAG", aidev_f3: "GPT4All et LLM", aidev_f4: "Catalogage automatique", aidev_btn: "Développer des prompts IA →", aidev_link: "Page détaillée →",
+                arqueobot_free: "gratuit pour usage non commercial", arqueobot_title: "arqueobot · IA archéologique unifiée", arqueobot_desc: "Un écosystème fusionnant conception de musées, détection de tessons, classification par IA, détection en direct et intelligence conversationnelle.", arqueobot_card1_title: "Architecte de musées IA", arqueobot_card1_desc: "Apprentissage par renforcement neuronal.", arqueobot_btn: "⟳ Découvrir arqueobot complet", arqueobot_card2_title: "Analyse intelligente d'artefacts", arqueobot_card2_desc: "Détection de tessons, segmentation en direct, assistant GPT4All.", arqueobot_f1: "Détection temps réel", arqueobot_f2: "Photogrammétrie 3D", arqueobot_f3: "Gestion intelligente", arqueobot_unify_text: "arqueobot unifie :", arqueobot_unify_list: "Museum AI Builder, AI Tab, détection de tessons, prétraitement, classification, COLMAP, programmes personnels et analytique avancée — tout gratuit pour usage académique et non commercial.", github_access: "Accéder au code", arqueobot_detail_link: "Page détaillée →",
+                modal_title: "arqueobot – suite d'intelligence profonde", modal_desc: "arqueobot est un outil gratuit non commercial intégrant tous les moteurs Python de l'écosystème WAAZP.", modal_modules_title: "⚙️ modules inclus :", mod1: "Museum Builder", mod2: "Assistant IA (GPT4All)", mod3: "Détection de tessons", mod4: "Détection en direct", mod5: "Analyse multivariée", mod6: "Photogrammétrie & COLMAP", mod7: "Classification", mod8: "Gestion hiérarchique", license_title: "🔓 Licence :", license_text: "arqueobot est gratuit pour la recherche, l'éducation et le travail de terrain non commercial.", modal_github: "Visiter arQueoJones", modal_close: "Fermer",
+                footer_tagline: "Advanced archaeological technologies · 3D scanning · artificial intelligence · GIS · heritage software", footer_desc: "Technologies archéologiques d'avant-garde", footer_services_title: "Services", footer_s1: "Photogrammétrie 3D", footer_s2: "Création d'apps", footer_s3: "QGIS", footer_s4: "Drone", footer_s5: "RA", footer_s6: "Extensions", footer_s7: "Développement Web", footer_s8: "Prompts IA", footer_s9: "arqueobot", footer_legal: "Mentions légales", footer_disclaimer: "arqueobot fourni 'en l'état'.", footer_privacy: "Confidentialité.", footer_copyright: "arqueobot gratuit pour usage académique.", footer_repo: "Dépôts open source", footer_license: "sous licences MIT / recherche."
+            },
+            de: {
+                tagline: "avantgardistische archäologische Intelligenz", nav_home: "Start", nav_photogram: "3D-Photogrammetrie", nav_app: "Apps", nav_qgis: "QGIS", nav_drone: "Drohne", nav_ar: "AR", nav_addons: "Add-ons", nav_webdev: "Web & SW", nav_aiprompt: "KI-Prompt", nav_arqueobot: "arqueobot",
+                hero_badge: "KI · Kulturerbe-Intelligenz", hero_title: "Wir rekonstruieren die Vergangenheit mit der Intelligenz der Zukunft", hero_desc: "Von der 3D-Photogrammetrie bis zum KI-gestützten Museumsdesign – ar.QueoJones bietet maßgeschneiderte digitale Lösungen für Archäologen, Museen und Kultureinrichtungen.", hero_btn1: "Dienste erkunden →", hero_btn2: "Kostenloses arqueobot entdecken",
+                badge1: "3D-Rekonstruktion", badge2: "Feld-Apps", badge3: "georäumliches QGIS", badge4: "arqueobot-Suite", badge5: "Luftbildarchäologie", badge6: "erweiterte Realität",
+                photogram_badge: "hohe Präzision", photogram_title: "3D-Photogrammetrie", photogram_desc: "Millimetergenaue digitale Zwillinge von Artefakten, Ausgrabungen und Architekturerbe.", photogram_f1: "Automatisiertes SfM", photogram_f2: "Dichte Punktwolke & Vernetzung", photogram_f3: "Orthofotos & Volumenanalyse", photogram_f4: "Web-3D-Betrachter", photogram_btn: "Demo anfordern →", photogram_link: "Detailseite →",
+                app_badge: "plattformübergreifend", app_title: "App-Entwicklung", app_desc: "Mobile & Web-Apps für archäologische Arbeitsabläufe.", app_f1: "React Native / Flutter", app_f2: "GPS-fähige Werkzeuge", app_f3: "Multimedia-Annotation", app_f4: "Cloud-Synchronisation + KI", app_btn: "Projekt besprechen →", app_link: "Detailseite →",
+                qgis_badge: "räumliche Intelligenz", qgis_title: "QGIS & Geodatenanalyse", qgis_desc: "Prädiktive Modellierung, Landschaftsarchäologie, LiDAR und benutzerdefinierte QGIS-Plugins.", qgis_f1: "Gelände- und Sichtbarkeitsanalyse", qgis_f2: "Interpretation von Luftbildern", qgis_f3: "Geodatenbanken & Automatisierung", qgis_f4: "Webkarten & StoryMaps", qgis_btn: "GIS erkunden →", qgis_link: "Detailseite →",
+                drone_badge: "UAV · multispektral", drone_title: "Luftbildarchäologie mit Drohnen", drone_desc: "Hochauflösende Vermessungen, LiDAR-ähnliche Geländemodelle.", drone_f1: "Orthomosaike & DGM", drone_f2: "NDVI & Bewuchsmerkmalerkennung", drone_f3: "Automatisierte Flugplanung + RTK", drone_f4: "3D-Geländerekonstruktion", drone_btn: "Vermessung anfragen →", drone_link: "Detailseite →",
+                ar_badge: "immersives Kulturerbe", ar_title: "Erweiterte Realität", ar_desc: "Interaktive Überlagerungen, AR-Museumsführer, virtuelle Rekonstruktionen.", ar_f1: "Markerloser & ortsbasierter AR", ar_f2: "Virtuelle Rekonstruktion", ar_f3: "WebAR & native Apps", ar_f4: "3D-Modellintegration", ar_btn: "AR-Projekt besprechen →", ar_link: "Detailseite →",
+                addons_badge: "erweitern & integrieren", addons_title: "Benutzerdefinierte Add-ons & Plugins", addons_desc: "QGIS-Plugins, Erweiterungen für 3D-Software, Datenkonnektoren.", addons_f1: "QGIS/ArcGIS-Plugin-Entwicklung", addons_f2: "Blender-, MeshLab-Erweiterungen", addons_f3: "Import/Export-Konnektoren", addons_f4: "Automatisierungsskripte", addons_btn: "Add-on anfragen →", addons_link: "Detailseite →",
+                webdev_badge: "Full‑Stack-Expertise", webdev_title: "Web- & Softwareentwicklung", webdev_desc: "Webplattformen, Desktop-Anwendungen, wissenschaftliche Software.", webdev_f1: "Webportale & Datenbanken", webdev_f2: "Desktop-Apps", webdev_f3: "REST-APIs", webdev_f4: "Langzeitwartung", webdev_btn: "Projekt starten →", webdev_link: "Detailseite →",
+                aidev_badge: "generative KI", aidev_title: "KI-Prompt-Entwicklung", aidev_desc: "Design und Feinabstimmung von LLM-Pipelines für archäologische Forschung.", aidev_f1: "Prompt-Engineering", aidev_f2: "RAG-Pipelines", aidev_f3: "GPT4All & Open-Source-LLM", aidev_f4: "Automatische Katalogisierung", aidev_btn: "KI-Prompts entwickeln →", aidev_link: "Detailseite →",
+                arqueobot_free: "kostenlos für nicht-kommerzielle Nutzung", arqueobot_title: "arqueobot · vereinte archäologische KI", arqueobot_desc: "Ein Ökosystem, das Museumsdesign, Scherbenerkennung, KI-Klassifizierung, Live-Erkennung und konversationelle Intelligenz vereint.", arqueobot_card1_title: "KI-Museumsarchitekt", arqueobot_card1_desc: "Neuronales bestärkendes Lernen.", arqueobot_btn: "⟳ Vollständiges arqueobot entdecken", arqueobot_card2_title: "Intelligente Artefaktanalyse", arqueobot_card2_desc: "Scherbenerkennung, Live-Segmentierung, GPT4All-Assistent.", arqueobot_f1: "Echtzeiterkennung", arqueobot_f2: "Photogrammetrie & 3D-Rekonstruktion", arqueobot_f3: "Intelligente Kategorieverwaltung", arqueobot_unify_text: "arqueobot vereint:", arqueobot_unify_list: "Museum AI Builder, AI Tab, Scherbenerkennung, Vorverarbeitung, Klassifikation, COLMAP, persönliche Programme und erweiterte Analytik – alles kostenlos für akademische und nicht-kommerzielle Nutzung.", github_access: "Quellcode & Dokumentation", arqueobot_detail_link: "Detailseite →",
+                modal_title: "arqueobot – Deep Intelligence Suite", modal_desc: "arqueobot ist ein kostenloses nicht-kommerzielles Toolkit, das alle Python-Engines des WAAZP-Ökosystems integriert.", modal_modules_title: "⚙️ Kernmodule:", mod1: "Museum Builder", mod2: "KI-Assistent (GPT4All)", mod3: "Scherben-/Objekterkennung", mod4: "Live-Erkennung", mod5: "Multivariate Analyse", mod6: "Photogrammetrie & COLMAP", mod7: "Klassifikation & Training", mod8: "Hierarchische Kategorieverwaltung", license_title: "🔓 Lizenz:", license_text: "arqueobot ist kostenlos für Forschung, Bildung und nicht-kommerzielle Feldarbeit.", modal_github: "Besuchen Sie arQueoJones auf GitHub", modal_close: "Fenster schließen",
+                footer_tagline: "Advanced archaeological technologies · 3D scanning · artificial intelligence · GIS · heritage software", footer_desc: "Avantgardistische archäologische Technologien", footer_services_title: "Dienste", footer_s1: "3D-Photogrammetrie", footer_s2: "App-Entwicklung", footer_s3: "QGIS & räumlich", footer_s4: "Drohnenarchäologie", footer_s5: "Erweiterte Realität", footer_s6: "Add-ons", footer_s7: "Web- & Softwareentwicklung", footer_s8: "KI-Prompt-Entwicklung", footer_s9: "arqueobot kostenlos", footer_legal: "Rechtliche Hinweise", footer_disclaimer: "arqueobot wird 'wie besehen' bereitgestellt.", footer_privacy: "Datenschutz: keine personenbezogenen Daten.", footer_copyright: "arqueobot kostenlos für nicht-kommerzielle akademische Nutzung.", footer_repo: "Open-Source-Repositories", footer_license: "unter MIT / Forschungslizenzen."
+            }
         };
-        // Aquí irían las traducciones completas (el código original ya las tiene). Por limitaciones de espacio, se asume que están presentes.
-        // En la implementación real, el bloque de traducciones se incluye íntegro como en la versión anterior.
 
         let currentLang = "es";
 
@@ -531,6 +842,7 @@
             alert(btnText.replace(/ →$/, "").trim());
         };
 
+        // Detectar idioma de URL
         (function() {
             const urlParams = new URLSearchParams(window.location.search);
             const langParam = urlParams.get('lang');
@@ -545,6 +857,7 @@
             btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang")));
         });
 
+        // Modal arqueobot
         const modal = document.getElementById('arqueobotModal');
         const openBtn = document.getElementById('openModalBtn');
         const closeBtn = document.getElementById('closeModalBtn');
@@ -559,46 +872,6 @@
         const backBtn = document.getElementById('backToTopBtn');
         window.addEventListener('scroll', () => { if(window.scrollY > 350) backBtn.classList.add('show'); else backBtn.classList.remove('show'); });
         backBtn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
-
-        // Modal para imágenes laterales
-        const imageModal = document.getElementById('imageModal');
-        const modalContentImg = document.querySelector('#imageModal .modal-content');
-        const modalImg = document.getElementById('modalImage');
-        const closeModalImg = document.querySelector('#imageModal .modal-close');
-        const allPerfImages = document.querySelectorAll('.film-perf img');
-
-        function openImageModal(src) {
-            imageModal.style.display = 'flex';
-            modalImg.src = src;
-            modalContentImg.style.transform = 'scale(0.2)';
-            void modalContentImg.offsetHeight;
-            modalContentImg.style.transform = 'scale(1)';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeImageModal() {
-            modalContentImg.style.transform = 'scale(0.2)';
-            setTimeout(() => {
-                imageModal.style.display = 'none';
-                modalImg.src = '';
-                document.body.style.overflow = '';
-            }, 200);
-        }
-
-        allPerfImages.forEach(img => {
-            img.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openImageModal(img.src);
-            });
-        });
-
-        closeModalImg.addEventListener('click', closeImageModal);
-        imageModal.addEventListener('click', (e) => {
-            if (e.target === imageModal) closeImageModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && imageModal.style.display === 'flex') closeImageModal();
-        });
     </script>
 </body>
 </html>
