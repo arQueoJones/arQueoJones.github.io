@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* Canvas de fondo con geometría viva */
+        /* Canvas de fondo - visible y animado */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -34,10 +34,10 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.65;
+            display: block;
         }
 
-        /* Contenedor principal con fondo semitransparente */
+        /* Contenedor principal con fondo semitransparente más claro para que se vea el canvas */
         .film-reel {
             position: relative;
             z-index: 2;
@@ -48,8 +48,8 @@
             width: 100%;
             margin: 0 auto;
             gap: 24px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(3px);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
             border-radius: 72px;
             box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.15);
             padding: 40px 30px;
@@ -237,206 +237,218 @@
     </div>
 
     <script>
-        // ==================== ANIMACIÓN ORGÁNICA: GEOMETRÍA VIVA, FRACTAL Y PROPORCIÓN ÁUREA ====================
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let time = 0;
-        const GOLDEN = (1 + Math.sqrt(5)) / 2;
-        const shapes = [];
-        const NUM_SHAPES = 42;  // Número armónico
+        // ==================== ANIMACIÓN DE FONDO VIVO, MORFANTE Y FRACTAL ====================
+        (function() {
+            const canvas = document.getElementById('bg-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let animationId = null;
+            const GOLDEN = (1 + Math.sqrt(5)) / 2;
+            let time = 0;
 
-        class LivingShape {
-            constructor(index) {
-                // Parámetros únicos basados en el índice y armonía áurea
-                const phi = (index * Math.PI * 2 * GOLDEN) % (Math.PI * 2);
-                this.typeSeed = index;  // para variación
-                this.x = 0.2 + 0.6 * Math.sin(index * 0.7);  // posición relativa inicial (luego se ajusta al tamaño)
-                this.y = 0.2 + 0.6 * Math.cos(index * 0.9);
-                this.sizeBase = 30 + 25 * Math.sin(index * 0.5) + 15 * Math.sin(index * 1.3);
-                this.speedX = 0.002 * (Math.sin(index * 0.8) + 0.5);
-                this.speedY = 0.002 * (Math.cos(index * 1.1) + 0.5);
-                this.angleSpeed = 0.005 + 0.003 * Math.sin(index * 2.2);
-                this.pulseSpeed = 0.8 + Math.sin(index) * 0.4;
-                this.morphSpeed = 0.2 + Math.sin(index) * 0.15;
-                this.alphaBase = 0.08 + 0.08 * Math.sin(index);
-                this.color = `hsla(${35 + 12 * Math.sin(index)}, 45%, 55%, 0.7)`;
-                this.currentType = 0;
-            }
+            // Configuración de las formas vivas
+            const NUM_SHAPES = 36;
+            const shapes = [];
 
-            updatePosition(w, h, t) {
-                // Movimiento armónico con influencia de proporción áurea
-                const offX = Math.sin(t * this.speedX * GOLDEN) * w * 0.12;
-                const offY = Math.cos(t * this.speedY * GOLDEN) * h * 0.12;
-                // Posición base alrededor del centro + desplazamiento armónico
-                this.posX = w * (0.5 + 0.2 * Math.sin(this.typeSeed * 0.7 + t * 0.1)) + offX;
-                this.posY = h * (0.5 + 0.2 * Math.cos(this.typeSeed * 0.9 + t * 0.12)) + offY;
-                // Asegurar que no se salga demasiado
-                this.posX = Math.min(Math.max(this.posX, -w*0.1), w*1.1);
-                this.posY = Math.min(Math.max(this.posY, -h*0.1), h*1.1);
-            }
+            class MorphingShape {
+                constructor(idx) {
+                    this.idx = idx;
+                    // Posiciones base (flotarán alrededor del centro)
+                    this.baseX = 0.3 + 0.4 * Math.sin(idx * 0.7);
+                    this.baseY = 0.3 + 0.4 * Math.cos(idx * 0.9);
+                    this.sizeBase = 35 + 25 * Math.sin(idx * 0.5);
+                    this.speedX = 0.003 * (Math.sin(idx * 0.8) + 0.6);
+                    this.speedY = 0.003 * (Math.cos(idx * 0.9) + 0.6);
+                    this.angleSpeed = 0.008 + 0.005 * Math.sin(idx * 1.4);
+                    this.pulseSpeed = 0.7 + 0.5 * Math.sin(idx);
+                    this.morphSpeed = 0.25 + 0.2 * Math.sin(idx * 1.2);
+                    this.alphaBase = 0.2 + 0.1 * Math.sin(idx);
+                    // Colores cálidos terrosos
+                    const hue = 32 + 12 * Math.sin(idx); // 20-44 grados, marrones-dorados
+                    this.color = `hsla(${hue}, 65%, 55%, 0.7)`;
+                    this.x = 0;
+                    this.y = 0;
+                }
 
-            getSize(t) {
-                const puls = 0.7 + 0.3 * Math.sin(t * this.pulseSpeed);
-                return this.sizeBase * puls;
-            }
+                updatePosition(w, h, t) {
+                    // Movimiento armónico alrededor del centro
+                    const offX = Math.sin(t * this.speedX * GOLDEN) * w * 0.12;
+                    const offY = Math.cos(t * this.speedY * GOLDEN) * h * 0.12;
+                    this.x = w * (0.5 + 0.2 * Math.sin(this.idx * 0.7 + t * 0.12)) + offX;
+                    this.y = h * (0.5 + 0.2 * Math.cos(this.idx * 0.9 + t * 0.15)) + offY;
+                    // Limitar dentro del viewport más un margen
+                    this.x = Math.min(Math.max(this.x, -w*0.1), w*1.1);
+                    this.y = Math.min(Math.max(this.y, -h*0.1), h*1.1);
+                }
 
-            getType(t) {
-                // Morfología: cambia de forma lentamente entre círculo, triángulo, cuadrado, pentágono y estrella
-                const typeVal = (Math.sin(t * this.morphSpeed) + 1) / 2; // 0..1
-                if (typeVal < 0.25) return 'circle';
-                if (typeVal < 0.5) return 'triangle';
-                if (typeVal < 0.75) return 'square';
-                return 'pentagon';
-            }
+                getSize(t) {
+                    const puls = 0.65 + 0.35 * Math.sin(t * this.pulseSpeed);
+                    return this.sizeBase * puls;
+                }
 
-            draw(ctx, t, w, h) {
-                const size = this.getSize(t);
-                const type = this.getType(t);
-                const alpha = this.alphaBase * (0.7 + 0.3 * Math.sin(t * 1.2));
-                ctx.save();
-                ctx.translate(this.posX, this.posY);
-                ctx.rotate(t * this.angleSpeed);
-                ctx.globalAlpha = alpha;
-                ctx.strokeStyle = this.color;
-                ctx.fillStyle = this.color;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
+                getType(t) {
+                    const val = (Math.sin(t * this.morphSpeed) + 1) / 2;
+                    if (val < 0.25) return 'circle';
+                    if (val < 0.5) return 'triangle';
+                    if (val < 0.75) return 'square';
+                    return 'pentagon';
+                }
 
-                switch(type) {
-                    case 'circle':
-                        ctx.arc(0, 0, size, 0, Math.PI * 2);
-                        ctx.stroke();
-                        if (Math.sin(t * 1.8) > 0) {
-                            ctx.beginPath();
-                            ctx.arc(0, 0, size * 0.6, 0, Math.PI * 2);
+                draw(ctx, t) {
+                    const size = this.getSize(t);
+                    const type = this.getType(t);
+                    const alpha = this.alphaBase * (0.6 + 0.4 * Math.sin(t * 1.5));
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(t * this.angleSpeed);
+                    ctx.globalAlpha = alpha;
+                    ctx.strokeStyle = this.color;
+                    ctx.fillStyle = this.color;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+
+                    switch(type) {
+                        case 'circle':
+                            ctx.arc(0, 0, size, 0, Math.PI * 2);
                             ctx.stroke();
-                        }
-                        break;
-                    case 'triangle':
-                        for (let i = 0; i < 3; i++) {
-                            const angle = (i * Math.PI * 2 / 3);
-                            const x = Math.cos(angle) * size;
-                            const y = Math.sin(angle) * size;
-                            if (i === 0) ctx.moveTo(x, y);
-                            else ctx.lineTo(x, y);
-                        }
-                        ctx.closePath();
-                        ctx.stroke();
-                        break;
-                    case 'square':
-                        ctx.strokeRect(-size, -size, size * 2, size * 2);
-                        break;
-                    case 'pentagon':
-                        for (let i = 0; i < 5; i++) {
-                            const angle = (i * Math.PI * 2 / 5) - Math.PI / 2;
-                            const x = Math.cos(angle) * size;
-                            const y = Math.sin(angle) * size;
-                            if (i === 0) ctx.moveTo(x, y);
-                            else ctx.lineTo(x, y);
-                        }
-                        ctx.closePath();
-                        ctx.stroke();
-                        break;
+                            if (Math.sin(t * 2) > 0) {
+                                ctx.beginPath();
+                                ctx.arc(0, 0, size * 0.55, 0, Math.PI * 2);
+                                ctx.stroke();
+                            }
+                            break;
+                        case 'triangle':
+                            for (let i = 0; i < 3; i++) {
+                                const angle = (i * Math.PI * 2 / 3);
+                                const x = Math.cos(angle) * size;
+                                const y = Math.sin(angle) * size;
+                                if (i === 0) ctx.moveTo(x, y);
+                                else ctx.lineTo(x, y);
+                            }
+                            ctx.closePath();
+                            ctx.stroke();
+                            break;
+                        case 'square':
+                            ctx.strokeRect(-size, -size, size * 2, size * 2);
+                            break;
+                        case 'pentagon':
+                            for (let i = 0; i < 5; i++) {
+                                const angle = (i * Math.PI * 2 / 5) - Math.PI / 2;
+                                const x = Math.cos(angle) * size;
+                                const y = Math.sin(angle) * size;
+                                if (i === 0) ctx.moveTo(x, y);
+                                else ctx.lineTo(x, y);
+                            }
+                            ctx.closePath();
+                            ctx.stroke();
+                            break;
+                    }
+                    ctx.restore();
+                }
+            }
+
+            function initShapes() {
+                for (let i = 0; i < NUM_SHAPES; i++) {
+                    shapes.push(new MorphingShape(i));
+                }
+            }
+
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            // Dibuja la espiral áurea principal y partículas
+            function drawGoldenSpiral(ctx, t) {
+                ctx.save();
+                ctx.translate(width / 2, height / 2);
+                ctx.globalAlpha = 0.12;
+                ctx.strokeStyle = '#b08b5a';
+                ctx.lineWidth = 1.8;
+                const maxR = Math.min(width, height) * 0.4;
+                ctx.beginPath();
+                for (let i = 0; i <= 200; i++) {
+                    const rad = 15 + (maxR - 15) * (i / 200);
+                    const ang = i * 0.12 * GOLDEN + t * 0.2;
+                    const x = Math.cos(ang) * rad;
+                    const y = Math.sin(ang) * rad;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // Pequeños puntos brillantes en espiral
+                ctx.globalAlpha = 0.2;
+                ctx.fillStyle = '#d4a373';
+                for (let i = 0; i < 150; i++) {
+                    const rad = 20 + (maxR - 20) * (i / 150);
+                    const ang = i * 0.25 * GOLDEN + t * 0.5;
+                    const x = Math.cos(ang) * rad;
+                    const y = Math.sin(ang) * rad;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 1.5 + 1.2 * Math.sin(i * 0.3 + t * 2), 0, Math.PI * 2);
+                    ctx.fill();
                 }
                 ctx.restore();
             }
-        }
 
-        function initShapes() {
-            for (let i = 0; i < NUM_SHAPES; i++) {
-                shapes.push(new LivingShape(i));
-            }
-        }
+            function animate() {
+                if (!ctx) return;
+                ctx.clearRect(0, 0, width, height);
+                time += 0.012;
 
-        function resizeCanvas() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        }
-
-        // Espiral áurea fractal (líneas conectadas)
-        function drawGoldenFractal(ctx, centerX, centerY, t) {
-            ctx.save();
-            ctx.translate(centerX, centerY);
-            ctx.globalAlpha = 0.07;
-            ctx.strokeStyle = '#b28b5e';
-            ctx.lineWidth = 1.2;
-            const maxR = Math.min(width, height) * 0.45;
-            let r = 15;
-            let angle = t * 0.05;
-            ctx.beginPath();
-            for (let i = 0; i <= 180; i++) {
-                const rad = r + (maxR - r) * (i / 180);
-                const a = angle + i * 0.08 * GOLDEN;
-                const x = Math.cos(a) * rad;
-                const y = Math.sin(a) * rad;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-
-            // Pequeños fractales en los extremos (opcional)
-            ctx.globalAlpha = 0.04;
-            for (let k = 0; k < 6; k++) {
-                const subAngle = angle + k * Math.PI * 2 / 6;
-                const startX = Math.cos(subAngle) * maxR * 0.95;
-                const startY = Math.sin(subAngle) * maxR * 0.95;
-                ctx.beginPath();
-                ctx.moveTo(startX, startY);
-                for (let i = 0; i <= 30; i++) {
-                    const rad = maxR * 0.95 + i * 4;
-                    const a = subAngle + i * 0.15;
-                    const x = Math.cos(a) * rad;
-                    const y = Math.sin(a) * rad;
-                    ctx.lineTo(x, y);
+                // Actualizar y dibujar formas
+                for (let shape of shapes) {
+                    shape.updatePosition(width, height, time);
+                    shape.draw(ctx, time);
                 }
-                ctx.stroke();
+
+                // Dibujar espiral dorada
+                drawGoldenSpiral(ctx, time);
+
+                // Dibujar líneas de conexión entre formas cercanas (opcional, da sensación de red orgánica)
+                ctx.save();
+                ctx.globalAlpha = 0.05;
+                ctx.strokeStyle = '#c9a87b';
+                ctx.lineWidth = 0.8;
+                for (let i = 0; i < shapes.length; i++) {
+                    for (let j = i + 1; j < shapes.length; j++) {
+                        const dx = shapes[i].x - shapes[j].x;
+                        const dy = shapes[i].y - shapes[j].y;
+                        const dist = Math.hypot(dx, dy);
+                        if (dist < 180 && dist > 30) {
+                            ctx.beginPath();
+                            ctx.moveTo(shapes[i].x, shapes[i].y);
+                            ctx.lineTo(shapes[j].x, shapes[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                ctx.restore();
+
+                animationId = requestAnimationFrame(animate);
             }
-            ctx.restore();
-        }
 
-        function animate() {
-            if (!ctx) return;
-            ctx.clearRect(0, 0, width, height);
-            time += 0.01;
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                // Recalcular posiciones de las formas al redimensionar (opcional)
+                for (let i = 0; i < shapes.length; i++) {
+                    shapes[i].updatePosition(width, height, time);
+                }
+            });
 
-            // Actualizar posiciones de las formas vivas
-            for (let shape of shapes) {
-                shape.updatePosition(width, height, time);
-                shape.draw(ctx, time, width, height);
-            }
-
-            // Espiral áurea principal
-            drawGoldenFractal(ctx, width / 2, height / 2, time);
-
-            // Pequeños puntos en espiral (estrellas)
-            ctx.save();
-            ctx.globalAlpha = 0.12;
-            ctx.fillStyle = '#c9a87b';
-            const spiralSteps = 120;
-            for (let i = 1; i <= spiralSteps; i++) {
-                const rad = 15 + (Math.min(width, height) * 0.4) * (i / spiralSteps);
-                const ang = i * 0.35 * GOLDEN + time * 0.3;
-                const x = width / 2 + Math.cos(ang) * rad;
-                const y = height / 2 + Math.sin(ang) * rad;
-                ctx.beginPath();
-                ctx.arc(x, y, 1.5 + Math.sin(i * 0.5) * 1, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            ctx.restore();
-
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', () => {
             resizeCanvas();
-        });
+            initShapes();
+            animate();
 
-        resizeCanvas();
-        initShapes();
-        animate();
+            // Asegurar que el canvas se detenga si la página se descarga (buena práctica)
+            window.addEventListener('beforeunload', () => {
+                if (animationId) cancelAnimationFrame(animationId);
+            });
+        })();
 
         // ==================== FUNCIONALIDADES DE LA PÁGINA (MODAL, ANIMACIONES DE ENTRADA) ====================
         (function() {
