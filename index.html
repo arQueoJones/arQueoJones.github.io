@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at 10% 30%, #fef9ef, #f5f0e6);
+            background: #0a0a0a;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -25,54 +25,55 @@
             overflow-x: hidden;
         }
 
-        /* Contenedor principal estilo carrete */
+        /* Contenedor principal estilo carrete de cine años 20 */
         .film-reel {
             display: flex;
             justify-content: center;
             align-items: stretch;
-            max-width: 1400px;
+            max-width: 1600px;
             width: 100%;
             margin: 0 auto;
-            gap: 20px;
-            background: #1a1a1a;
-            border-radius: 48px;
-            box-shadow: 0 30px 40px -15px rgba(0, 0, 0, 0.3);
-            padding: 30px 20px;
+            gap: 24px;
+            background: #1a1510;
+            border-radius: 60px;
+            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+            padding: 40px 30px;
             transition: all 0.3s ease;
+            border: 1px solid rgba(201, 119, 46, 0.4);
         }
 
-        /* Laterales (tiras de película) */
+        /* Laterales (tiras de película) - DOBLE ANCHO */
         .film-strip {
-            width: 110px;
-            background: #2c2c2c;
-            border-radius: 40px;
+            width: 200px;           /* antes 110px → duplicado aprox */
+            background: #2a241e;
+            border-radius: 48px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 0;
-            gap: 16px;
-            box-shadow: inset 0 0 0 2px #4a4a4a, 0 10px 20px rgba(0,0,0,0.2);
+            padding: 30px 0;
+            gap: 24px;             /* mismo espaciado vertical */
+            box-shadow: inset 0 0 0 2px #5a4a3a, 0 10px 25px rgba(0,0,0,0.4);
         }
 
         .strip-left {
-            border-right: 3px solid #c9772e;
+            border-right: 4px solid #c9772e;
         }
         .strip-right {
-            border-left: 3px solid #c9772e;
+            border-left: 4px solid #c9772e;
         }
 
-        /* Cada imagen como "perforación" */
+        /* Imágenes como perforaciones cinematográficas - TAMAÑO DOBLE */
         .film-perf {
-            width: 80px;
-            height: 90px;
-            background: #111;
-            border-radius: 12px;
+            width: 160px;           /* antes 80px → doble */
+            height: 180px;          /* antes 90px → doble */
+            background: #0f0c08;
+            border-radius: 20px;
             overflow: hidden;
             transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 1px solid #c9772e;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+            border: 2px solid #c9772e;
         }
         .film-perf img {
             width: 100%;
@@ -82,24 +83,24 @@
             transition: transform 0.3s ease;
         }
         .film-perf:hover {
-            transform: scale(1.15);
+            transform: scale(1.08);
             z-index: 10;
-            box-shadow: 0 12px 20px rgba(0,0,0,0.4);
-            border-color: #ffaa66;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+            border-color: #ffbc6e;
         }
 
-        /* Zona central */
+        /* Zona central (pantalla de cine) */
         .center-stage {
             flex: 1;
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 48px;
-            padding: 2rem 2rem 1rem 2rem;
+            background: rgba(20, 15, 10, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 56px;
+            padding: 2rem 2rem 1.5rem 2rem;
             display: flex;
             flex-direction: column;
             gap: 2rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(201, 119, 46, 0.5);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
         /* Logotipo */
@@ -107,33 +108,35 @@
             text-align: center;
         }
         .logo-full {
-            max-width: 85%;
+            max-width: 80%;
             height: auto;
             display: inline-block;
-            border-radius: 28px;
-            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.2));
+            border-radius: 32px;
+            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.4));
             transition: transform 0.3s ease;
         }
         .logo-full:hover {
             transform: scale(1.01);
         }
 
-        /* Selector de idioma */
+        /* Selector de idioma estilo vintage */
         .welcome-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 500;
-            color: #f0e6d2;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
+            color: #f5e6d3;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
             text-align: center;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             display: inline-block;
             width: auto;
             margin-left: auto;
             margin-right: auto;
-            padding: 0.5rem 1.8rem;
+            padding: 0.5rem 2rem;
             border-radius: 60px;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
+            font-family: monospace;
+            text-transform: uppercase;
         }
         .welcome-title i {
             margin-right: 8px;
@@ -147,8 +150,8 @@
             margin: 0.5rem 0;
         }
         .language-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 60px;
+            background: rgba(250, 245, 235, 0.95);
+            border-radius: 80px;
             padding: 0.8rem 1.8rem;
             display: flex;
             align-items: center;
@@ -156,98 +159,158 @@
             flex-wrap: wrap;
             gap: 1rem;
             transition: all 0.2s ease;
-            border: 1px solid #e2d9ce;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #d4bc9a;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
         }
         .language-card:hover {
             transform: translateX(10px);
             border-color: #c9772e;
-            background: #fffef7;
+            background: #fffcf5;
         }
         .lang-info {
             text-align: left;
             flex: 1;
         }
         .lang-name {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            color: #1e2a3e;
+            color: #2c241a;
         }
         .lang-motto {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            color: #5b6e8c;
+            color: #6b5a48;
         }
         .lang-arrow {
-            background: #f0e6d2;
+            background: #e0cfbc;
             border-radius: 60px;
-            width: 56px;
-            height: 56px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
             text-decoration: none;
-            color: #1e2a3e;
-            font-size: 1.6rem;
+            color: #2c241a;
+            font-size: 1.8rem;
             font-weight: 600;
         }
         .lang-arrow:hover {
             background: #c9772e;
             color: white;
             transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(201,119,46,0.4);
         }
 
-        /* Vídeo central */
+        /* Vídeo central (pantalla) */
         .video-container {
             width: 100%;
-            border-radius: 32px;
+            border-radius: 40px;
             overflow: hidden;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
             margin-top: 10px;
             background: #000;
+            border: 2px solid #c9772e;
         }
         .video-container video {
             width: 100%;
             display: block;
-            border-radius: 32px;
+            border-radius: 36px;
         }
 
-        /* Footer sutil */
+        /* Footer */
         .footer-note {
-            margin-top: 1.5rem;
-            font-size: 0.7rem;
-            color: #cfcfcf;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: #d4bc9a;
             text-align: center;
-            background: rgba(0,0,0,0.4);
-            padding: 0.5rem;
+            background: rgba(20,15,10,0.7);
+            padding: 0.6rem;
             border-radius: 60px;
+            font-family: monospace;
         }
 
-        /* responsive: en móviles ocultar las tiras laterales y ajustar */
-        @media (max-width: 880px) {
+        /* MODAL para imagen ampliada (estilo cinematográfico) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 80vw;
+            max-height: 80vh;
+            background: #1a1510;
+            border-radius: 32px;
+            padding: 20px;
+            border: 3px solid #c9772e;
+            box-shadow: 0 0 50px rgba(0,0,0,0.7);
+        }
+        .modal-content img {
+            width: auto;
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
+            border-radius: 20px;
+            object-fit: contain;
+        }
+        .modal-close {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 48px;
+            height: 48px;
+            background: #1a1510;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #c9772e;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid #c9772e;
+            background: #0a0a0a;
+        }
+        .modal-close:hover {
+            background: #c9772e;
+            color: #0a0a0a;
+            transform: scale(1.1);
+        }
+
+        /* Responsive: en móviles, las tiras laterales se ocultan */
+        @media (max-width: 1000px) {
             .film-strip {
                 display: none;
             }
+            .film-reel {
+                padding: 20px;
+            }
             .center-stage {
                 padding: 1.5rem;
-            }
-            .language-card {
-                padding: 0.6rem 1.2rem;
             }
             .lang-name {
                 font-size: 1.2rem;
             }
             .lang-motto {
-                font-size: 0.75rem;
+                font-size: 0.8rem;
             }
             .lang-arrow {
-                width: 48px;
-                height: 48px;
-                font-size: 1.3rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
             }
         }
-        @media (max-width: 560px) {
+        @media (max-width: 600px) {
             .language-card {
                 flex-direction: column;
                 text-align: center;
@@ -260,17 +323,17 @@
 </head>
 <body>
     <div class="film-reel">
-        <!-- Tira izquierda: imágenes 1 a 6 -->
+        <!-- Tira izquierda: imágenes 1 a 6 - doble tamaño -->
         <div class="film-strip strip-left">
-            <div class="film-perf"><img src="chainpic_1.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_2.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_3.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_4.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_5.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_6.jpg" alt="film perforation" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_1.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_2.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_3.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_4.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_5.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_6.jpg" alt="film frame" loading="lazy"></div>
         </div>
 
-        <!-- Zona central -->
+        <!-- Zona central (pantalla) -->
         <div class="center-stage">
             <div class="logo-wrapper">
                 <img src="logo.jpg" alt="ar.QueoJones" class="logo-full">
@@ -313,7 +376,7 @@
                 </div>
             </div>
 
-            <!-- Vídeo central -->
+            <!-- Vídeo central (película) -->
             <div class="video-container">
                 <video src="landingvid.mp4" autoplay muted loop playsinline></video>
             </div>
@@ -324,39 +387,84 @@
 
         <!-- Tira derecha: imágenes 7 a 12 -->
         <div class="film-strip strip-right">
-            <div class="film-perf"><img src="chainpic_7.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_8.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_9.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_10.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_11.jpg" alt="film perforation" loading="lazy"></div>
-            <div class="film-perf"><img src="chainpic_12.jpg" alt="film perforation" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_7.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_8.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_9.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_10.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_11.jpg" alt="film frame" loading="lazy"></div>
+            <div class="film-perf"><img src="chainpic_12.jpg" alt="film frame" loading="lazy"></div>
         </div>
     </div>
 
-    <!-- Animación de entrada para las tarjetas y tiras -->
+    <!-- Modal para imágenes ampliadas -->
+    <div id="imageModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-close" id="closeModalBtn">&times;</div>
+            <img id="modalImage" src="" alt="Ampliada">
+        </div>
+    </div>
+
     <script>
         (function() {
-            // Efecto sutil de aparición para las tarjetas de idioma
+            // Animación de entrada para las tarjetas de idioma
             const cards = document.querySelectorAll('.language-card');
             cards.forEach((card, idx) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
-                card.style.transition = `opacity 0.4s ease ${idx * 0.1}s, transform 0.4s ease ${idx * 0.1}s`;
+                card.style.transition = `opacity 0.5s ease ${idx * 0.1}s, transform 0.5s ease ${idx * 0.1}s`;
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, 100);
             });
-            // Las imágenes laterales también pueden tener una pequeña animación
+
+            // Animación para las imágenes laterales
             const perfs = document.querySelectorAll('.film-perf');
             perfs.forEach((perf, i) => {
                 perf.style.opacity = '0';
-                perf.style.transform = 'translateX(15px)';
-                perf.style.transition = `opacity 0.3s ease ${i * 0.03}s, transform 0.3s ease ${i * 0.03}s`;
+                perf.style.transform = 'translateX(20px)';
+                perf.style.transition = `opacity 0.4s ease ${i * 0.03}s, transform 0.4s ease ${i * 0.03}s`;
                 setTimeout(() => {
                     perf.style.opacity = '1';
                     perf.style.transform = 'translateX(0)';
                 }, 150);
+            });
+
+            // Modal para ampliar imágenes al hacer clic
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeModal = document.getElementById('closeModalBtn');
+            const allImages = document.querySelectorAll('.film-perf img');
+
+            function openModal(imgSrc) {
+                modal.style.display = 'flex';
+                modalImg.src = imgSrc;
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModalFunc() {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+                modalImg.src = '';
+            }
+
+            allImages.forEach(img => {
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openModal(img.src);
+                });
+            });
+
+            closeModal.addEventListener('click', closeModalFunc);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModalFunc();
+            });
+
+            // Tecla Escape para cerrar
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    closeModalFunc();
+                }
             });
         })();
     </script>
